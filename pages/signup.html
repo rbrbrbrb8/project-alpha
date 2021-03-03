@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="SignUpApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/vendors/angular.min.js"></script>
+    <script src = "/apps/signUp/signUpApp.js"></script>
+    <script src = "/apps/signUp/signUpModule.js"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Sign Up</title>
+</head>
+<body ng-controller="SignUpController">
+    <form name="signUpForm" ng-submit="addToDb()" novalidate>
+    <input type="text" placeholder="Username" ng-model="signup.username" name="input_username" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{6,8}$/"/>
+        <div ng-if="signUpForm.input_username.$touched && signUpForm.input_username.$invalid">
+            <small style="color: red; display: block;">{{msg_invalid_user}}</small>
+        </div>
+        <input type="password" placeholder="Password" ng-model="signup.password" name="input_password" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{8,12}$/" />
+        <div ng-if="signUpForm.input_password.$touched && signUpForm.input_password.$invalid">
+            <small style="color: red; display: block;">{{msg_invalid_password}}</small>
+        </div>
+        <input type="submit" value="Sign Up" />
+        <p>Already have an account? <a href="/">Login</a></p>
+    </form>
+    
+</body>
+</html>

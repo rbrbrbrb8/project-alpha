@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/vendors/angular.min.js"></script>
+    <!-- <script src = "scripts/LoginVerification.js"></script> -->
+    
+    <title>Login</title>
+</head>
+<body>
+    <form ng-submit="checkCredentials()" novalidate>
+        <input type="text" placeholder="Username" ng-model="login.username" />
+        <input type="text" placeholder="Password" ng-model="login.password" />
+        <input type="submit" value="Login" />
+        <p>Don't have an account? <a href="/signup">sign up here</a></p>
+    </form>
+   
+
+</body>
+</html>

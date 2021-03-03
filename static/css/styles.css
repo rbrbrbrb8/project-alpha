@@ -1,0 +1,11 @@
+body{
+    background-color: black;
+    color: red;
+}
+input{
+    display: block;
+    margin-top: 10px;
+}
+input.ng-touched.ng-invalid{
+    border: 2px solid red;
+}
