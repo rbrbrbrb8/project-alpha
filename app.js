@@ -8,7 +8,7 @@ const port = 3000;
 const signUpRouter = require('./routes/signUpRoute');
 
 
-mongoose.connect('mongodb+srv://rbrbrbrb8:rbpromongorb23@clusterproject.pzpyd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb+srv://rbrbrbrb8:rbpromongorb23@clusterproject.pzpyd.mongodb.net/ProjectDatabase?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 db.on('error',console.error.bind(console,'connection error:'));
 db.once('open',function(){

@@ -1,14 +1,20 @@
 const mongoose = require('mongoose');
 const db = mongoose.connection;
+const dbHandler = {};
 
-function getModel(collection)
+function getModel(model)
 {
-  return require('./models/' + collection);
+  console.log()
+  return require('./models/' + model);
 }
 
-function addDocumentToDb(collection,document)
-{
-  const Model = getModel(collection);
+dbHandler.addDocumentToDb = (modelName,document) => {
+  const Model = getModel(modelName);
+  console.log(String(Model));
   const newDoc = new Model(document);
-  db.collection(collection).insertOne(newDoc).then()
+  db.collection(String(Model.prototype.collection)).insertOne(newDoc).then(resolve => {
+    console.log("successful insertion to" + String(Model.prototype.collection));
+  });
 }
+
+module.exports = dbHandler;

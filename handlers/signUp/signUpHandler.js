@@ -1,4 +1,4 @@
-
+const dbHandler = require('../db/dbHandler');
 let signUpHandler = {};
 signUpHandler.init = () => {};
 
@@ -11,6 +11,7 @@ validateDetails = (username,password) => {
 signUpHandler.requestRegistration = (username,password) =>{
    let isValid = validateDetails(username,password);
    if(isValid){
+    dbHandler.addDocumentToDb("user",{username,password});
     return "valid credentials - inserting into db...";
    }
    else{
