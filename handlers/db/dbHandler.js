@@ -12,7 +12,7 @@ dbHandler.addDocumentToDb = (modelName,document) => {
   const Model = getModel(modelName);
   const newDoc = new Model(document);
   newDoc.save().then(savedDoc => {
-    console.log("saved successfully to db");
+    console.log("saved successfully to db!");
   });
 }
 
