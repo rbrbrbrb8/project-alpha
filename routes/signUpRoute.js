@@ -11,8 +11,10 @@ signUpRouter.get('/',(req,res) => {
 
 signUpRouter.post('/',(req, res) => {
     // console.log(req.body);
-    console.log(signUpHandler.requestRegistration(req.body.username,req.body.password));
-    res.send("omer tipa gay");
+    signUpHandler.requestRegistration(req.body.username,req.body.password).then(res.redirect('/login'))
+    .catch(err => {
+      console.log(err);
+    });
       // res.sendFile('/pages/signup.html',{root:__dirname});
     });
 

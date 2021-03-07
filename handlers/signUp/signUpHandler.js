@@ -12,12 +12,25 @@ validateDetails = (username,password) => {
 signUpHandler.requestRegistration = async (username,password) =>{
    let isValid = validateDetails(username,password);
    if(isValid){
-    const hashedPassword = await bcrypt.hash(password);
-    dbHandler.addDocumentToDb("user",{username,hashedPassword});
-    return "valid credentials - inserting into db...";
+       try{
+            const hashedPassword =bcrypt.hashSync(password,10);
+            console.log("username: " + username + ",password:" + hashedPassword);
+            const isSuccessful = dbHandler.addDocumentToDb("user",{username,password});
+            console.log("valid credentials - inserting into db...");
+            return new Promise((resolve,reject) => {
+                if(isSuccessful){
+                    resolve();
+                }
+                else{
+                    reject('Error:something went wrong');
+                }
+            })
+       }catch(err){
+            console.log(err);
+       }
    }
    else{
-    return "invalid credentials - user should try again";
+     console.log("invalid credentials - user should try again");
    }
 };
 
