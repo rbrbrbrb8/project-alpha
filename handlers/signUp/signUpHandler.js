@@ -1,4 +1,5 @@
 const dbHandler = require('../db/dbHandler');
+const bcrypt = require('bcrypt');
 let signUpHandler = {};
 signUpHandler.init = () => {};
 
@@ -8,10 +9,11 @@ validateDetails = (username,password) => {
     return usernameValidator.test(username) && passwordValidator.test(password);
 };
 
-signUpHandler.requestRegistration = (username,password) =>{
+signUpHandler.requestRegistration = async (username,password) =>{
    let isValid = validateDetails(username,password);
    if(isValid){
-    dbHandler.addDocumentToDb("user",{username,password});
+    const hashedPassword = await bcrypt.hash(password);
+    dbHandler.addDocumentToDb("user",{username,hashedPassword});
     return "valid credentials - inserting into db...";
    }
    else{
