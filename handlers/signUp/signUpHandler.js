@@ -9,16 +9,20 @@ validateDetails = (username,password) => {
     return usernameValidator.test(username) && passwordValidator.test(password);
 };
 
-signUpHandler.requestRegistration = async (username,password) =>{
-   let isValid = validateDetails(username,password);
-   if(isValid){
-    const hashedPassword = await bcrypt.hash(password);
-    dbHandler.addDocumentToDb("user",{username,hashedPassword});
-    return "valid credentials - inserting into db...";
-   }
-   else{
-    return "invalid credentials - user should try again";
-   }
+signUpHandler.requestRegistration = async (username,unHashedPassword) =>{
+   let isValid = validateDetails(username,unHashedPassword);
+    if(!isValid) return false;
+    const password = await bcrypt.hash(unHashedPassword,10);
+    try {
+        const outcome = await dbHandler.addDocumentToDb("user",{username,password});
+        console.log("success, in signUpHandler");
+        return true;
+    } catch (error) {
+        console.log("error in signUpHandler");
+        return error;
+    }
+    
+   
 };
 
 module.exports = signUpHandler;

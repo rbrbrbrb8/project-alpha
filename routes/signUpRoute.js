@@ -9,10 +9,13 @@ signUpRouter.get('/',(req,res) => {
     
 });
 
-signUpRouter.post('/',(req, res) => {
+signUpRouter.post('/',async (req, res) => {
     // console.log(req.body);
-    console.log(signUpHandler.requestRegistration(req.body.username,req.body.password));
-    res.send("omer tipa gay");
+    const isSuccessful = await signUpHandler.requestRegistration(req.body.username,req.body.password);
+    if(!isSuccessful){
+      res.send("unsuccessful. try again later");
+    }
+    res.redirect('/login');
       // res.sendFile('/pages/signup.html',{root:__dirname});
     });
 
