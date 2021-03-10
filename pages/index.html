@@ -5,18 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu:500' rel='stylesheet' type='text/css'>
     <script src="/vendors/angular.min.js"></script>
     <!-- <script src = "scripts/LoginVerification.js"></script> -->
     
     <title>Login</title>
 </head>
 <body>
-    <form ng-submit="checkCredentials()" novalidate>
-        <input type="text" placeholder="Username" ng-model="login.username" />
-        <input type="text" placeholder="Password" ng-model="login.password" />
-        <input type="submit" value="Login" />
-        <p>Don't have an account? <a href="/signup">sign up here</a></p>
-    </form>
+    <div class = "auth">
+        <div class="auth-header">
+            <h1>Login</h1>
+        </div>
+        <form ng-submit="checkCredentials()" novalidate class="auth-form">
+            <h3>Username:</h3>
+            <input type="text" placeholder="Username" ng-model="login.username" />
+            <h3>Password:</h3>
+            <input type="text" placeholder="Password" ng-model="login.password" />
+            <input type="submit" value="Login" />
+            <p>Don't have an account? <a href="/signup" class="auth-switch-form">sign up here</a></p>
+        </form>
+    </div>
    
 
 </body>
