@@ -6,6 +6,13 @@ const MongoStore = require('connect-mongo').default;
 const app = express();
 const port = 3000;
 
+const passport = require('passport');
+
+const initializePassport = require('./passport-config');
+initializePassport(passport);
+
+
+
 const sessionStore = MongoStore.create({
   mongoUrl:'mongodb+srv://rbrbrbrb8:rbpromongorb23@clusterproject.pzpyd.mongodb.net/ProjectDatabase?retryWrites=true&w=majority',
   collectionName:'Sessions'

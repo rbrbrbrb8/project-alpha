@@ -12,11 +12,6 @@ dbHandler.addDocumentToDb = async (modelName,document) => {
   console.log(document);
   const Model = getModel(modelName);
   const newDoc = new Model(document);
-<<<<<<< HEAD
-  newDoc.save().then(savedDoc => {
-    console.log("saved successfully to db!");
-  });
-=======
   try {
     await newDoc.save();
     console.log("saved successfully to db");
@@ -27,7 +22,6 @@ dbHandler.addDocumentToDb = async (modelName,document) => {
   }
   
  
->>>>>>> cd7dd93a2f932b047915a3856265f52f01f1f7f3
 }
 
 module.exports = dbHandler;
