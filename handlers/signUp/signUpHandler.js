@@ -9,31 +9,6 @@ validateDetails = (username,password) => {
     return usernameValidator.test(username) && passwordValidator.test(password);
 };
 
-<<<<<<< HEAD
-signUpHandler.requestRegistration = async (username,password) =>{
-   let isValid = validateDetails(username,password);
-   if(isValid){
-       try{
-            const hashedPassword =bcrypt.hashSync(password,10);
-            console.log("username: " + username + ",password:" + hashedPassword);
-            const isSuccessful = dbHandler.addDocumentToDb("user",{username,password});
-            console.log("valid credentials - inserting into db...");
-            return new Promise((resolve,reject) => {
-                if(isSuccessful){
-                    resolve();
-                }
-                else{
-                    reject('Error:something went wrong');
-                }
-            })
-       }catch(err){
-            console.log(err);
-       }
-   }
-   else{
-     console.log("invalid credentials - user should try again");
-   }
-=======
 signUpHandler.requestRegistration = async (username,unHashedPassword) =>{
    let isValid = validateDetails(username,unHashedPassword);
     if(!isValid) return false;
@@ -48,7 +23,6 @@ signUpHandler.requestRegistration = async (username,unHashedPassword) =>{
     }
     
    
->>>>>>> my-temp-work
 };
 
 module.exports = signUpHandler;

@@ -8,24 +8,6 @@ function getModel(model)
   return require('./models/' + model);
 }
 
-<<<<<<< HEAD
-dbHandler.addDocumentToDb = (modelName,document) => {
-  let outcome;
-  const Model = getModel(modelName);
-  const newDoc = new Model(document);
-  console.log("modelname:" + modelName);
-  console.log("document:" + newDoc);
-  newDoc.save().then(savedDoc => {
-    console.log("saved successfully to db");
-    outcome = true;
-  }).catch(err => {
-    console.log("something went wrong in dbHandler");
-    outcome = false;
-
-  });
-  console.log("outcome:" + outcome);
-  
-=======
 dbHandler.addDocumentToDb = async (modelName,document) => {
   console.log(document);
   const Model = getModel(modelName);
@@ -52,7 +34,6 @@ dbHandler.findDocumentByProperty = async (modelName,propety) => {
     console.log("couldn't find anything");
     return err;
   }
->>>>>>> my-temp-work
 }
 
 module.exports = dbHandler;

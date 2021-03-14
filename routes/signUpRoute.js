@@ -11,18 +11,11 @@ signUpRouter.get('/',(req,res) => {
 
 signUpRouter.post('/',async (req, res) => {
     // console.log(req.body);
-<<<<<<< HEAD
-    signUpHandler.requestRegistration(req.body.username,req.body.password).then(res.redirect('/login'))
-    .catch(err => {
-      console.log(err);
-    });
-=======
     const isSuccessful = await signUpHandler.requestRegistration(req.body.username,req.body.password);
     if(!isSuccessful){
       res.send("unsuccessful. try again later");
     }
     res.redirect('/login');
->>>>>>> my-temp-work
       // res.sendFile('/pages/signup.html',{root:__dirname});
     });
 
