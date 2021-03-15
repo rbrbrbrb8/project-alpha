@@ -24,4 +24,16 @@ dbHandler.addDocumentToDb = async (modelName,document) => {
  
 }
 
+dbHandler.findDocumentByProperty = async (modelName,propety) => {
+  const Model = getModel(modelName);
+  try {
+    const doc = await Model.find(propety);
+    console.log("found doc: " + doc);
+    return doc;
+  } catch (err) {
+    console.log("couldn't find anything");
+    return err;
+  }
+}
+
 module.exports = dbHandler;
