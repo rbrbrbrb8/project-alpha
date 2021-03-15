@@ -15,7 +15,7 @@ signUpRouter.post('/',async (req, res) => {
     if(!isSuccessful){
       res.send("unsuccessful. try again later");
     }
-    res.redirect('/login');
+    res.redirect('/');
       // res.sendFile('/pages/signup.html',{root:__dirname});
     });
 

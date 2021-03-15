@@ -56,7 +56,7 @@ app.use(express.static('static'));
 
 //using routers
 app.use('/signup',signUpRouter);
-app.post('/',passport.authenticate(),loginRouter);
+app.post('/',function(){console.log("caught login post request")},passport.authenticate(),loginRouter);
 app.get('/',loginRouter);
 // app.use('/main',checkAuthenticated(),mainRouter);
 

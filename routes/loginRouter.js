@@ -11,6 +11,7 @@ loginRouter.get('/',(req,res) => {
 loginRouter.post('/',async (req, res) => {
     // console.log(req.body);
     console.log("successful authentication");
+    res.redirect('/welcome.html');
 });
 
 module.exports = loginRouter;

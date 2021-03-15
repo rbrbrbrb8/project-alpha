@@ -1,4 +1,4 @@
-const loginApp = angular.module('LoginApp',['LoginModule']);
+const loginApp = angular.module('LoginApp',['loginModule']);
 
 
 loginApp.controller('LoginController',['$scope','loginHttpMethods',function($scope,loginHttpMethods){

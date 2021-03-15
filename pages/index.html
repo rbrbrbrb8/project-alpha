@@ -19,16 +19,16 @@
         <div class="auth-header">
             <h1>Login</h1>
         </div>
-        <form ng-submit="checkCredentialsAndLogin()" novalidate class="auth-form">
+        <form name = "loginForm" ng-submit="checkCredentialsAndLogin()" novalidate class="auth-form">
             <h3>Username:</h3>
             <input type="text" placeholder="Username" ng-model="login.username" name="input_username" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{6,8}$/" />
-            <div ng-if="signUpForm.input_username.$touched && signUpForm.input_username.$invalid">
+            <div ng-if="loginForm.input_username.$touched && loginForm.input_username.$invalid" style="margin-bottom: 5px;">
                 <small style="color: red; display: block;">{{msg_invalid_user}}</small>
             </div>
             <h3>Password:</h3>
             <input type="password" placeholder="Password" ng-model="login.password" name="input_password" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{8,12}$/" />
-            <div ng-if="signUpForm.input_password.$touched && signUpForm.input_password.$invalid">
-                <small style="color: red; display: block;">{{msg_invalid_password}}</small>
+            <div ng-if="loginForm.input_password.$touched && loginForm.input_password.$invalid" style="margin-bottom: 5px;">
+                <small style="color: red; display: block; ">{{msg_invalid_password}}</small>
             </div>
             <input type="submit" value="Login" />
             <p>Don't have an account? <a href="/signup" class="auth-switch-form">sign up here</a></p>
