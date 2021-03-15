@@ -6,7 +6,7 @@ if(process.env.NODE_ENV !== 'prod'){
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
-const flash = require('express-flash');
+
 
 const MongoStore = require('connect-mongo').default;
 const app = express();
@@ -25,7 +25,7 @@ initializePassport(passport);
 // });
 
 const signUpRouter = require('./routes/signUpRoute');
-
+const loginRouter = require('./routes/loginRouter');
 
 mongoose.connect('mongodb+srv://rbrbrbrb8:rbpromongorb23@clusterproject.pzpyd.mongodb.net/ProjectDatabase?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
@@ -33,7 +33,7 @@ db.on('error',console.error.bind(console,'connection error:'));
 db.once('open',function(){
     console.log('were connected');
     app.listen(port, () => {
-        console.log(`Example app listening at http://localhost:${port}`)
+        console.log(`Example app listening at http://localhost:${port}`);
       });
     
 });
@@ -41,7 +41,7 @@ db.once('open',function(){
 //init parsers
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-app.use(flash());
+
 
 //setting up session
 app.use(session({
@@ -56,21 +56,11 @@ app.use(express.static('static'));
 
 //using routers
 app.use('/signup',signUpRouter);
-app.post('/login',passport.authenticate(),loginRouter);
-app.get('/login',loginRouter);
-app.use('/main',checkAuthenticated(),mainRouter);
+app.post('/',passport.authenticate(),loginRouter);
+app.get('/',loginRouter);
+// app.use('/main',checkAuthenticated(),mainRouter);
 
 
-//needs changing to loginRouter
-app.get('/', (req, res) => {
-  if(req.session.viewCount){
-    req.session.viewCount++;
-  } else{
-    req.session.viewCount = 1;
-  }
-  console.log(`you have visited this page ${req.session.viewCount} times`);
-  res.sendFile('/pages/index.html',{root:__dirname});
-});
 
 // app.get('/signup', (req, res) => {
 //   // res.send("omer tipa gay");

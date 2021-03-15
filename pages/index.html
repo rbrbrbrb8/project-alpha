@@ -1,26 +1,35 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" ng-app="LoginApp">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
-    <link href='https://fonts.googleapis.com/css?family=Ubuntu:500' rel='stylesheet' type='text/css'>
     <script src="/vendors/angular.min.js"></script>
-    <!-- <script src = "scripts/LoginVerification.js"></script> -->
+    <script src = "/apps/login/loginApp.js"></script>
+    <script src = "/apps/login/loginModule.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu:500' rel='stylesheet' type='text/css'>
+    
+    
     
     <title>Login</title>
 </head>
-<body>
+<body ng-controller = "LoginController">
     <div class = "auth">
         <div class="auth-header">
             <h1>Login</h1>
         </div>
-        <form ng-submit="checkCredentials()" novalidate class="auth-form">
+        <form ng-submit="checkCredentialsAndLogin()" novalidate class="auth-form">
             <h3>Username:</h3>
-            <input type="text" placeholder="Username" ng-model="login.username" />
+            <input type="text" placeholder="Username" ng-model="login.username" name="input_username" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{6,8}$/" />
+            <div ng-if="signUpForm.input_username.$touched && signUpForm.input_username.$invalid">
+                <small style="color: red; display: block;">{{msg_invalid_user}}</small>
+            </div>
             <h3>Password:</h3>
-            <input type="text" placeholder="Password" ng-model="login.password" />
+            <input type="password" placeholder="Password" ng-model="login.password" name="input_password" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{8,12}$/" />
+            <div ng-if="signUpForm.input_password.$touched && signUpForm.input_password.$invalid">
+                <small style="color: red; display: block;">{{msg_invalid_password}}</small>
+            </div>
             <input type="submit" value="Login" />
             <p>Don't have an account? <a href="/signup" class="auth-switch-form">sign up here</a></p>
         </form>
