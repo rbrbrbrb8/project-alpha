@@ -4,6 +4,7 @@ const rootDir = require('../root_dir');
 const loginRouter = express.Router();
 
 loginRouter.get('/',(req,res) => {
+    res.url = '/';
     res.sendFile('/pages/index.html',{root:rootDir});
     
 });
@@ -11,7 +12,7 @@ loginRouter.get('/',(req,res) => {
 loginRouter.post('/',async (req, res) => {
     // console.log(req.body);
     console.log("successful authentication");
-    res.redirect('/welcome.html');
+    res.redirect('/welcome');
 });
 
 module.exports = loginRouter;

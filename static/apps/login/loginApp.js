@@ -20,6 +20,7 @@ loginApp.controller('LoginController',['$scope','loginHttpMethods',function($sco
             loginHttpMethods.requestLogin($scope.login.username,$scope.login.password)
             .then(res => {
                 console.log(res.data);
+                window.location.href = '/welcome.html';
             })
         };
 

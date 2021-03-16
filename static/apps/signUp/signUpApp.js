@@ -21,7 +21,8 @@ signUpApp.controller('SignUpController',['$scope','httpMethods',function($scope,
         if(validateUsername($scope.signup.username) && validatePassword($scope.signup.password)){
             httpMethods.requestSignUp($scope.signup.username,$scope.signup.password)
             .then( res => {
-                console.log(res.data);
+                console.log(res);
+                // window.location.assign(res.url);
             })
         };
 
