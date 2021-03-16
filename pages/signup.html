@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="/css/styles.css">
     <title>Sign Up</title>
 </head>
-<!-- ng-submit="addToDb()" -->
+
 <body ng-controller="SignUpController">
-    <form name="signUpForm" action="/signup" method="POST"  novalidate>
+    <form name="signUpForm" ng-submit ="preventIfInvalid($event)" action="/signup" method="POST"  novalidate>
     <input type="text" placeholder="Username" ng-model="signup.username" name="username" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{6,8}$/"/>
         <div ng-if="signUpForm.username.$touched && signUpForm.username.$invalid">
             <small style="color: red; display: block;">{{msg_invalid_user}}</small>
