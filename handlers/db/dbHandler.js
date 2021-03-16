@@ -24,12 +24,25 @@ dbHandler.addDocumentToDb = async (modelName,document) => {
  
 }
 
-dbHandler.findDocumentByProperty = async (modelName,propety) => {
+dbHandler.findManyDocumentsByProperty = async (modelName,propety) => {
   const Model = getModel(modelName);
   try {
     const doc = await Model.find(propety);
     console.log("found doc: " + doc);
     return doc;
+  } catch (err) {
+    console.log("couldn't find anything");
+    return err;
+  }
+}
+
+dbHandler.findOneDocumentByProperty = async (modelName,propety) => {
+  const Model = getModel(modelName);
+  try {
+    const doc = await Model.findOne(propety);
+    const docFixed = doc['_doc'];
+    console.log("found doc: " + doc);
+    return docFixed;
   } catch (err) {
     console.log("couldn't find anything");
     return err;

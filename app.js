@@ -15,8 +15,11 @@ const port = 3000;
 const passport = require('passport');
 
 const initializePassport = require('./passport-config');
-initializePassport(passport);
 
+
+initializePassport(passport);
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 // const sessionStore = MongoStore.create({
@@ -49,17 +52,27 @@ app.use(session({
   resave:false,
   saveUninitialized:false,
 }));
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use(express.static('static'));
 
 //using routers
 app.use('/signup',signUpRouter);
-app.post('/',function(){console.log("caught login post request")},passport.authenticate(),loginRouter);
+app.post('/',function(req,res,next){
+  console.log("caught login post request"); 
+  next();
+  },
+  passport.authenticate('local', {
+    successRedirect: '/bla',
+    failureRedirect: '/',
+    failureFlash: true
+  }),
+  loginRouter);
 app.get('/',loginRouter);
 // app.use('/main',checkAuthenticated(),mainRouter);
 
+app.get('/bla', (req, res) => {
+  res.send('omer tipa gay');
+})
 
 
 // app.get('/signup', (req, res) => {
