@@ -20,7 +20,7 @@ const initialize = (passport) => {
 					}
 					try {
 						const passwordUser = user['password'];
-						const isValidPassword = await bcrypt.compare(password,passwordUser);
+						const isValidPassword = passwordUser ? await bcrypt.compare(password,passwordUser) : false;
 						return isValidPassword ? done(null,user) : done(null,false,{message:'User or password incorrect'});
 					} catch (e){
 						return done(e);

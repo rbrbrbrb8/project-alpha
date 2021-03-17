@@ -12,18 +12,18 @@
 </head>
 
 <body ng-controller="SignUpController">
-    <form name="signUpForm" ng-submit ="preventIfInvalid($event)" action="/signup" method="POST"  novalidate>
-    <input type="text" placeholder="Username" ng-model="signup.username" name="username" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{6,8}$/"/>
-        <div ng-if="signUpForm.username.$touched && signUpForm.username.$invalid">
-            <small style="color: red; display: block;">{{msg_invalid_user}}</small>
-        </div>
-        <input type="password" placeholder="Password" ng-model="signup.password" name="password" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{8,12}$/" />
-        <div ng-if="signUpForm.password.$touched && signUpForm.password.$invalid">
-            <small style="color: red; display: block;">{{msg_invalid_password}}</small>
-        </div>
-        <input type="submit" value="Sign Up" />
-        <p>Already have an account? <a href="/">Login</a></p>
-    </form>
+	<form name="signUpForm" ng-submit ="preventIfInvalid($event)" action="/signup" method="POST"  novalidate>
+		<input type="text" placeholder="Username" ng-model="signup.username" name="username" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{6,8}$/">
+			<div ng-if="signUpForm.username.$touched && signUpForm.username.$invalid">
+				<small style="color: red; display: block;">{{msg_invalid_user}}</small>
+			</div>
+			<input type="password" placeholder="Password" ng-model="signup.password" name="password" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{8,12}$/" >
+			<div ng-if="signUpForm.password.$touched && signUpForm.password.$invalid">
+				<small style="color: red; display: block;">{{msg_invalid_password}}</small>
+			</div>
+			<input type="submit" value="Sign Up" >
+			<p>Already have an account? <a href="/">Login</a></p>
+	</form>
     
 </body>
 </html>
