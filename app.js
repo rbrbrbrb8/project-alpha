@@ -30,6 +30,7 @@ app.use(passport.session());
 
 const signUpRouter = require('./routes/signUpRoute');
 const loginRouter = require('./routes/loginRouter');
+const homepageRouter = require('./routes/homepageRoute');
 
 mongoose.connect('mongodb+srv://rbrbrbrb8:rbpromongorb23@clusterproject.pzpyd.mongodb.net/ProjectDatabase?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
@@ -60,17 +61,13 @@ app.use(express.static('static'));
 app.use('/signup',signUpRouter);
 app.post('/',
   passport.authenticate('local', {
-    successRedirect: '/welcome.html',
+    successRedirect: '/homepage',
     failureRedirect: '/',
     failureFlash: true
   }),
   loginRouter);
 app.get('/',loginRouter);
-// app.use('/main',checkAuthenticated(),mainRouter);
-
-app.get('/bla', (req, res) => {
-  res.send('omer tipa gay');
-})
+app.use('/homepage',checkAuthenticated,homepageRouter);
 
 
 // app.get('/signup', (req, res) => {
@@ -86,8 +83,9 @@ app.get('/bla', (req, res) => {
 
 
 function checkAuthenticated(req,res,next){
+  console.log("auth: " + req.isAuthenticated());
   if(req.isAuthenticated()){
     return next();
   };
-  res.redirect('/login');
+  res.redirect('/');
 }
