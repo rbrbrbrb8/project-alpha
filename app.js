@@ -18,11 +18,6 @@ const initializePassport = require('./passport-config');
 
 app.use(flash());
 
-initializePassport(passport);
-app.use(passport.initialize());
-app.use(passport.session());
-
-
 // const sessionStore = MongoStore.create({
 //   mongoUrl:'mongodb+srv://rbrbrbrb8:rbpromongorb23@clusterproject.pzpyd.mongodb.net/ProjectDatabase?retryWrites=true&w=majority',
 //   collectionName:'Sessions'
@@ -54,6 +49,10 @@ app.use(session({
   resave:false,
   saveUninitialized:false,
 }));
+
+initializePassport(passport);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(express.static('static'));
 
