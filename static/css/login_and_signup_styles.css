@@ -1,0 +1,128 @@
+html {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: linear-gradient(#3c3e42,#243b55);
+}
+.auth-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%,-50%);
+  background: rgba(0, 0, 0, .5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+  border-radius: 10px;
+}
+
+.auth-box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+}
+.auth-box .user-box{
+  position: relative;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+.auth-box .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 20px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+.auth-box .user-box label{
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.auth-box .user-box input:focus ~ label,
+.auth-box .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
+
+.auth-box form a {
+  position: relative;
+  padding: 10px 20px;
+  color: #03e9f4;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  margin-top: 40px;
+  letter-spacing: 2px;
+}
+
+.auth-box form input[type="submit"] {
+  position: relative;
+  padding: 10px 20px;
+  color: #03e9f4;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  margin-top: 40px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.auth-box a:hover {
+  background: #03e9f4;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #03e9f4,
+              0 0 25px #03e9f4,
+              0 0 50px #03e9f4,
+              0 0 75px #03e9f4;
+}
+
+.auth-box input[type="submit"]:hover {
+  background: #03e9f4;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #03e9f4,
+              0 0 25px #03e9f4,
+              0 0 50px #03e9f4,
+              0 0 75px #03e9f4;
+}
+
+.buttons-box {
+  margin-top: -40px;
+  display: flex;
+  justify-content: space-between;
+}
+.error-invalid {
+  position: relative;
+  color: #f00;
+  display: inline-block;
+  font-size: 12px;
+  
+}
+
+
+.auth-form input.ng-touched.ng-invalid{
+    border: 2px solid red;
+}

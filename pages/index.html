@@ -4,34 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/login_and_signup_styles.css">
     <script src="/vendors/angular.min.js"></script>
     <script src = "/apps/login/loginApp.js"></script>
     <script src = "/apps/login/loginModule.js"></script>
-    <link href='https://fonts.googleapis.com/css?family=Ubuntu:500' rel='stylesheet' type='text/css'>
     
+     b  
     
     
     <title>Login</title>
 </head>
 <body ng-controller = "LoginController">
-    <div class = "auth">
-        <div class="auth-header">
-            <h1>Login</h1>
-        </div>
-        <form name = "loginForm" ng-submit="preventIfInvalid($event)" action="/" method="POST" novalidate class="auth-form">
-            <h3>Username:</h3>
-            <input type="text" placeholder="Username" ng-model="login.username" name="username" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{6,8}$/" />
-            <div ng-if="loginForm.input_username.$touched && loginForm.input_username.$invalid" style="margin-bottom: 5px;">
-                <small style="color: red; display: block;">{{msg_invalid_user}}</small>
+    
+    <div class="auth-box">
+        <h2>Login</h2>
+        <form name = "loginForm" ng-submit="preventIfInvalid($event)" action="/" method="POST" novalidate>
+            <div class="user-box">
+                <input type="text" ng-model="login.username" name="username" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{6,8}$/" />
+                <label>Username</label>
+                <div ng-if="loginForm.username.$touched && loginForm.username.$invalid" class="error-invalid">
+                    {{msg_invalid_user}}
+                </div>
             </div>
-            <h3>Password:</h3>
-            <input type="password" placeholder="Password" ng-model="login.password" name="password" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{8,12}$/" />
-            <div ng-if="loginForm.input_password.$touched && loginForm.input_password.$invalid" style="margin-bottom: 5px;">
-                <small style="color: red; display: block; ">{{msg_invalid_password}}</small>
+            <div class="user-box">
+                <input type="password" ng-model="login.password" name="password" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{8,12}$/" />
+                <label>Password</label>
+                <div ng-if="loginForm.password.$touched && loginForm.password.$invalid" class="error-invalid">
+                    {{msg_invalid_password}}
+                </div>
             </div>
-            <input type="submit" value="Login" />
-            <p>Don't have an account? <a href="/signup" class="auth-switch-form">sign up here</a></p>
+            <div class="buttons-box">
+                <input type="submit" value="Login" />
+                <a href="/signup" class="auth-switch-form">sign up</a>
+            </div>
         </form>
     </div>
    

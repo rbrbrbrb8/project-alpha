@@ -47,7 +47,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(session({
   secret:process.env.SESSION_SECRET,
   resave:false,
-  saveUninitialized:false,
+  saveUninitialized:false,  
 }));
 
 initializePassport(passport);

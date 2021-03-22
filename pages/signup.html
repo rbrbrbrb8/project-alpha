@@ -7,23 +7,33 @@
     <script src="/vendors/angular.min.js"></script>
     <script src = "/apps/signUp/signUpApp.js"></script>
     <script src = "/apps/signUp/signUpModule.js"></script>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/login_and_signup_styles.css">
     <title>Sign Up</title>
 </head>
 
 <body ng-controller="SignUpController">
-	<form name="signUpForm" ng-submit ="preventIfInvalid($event)" action="/signup" method="POST"  novalidate>
-		<input type="text" placeholder="Username" ng-model="signup.username" name="username" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{6,8}$/">
-			<div ng-if="signUpForm.username.$touched && signUpForm.username.$invalid">
-				<small style="color: red; display: block;">{{msg_invalid_user}}</small>
+	<div class="auth-box">
+		<h2>Sign Up</h2>
+		<form name="signUpForm" ng-submit ="preventIfInvalid($event)" action="/signup" method="POST"  novalidate>
+			<div class="user-box">
+				<input type="text" ng-model="signup.username" name="username" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{6,8}$/">
+				<label>Username</label>
+					<div ng-if="signUpForm.username.$touched && signUpForm.username.$invalid" class="error-invalid">
+						{{msg_invalid_user}}
+					</div>
 			</div>
-			<input type="password" placeholder="Password" ng-model="signup.password" name="password" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{8,12}$/" >
-			<div ng-if="signUpForm.password.$touched && signUpForm.password.$invalid">
-				<small style="color: red; display: block;">{{msg_invalid_password}}</small>
+			<div class="user-box">
+				<input type="password" ng-model="signup.password" name="password" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{8,12}$/" >
+				<label>Password</label>
+				<div ng-if="signUpForm.password.$touched && signUpForm.password.$invalid" class="error-invalid">
+					{{msg_invalid_password}}
+				</div>
 			</div>
-			<input type="submit" value="Sign Up" >
-			<p>Already have an account? <a href="/">Login</a></p>
-	</form>
-    
+			<div class="buttons-box">
+				<input type="submit" value="Sign Up" >
+				<a href="/">Login</a>
+			</div>
+		</form>
+	</div>
 </body>
 </html>
