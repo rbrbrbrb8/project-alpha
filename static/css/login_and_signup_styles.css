@@ -87,6 +87,7 @@ body {
   cursor: pointer;
   background: transparent;
   border: none;
+  outline: none;
 }
 
 .auth-box a:hover {
