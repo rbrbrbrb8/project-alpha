@@ -7,11 +7,7 @@
     <link rel="stylesheet" href="/css/login_and_signup_styles.css">
     <script src="/vendors/angular.min.js"></script>
     <script src = "/apps/login/loginApp.js"></script>
-    <script src = "/apps/login/loginModule.js"></script>
-    
-     b  
-    
-    
+    <script src = "/apps/login/loginModule.js"></script> 
     <title>Login</title>
 </head>
 <body ng-controller = "LoginController">
@@ -19,25 +15,25 @@
     <div class="auth-box">
         <h2>Login</h2>
         <form name = "loginForm" ng-submit="preventIfInvalid($event)" action="/" method="POST" novalidate>
-            <div class="user-box">
-                <input type="text" ng-model="login.username" name="username" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{6,8}$/" />
-                <label>Username</label>
-                <div ng-if="loginForm.username.$touched && loginForm.username.$invalid" class="error-invalid">
-                    {{msg_invalid_user}}
-                </div>
-            </div>
-            <div class="user-box">
-                <input type="password" ng-model="login.password" name="password" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{8,12}$/" />
-                <label>Password</label>
-                <div ng-if="loginForm.password.$touched && loginForm.password.$invalid" class="error-invalid">
-                    {{msg_invalid_password}}
-                </div>
-            </div>
-            <div class="buttons-box">
-                <input type="submit" value="Login" />
-                <a href="/signup" class="auth-switch-form">sign up</a>
-            </div>
-        </form>
+					<div class="user-box">
+							<input type="text" ng-model="login.username" name="username" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{6,8}$/" />
+							<label>Username</label>
+							<div ng-if="loginForm.username.$touched && loginForm.username.$invalid" class="error-invalid">
+									{{msg_invalid_user}}
+							</div>
+					</div>
+					<div class="user-box">
+							<input type="password" ng-model="login.password" name="password" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{8,12}$/" />
+							<label>Password</label>
+							<div ng-if="loginForm.password.$touched && loginForm.password.$invalid" class="error-invalid">
+									{{msg_invalid_password}}
+							</div>
+					</div>
+					<div class="buttons-box"  ng-class="{true: 'validSubmit',false: 'invalidSubmit'}[loginForm.password.$valid && loginForm.username.$valid]">
+							<input type="submit" value="Login" />
+							<a href="/signup" class="auth-switch-form">sign up</a>
+					</div>
+			</form>
     </div>
    
 

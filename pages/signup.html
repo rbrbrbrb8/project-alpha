@@ -29,11 +29,12 @@
 					{{msg_invalid_password}}
 				</div>
 			</div>
-			<div class="buttons-box">
+			<div class="buttons-box" ng-class="{true: 'validSubmit',false: 'invalidSubmit'}[signUpForm.password.$valid && signUpForm.username.$valid]">
 				<input type="submit" value="Sign Up" >
 				<a href="/">Login</a>
 			</div>
 		</form>
 	</div>
+	
 </body>
 </html>

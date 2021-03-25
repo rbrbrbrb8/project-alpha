@@ -100,7 +100,7 @@ body {
               0 0 75px #03e9f4;
 }
 
-.auth-box input[type="submit"]:hover {
+.validSubmit input[type="submit"]:hover {
   background: #03e9f4;
   color: #fff;
   border-radius: 5px;
@@ -108,6 +108,16 @@ body {
               0 0 25px #03e9f4,
               0 0 50px #03e9f4,
               0 0 75px #03e9f4;
+}
+
+.invalidSubmit input[type="submit"]:hover {
+  background: #f00;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #f00,
+              0 0 25px #f00,
+              0 0 50px #f00,
+              0 0 75px #f00;
 }
 
 .buttons-box {
