@@ -1,8 +1,19 @@
 <div>
-  <img src="{{project[thumbnail]}}">
-  <h4>{{project[title]}}</h4>
+  <div>
+    <img src="{{project['thumbnail']}}">
+    <h4>{{project['title']}}</h4>
+  </div>
   <div class="user-info-project-box">
-    <img src="{{project[user][profilePic]}}">
-    <small>{{project[user][name]</small>
+    <img src="{{project['creator']['profilePic']}}">
+    <small>{{project['creator']['name']}}</small>
+  </div>
+  <div class="project-description-project-box">
+    {{project['description']}}
+  </div>
+  <div class="action-buttons-project-box">
+    <a></a> <!-- like -->
+    <a></a> <!-- share -->
+    <a></a> <!-- add to shortlist -->
+
   </div>
 </div>
