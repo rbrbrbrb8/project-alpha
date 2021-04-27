@@ -16,10 +16,10 @@ signUpHandler.requestRegistration = async (username,unHashedPassword) =>{
     try {
         const outcome = await dbHandler.addDocumentToDb("user",{username,password});
         console.log("success, in signUpHandler");
-        return true;
+        return outcome;
     } catch (error) {
         console.log("error in signUpHandler");
-        return error;
+        return false;
     }
     
    

@@ -11,18 +11,3 @@ homepageApp.controller('HomepageController',['$http','$scope',function($http,$sc
   
 }]); 
 
-
-homepageApp.directive('projectBox',[function(){
-
-
-
-
-  return {
-    restrict: 'E',
-    scope: {
-      project: '='
-    },
-    templateUrl:'../views/projectbox.html'
-  };
-
-}]);

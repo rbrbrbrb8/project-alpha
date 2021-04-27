@@ -9,8 +9,26 @@
     <title>Welcome</title>
 </head>
 <body ng-controller= "HomepageController">
-    <!-- <div ng-repeat= "project in projects">
-        <project-box project="project"></project-box>
-    </div> -->
+    <div ng-repeat= "project in projects">
+        <div>
+            <div>
+              <img src="{{project['thumbnail']}}">
+              <h4>{{project['title']}}</h4>
+            </div>
+            <div class="user-info-project-box">
+              <img src="{{project['creator']['profilePic']}}">
+              <small>{{project['creator']['name']}}</small>
+            </div>
+            <div class="project-description-project-box">
+              {{project['description']}}
+            </div>
+            <div class="action-buttons-project-box">
+              <a></a> <!-- like -->
+              <a></a> <!-- share -->
+              <a></a> <!-- add to shortlist -->
+          
+            </div>
+          </div>
+    </div>
 </body>
 </html>

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const db = mongoose.connection;
 const dbHandler = {};
-
+const userModel = require('./models/user');
 function getModel(model)
 {
   
@@ -13,12 +13,13 @@ dbHandler.addDocumentToDb = async (modelName,document) => {
   const Model = getModel(modelName);
   const newDoc = new Model(document);
   try {
+    
     await newDoc.save();
     console.log("saved successfully to db");
     return true;
   } catch (error) {
     console.log("couldn't save in db");
-    return error;
+    return false;
   }
   
  
