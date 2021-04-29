@@ -14,9 +14,9 @@ signUpRouter.post('/',async (req, res) => {
     const isSuccessful = await signUpHandler.requestRegistration(req.body.username,req.body.password);
     if(!isSuccessful){
       console.log("unsuccessful. try again later");
-      res.destroy();
+      res.redirect('/signup');
     }
-    else res.redirect('/');
+    else res.redirect('/'); 
       // res.sendFile('/pages/signup.html',{root:__dirname});
     });
 
