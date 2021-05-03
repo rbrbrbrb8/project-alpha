@@ -6,11 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/navbar.css">
     <script src="/vendors/angular.min.js"></script>
+    <script src="/vendors/angular-material.min.js"></script>
+    <script src="/vendors/angular-animate.min.js"></script>
+    <script src="/vendors/angular-aria.min.js"></script>
+    <script src="/vendors/angular-messages.min.js"></script>
     <script src = "/apps/homepage/homepageApp.js"></script>
+    <link rel="stylesheet" href="/vendors/angular-material.min.css">
+		
     <title>Welcome</title>
 </head>
 <body ng-controller= "HomepageController">
   <navbar></navbar>
+  <div ng-cloak>
+    <md-content class="md-padding" layout-xs="column" layout=row>
+      <div flex-xs="" flex-gt-xs="50" layout="column">
+        <md-card>
+          <img ng-src="./images/redhot.jpg" class="md-card-image" alt="Washed Out" style="width: 100px; height: 100px;">
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline">Icon action buttons</span>
+            </md-card-title-text>
+          </md-card-title>
+          <md-card-content>
+            <p>
+              The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+              two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+            </p>
+          </md-card-content>
+          <md-card-actions layout="row" layout-align="end center">
+            <md-button class="md-icon-button" aria-label="Favorite">
+              <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Settings">
+              <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Share">
+              <md-icon md-svg-icon="img/icons/baseline-share-24px.svg"></md-icon>
+            </md-button>
+          </md-card-actions>
+        </md-card>
+        <md-card>
+      </div>
+    </md-content>
+  </div>
     <!-- <div ng-repeat= "project in projects">
         <div>
             <div>

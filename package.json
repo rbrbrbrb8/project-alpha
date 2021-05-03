@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "angular-material": "^1.2.2",
+    "angular-messages": "^1.8.2",
     "bcrypt": "^5.0.1",
     "connect-mongo": "^4.2.2",
     "dotenv": "^8.2.0",

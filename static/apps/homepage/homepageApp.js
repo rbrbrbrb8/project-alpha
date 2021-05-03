@@ -1,4 +1,4 @@
-const homepageApp = angular.module('HomepageApp',[]);
+const homepageApp = angular.module('HomepageApp',['ngMaterial']);
 
 
 homepageApp.controller('HomepageController',['$scope',function($scope){
