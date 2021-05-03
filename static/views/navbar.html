@@ -1,15 +1,19 @@
 <div class="navbar-container">
-  <img class="user-image" alt="user_img">
-  <a class="navbar-button">my profile</a>
+  <div class="image-div">
+    <img class="user-image" alt="user_img" ng-src="../images/redhot.jpg">
+  </div>
+  <a class="navbar-button-profile navbar-button-general">my profile</a>
   <div class="dropdown-projects">
     <button class="dropdown-button">projects</button>
-    <div class="dropdown-projects-content">
-      <a href="/myprojects">my projects</a>
-      <a href="/mycategories">my categories</a>
-      <a href="/allprojects">all projects</a>
-      <a href="/myinvestments">my investments</a>
+    <div class="abosoluteDiv">
+      <ul class="dropdown-projects-content">
+        <li><a href="/myprojects">my projects</a></li>
+        <li><a href="/mycategories">my categories</a></li>
+        <li><a href="/allprojects">all projects</a></li>
+        <li><a href="/myinvestments">my investments</a></li>
+      </ul>
     </div>
   </div>
-  <a class="navbar-button-search">search</a>
-  <a class="navbar-button-create">add project</a>
+  <a class="navbar-button-search navbar-button-general">search</a>
+  <a class="navbar-button-create navbar-button-general" href="/addproject">add project</a>
 </div>

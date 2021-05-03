@@ -14,7 +14,7 @@
     
     <div class="auth-box">
         <h2>Login</h2>
-        <form name = "loginForm" ng-submit="preventIfInvalid($event)" action="/" method="POST" novalidate>
+        <form name = "loginForm" ng-submit="preventIfInvalid($event)" action="/" method="POST" novalidate autocomplete="off">
 					<div class="user-box">
 							<input type="text" ng-model="login.username" name="username" ng-required="true" ng-pattern="/^(?![0-9]{6})[0-9a-zA-Z]{6,8}$/" />
 							<label>Username</label>

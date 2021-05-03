@@ -28,6 +28,7 @@ body {
 .auth-box .user-box{
   position: relative;
   margin-bottom: 10px;
+  height: 98px;
   padding-bottom: 10px;
 }
 .auth-box .user-box input {
