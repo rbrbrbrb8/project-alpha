@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/navbar.css">
+  <link rel="stylesheet" href="/css/homepage.css">
   <script src="/vendors/angular.min.js"></script>
   <script src="/vendors/angular-material.min.js"></script>
   <script src="/vendors/angular-animate.min.js"></script>
@@ -19,22 +20,26 @@
 
 <body ng-controller="HomepageController" ng-init="arr = [1,2,3,4,5,6,7,8,9,10,11,12]">
   <navbar></navbar>
-  <div>
+  <div class="header-div">
     <h1 class="main-header">Explore</h1>
   </div>
-  <div layout="row" layout-wrap>
+  <div layout="row" layout-wrap class="all-projects-container">
     <div flex="50" flex-gt-sm="33" flex-gt-md="25" ng-repeat="item in arr">
       <md-card>
         <md-card-header>
           <md-card-avatar>
-
+            <div>
+              <img class="md-user-avatar" src="/images/avatar.jpg">
+            </div>
           </md-card-avatar>
           <md-card-header-text>
             <span class="md-title">Title</span>
             <span class="md-subhead">Sub header</span>
           </md-card-header-text>
         </md-card-header>
-        <img ng-src="card-image.png" class="md-card-image" alt="image caption">
+        <div class="project-image-div">
+          <img ng-src="/images/redhot.jpg" class="md-card-image project-image" alt="image caption">
+        </div>
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline">Card headline</span>
@@ -42,16 +47,18 @@
         </md-card-title>
         <md-card-content>
           <p>
-            Card content
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
           </p>
         </md-card-content>
         <md-card-actions layout="row" layout-align="start center">
-            <md-button class="md-icon-button" aria-label="icon">
-              <md-icon md-svg-icon="./images/favorite.svg"></md-icon>
-            </md-button>
-            <md-button class="md-icon-button" aria-label="icon">
-              <md-icon md-svg-icon="./images/menu.svg"></md-icon>
-            </md-button>
+          <md-button class="md-icon-button" aria-label="favorite">
+            <md-icon md-svg-icon="/images/icons/favorite.svg"></md-icon>
+          </md-button>
+          <md-button class="md-icon-button" aria-label="donate">
+            <md-icon md-svg-icon="/images/icons/donate.svg"></md-icon>
+          </md-button>
         </md-card-actions>
       </md-card>
     </div>
