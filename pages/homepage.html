@@ -1,23 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" ng-app = "HomepageApp">
+<html lang="en" ng-app="HomepageApp">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/navbar.css">
-    <script src="/vendors/angular.min.js"></script>
-    <script src="/vendors/angular-material.min.js"></script>
-    <script src="/vendors/angular-animate.min.js"></script>
-    <script src="/vendors/angular-aria.min.js"></script>
-    <script src="/vendors/angular-messages.min.js"></script>
-    <script src = "/apps/homepage/homepageApp.js"></script>
-    <link rel="stylesheet" href="/vendors/angular-material.min.css">
-		
-    <title>Welcome</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/navbar.css">
+  <script src="/vendors/angular.min.js"></script>
+  <script src="/vendors/angular-material.min.js"></script>
+  <script src="/vendors/angular-animate.min.js"></script>
+  <script src="/vendors/angular-aria.min.js"></script>
+  <script src="/vendors/angular-messages.min.js"></script>
+  <script src="/apps/homepage/homepageApp.js"></script>
+  <link rel="stylesheet" href="/vendors/angular-material.min.css">
+
+  <title>Welcome</title>
 </head>
-<body ng-controller= "HomepageController">
+
+<body ng-controller="HomepageController" ng-init="arr = [1,2,3,4,5,6,7,8,9,10,11,12]">
   <navbar></navbar>
-  <div ng-cloak>
+  <div>
+    <h1 class="main-header">Explore</h1>
+  </div>
+  <div layout="row" layout-wrap>
+    <div flex="50" flex-gt-sm="33" flex-gt-md="25" ng-repeat="item in arr">
+      <md-card>
+        <md-card-header>
+          <md-card-avatar>
+
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-title">Title</span>
+            <span class="md-subhead">Sub header</span>
+          </md-card-header-text>
+        </md-card-header>
+        <img ng-src="card-image.png" class="md-card-image" alt="image caption">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Card headline</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p>
+            Card content
+          </p>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="start center">
+            <md-button class="md-icon-button" aria-label="icon">
+              <md-icon md-svg-icon="./images/favorite.svg"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="icon">
+              <md-icon md-svg-icon="./images/menu.svg"></md-icon>
+            </md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+  </div>
+
+  <!-- <div ng-cloak>
     <md-content class="md-padding" layout-xs="column" layout=row>
       <div flex-xs="" flex-gt-xs="50" layout="column">
         <md-card>
@@ -48,27 +88,8 @@
         <md-card>
       </div>
     </md-content>
+  </div> -->
   </div>
-    <!-- <div ng-repeat= "project in projects">
-        <div>
-            <div>
-              <img src="{{project['thumbnail']}}">
-              <h4>{{project['title']}}</h4>
-            </div>
-            <div class="user-info-project-box">
-              <img src="{{project['creator']['profilePic']}}">
-              <small>{{project['creator']['name']}}</small>
-            </div>
-            <div class="project-description-project-box">
-              {{project['description']}}
-            </div>
-            <div class="action-buttons-project-box">
-              <a></a>  like
-              <a></a>  share
-              <a></a>  add to shortlist
-          
-            </div>
-          </div> -->
-    </div>
 </body>
+
 </html>
