@@ -79,7 +79,9 @@ app.use('/homepage',checkAuthenticated,homepageRouter);
 //     // res.sendFile('/pages/signup.html',{root:__dirname});
 //   })
   
-
+app.get('/addproject',(req,res)=>{
+  res.sendFile('/pages/addProject.html',{root:__dirname});
+});
 
 function checkAuthenticated(req,res,next){
   console.log("auth: " + req.isAuthenticated());
