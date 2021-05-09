@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=, initial-scale=1.0">
   <link rel="stylesheet" href="/css/navbar.css">
+  <link rel="stylesheet" href="/css/addProject.css">
   <script src="/vendors/angular.min.js"></script>
   <script src="/vendors/angular-material.min.js"></script>
   <script src="/vendors/angular-animate.min.js"></script>
@@ -16,98 +17,94 @@
   <title>Create a Project</title>
 </head>
 
-<body ng-controller="AddProjectController">
+<body ng-controller="AddProjectController" ng-init="categorys=['Software','Food','Sports']">
   <navbar></navbar>
-  <md-button></md-button>
-  <div  layout="column" ng-cloak="" class="md-inline-form inputdemoBasicUsage">
-
+  <div class="header-div">
+    <h1 class="main-header">Add Project</h1>
+  </div>
+  <div layout="column" ng-cloak="" class="md-inline-form inputdemoBasicUsage create-project-form-container">
+    <div layout-padding="">
+      <h3 class="form-subheader">Project Details</h3>
+    </div>
     <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding="">
-      <div>
-        <md-input-container>
+      <div flex="100" layout-gt-sm="row">
+        <md-input-container flex="33">
           <label>Project Name</label>
           <input ng-model="project.title">
         </md-input-container>
-  
-        <md-input-container>
+
+        <md-input-container flex="33">
           <label>Amount to Raise</label>
           <input ng-model="project.amount" type="text">
         </md-input-container>
+
+        <md-input-container flex="33" style="display: inline-block;">
+          <label>Deadline</label>
+          <md-datepicker ng-model="project.deadlineDate" aria-label="Enter date"></md-datepicker>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm="">
       </div>
     </md-content>
-  
+
     <md-content layout-padding="">
-      <div>
-        <form name="projectForm">
-  
-            <md-input-container>
-              <label>Enter Deadline</label>
-              <md-datepicker ng-model="project.deadlineDate" aria-label="Enter date"></md-datepicker>
-            </md-input-container>
-          </div>
-  
-          <div layout-gt-sm="row">
-            <md-input-container class="md-block" flex-gt-sm="">
-              <label>First name</label>
-              <input ng-model="project.firstName">
-            </md-input-container>
-  
-            <md-input-container class="md-block" flex-gt-sm="">
-              <label>Long Last Name That Will Be Truncated And 3 Dots (Ellipsis) Will Appear At The End</label>
-              <input ng-model="theMax">
-            </md-input-container>
-          </div>
-  
-          <md-input-container class="md-block">
-            <label>Address</label>
-            <input ng-model="project.address">
-          </md-input-container>
-  
-          <md-input-container md-no-float="" class="md-block">
-            <input ng-model="project.address2" placeholder="Address 2" aria-label="Address 2">
-          </md-input-container>
-  
-          <div layout-gt-sm="row">
-            <md-input-container class="md-block" flex-gt-sm="">
-              <label>City</label>
-              <input ng-model="project.city">
-            </md-input-container>
-  
-            <md-input-container class="md-block" flex-gt-sm="">
-              <label>Category</label>
-              <md-select ng-model="project.category">
-                <md-option ng-repeat="category in categorys" value="{{category.abbrev}}">
-                  {{category.abbrev}}
-                </md-option>
-              </md-select>
-            </md-input-container>
-  
-            <md-input-container class="md-block" flex-gt-sm="">
-              <label>Postal Code</label>
-              <input name="postalCode" ng-model="project.postalCode" placeholder="12345" required="" ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
-  
-              <div ng-messages="projectForm.postalCode.$error" role="alert" multiple="">
-                <div ng-message="required" class="my-message">You must supply a postal code.</div>
-                <div ng-message="pattern" class="my-message">That doesn't look like a valid postal
-                  code.
-                </div>
-                
-                <div ng-message="md-maxlength" class="my-message">
-                  Don't use the long version silly...we don't need to be that specific...
-                </div>
-              </div>
-            </md-input-container>
-          </div>
-  
-          <md-input-container class="md-block">
-            <label>Project Description</label>
-            <textarea ng-model="project.projectDescription" md-maxlength="150" rows="5" md-select-on-focus=""></textarea>
-          </md-input-container>
-  
-  
-        </form>
+      <form name="projectForm" class="create-project-form"></form>
+      <div flex="25">
+        <label>Category</label>
+        <md-select ng-model="project.category">
+          <md-option ng-repeat="category in categorys" value="{{category}}">
+            {{category}}
+          </md-option>
+        </md-select>
+        </md-input-container>
       </div>
-    </md-content>
-  
+
+        <md-input-container class="md-block">
+          <label>Project Description</label>
+          <textarea ng-model="project.projectDescription" md-maxlength="150" rows="4" md-select-on-focus=""></textarea>
+        </md-input-container>
+        
+        <div>
+          <h3 class="form-subheader">Banking Details</h3>
+        </div>
+        <div layout-gt-sm="row" class="bank-info-container">
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>Bank ID</label>
+            <input name="bankID" ng-model="project.bankID" required ng-pattern="/^[0-9]{2}$/" md-maxlength="2">
+            <div ng-messages="projectForm.bankID.$error" role="alert">
+              <div ng-message="required" class="my-message">You must supply a bank ID.</div>
+              <div ng-message="pattern" class="my-message">That doesn't look like a valid bank ID.</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>branch ID</label>
+            <input name="branchID" ng-model="project.branchID" required="" ng-pattern="/^[0-9]{3}$/" md-maxlength="3">
+            <div ng-messages="projectForm.branchID.$error" role="alert" multiple="">
+              <div ng-message="required" class="my-message">You must supply a branch ID.</div>
+              <div ng-message="pattern" class="my-message">That doesn't look like a valid branch ID.</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>Account Number</label>
+            <input name="bankAccount" ng-model="project.bankAccount" required="" ng-pattern="/^[0-9]{6}$/"
+              md-maxlength="6">
+            <div ng-messages="projectForm.bankAccount.$error" role="alert" multiple="">
+              <div ng-message="required" class="my-message">You must supply an account number.</div>
+              <div ng-message="pattern" class="my-message">That doesn't look like a valid account number.</div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div>
+          <md-button type="submit">Next</md-button>
+        </div>
+
+
+      </form>
+  </div>
+  </md-content>
+
   </div>
 
 </body>

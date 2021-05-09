@@ -1,6 +1,5 @@
 const addProjectApp = angular.module('AddProjectApp',['ngMaterial']);
 
-
 addProjectApp.controller('AddProjectController',['$scope',function($scope){
   
 }]); 
