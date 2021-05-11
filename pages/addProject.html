@@ -22,8 +22,10 @@
   <div class="header-div">
     <h1 class="main-header">Add Project</h1>
   </div>
-  <div layout="column" ng-cloak="" class="md-inline-form inputdemoBasicUsage create-project-form-container">
-    <md-content layout-padding=""> <!--  md-theme="docs-dark" -->
+  <div layout="column" ng-cloak="" class="md-inline-form inputdemoBasicUsage create-project-form-container"
+    ng-if="!isNext">
+    <md-content layout-padding="">
+      <!--  md-theme="docs-dark" -->
       <div layout-padding="">
         <h3 class="form-subheader">Project Details</h3>
       </div>
@@ -43,7 +45,7 @@
             <label>Deadline</label>
             <md-datepicker ng-model="project.deadlineDate" aria-label="Enter date"></md-datepicker>
           </md-input-container>
-          <md-input-container class="md-block" flex-gt-sm="">
+
         </div>
       </md-content>
     </md-content>
@@ -99,7 +101,7 @@
         </div>
 
         <div>
-          <md-button type="submit">Next</md-button>
+          <md-button type="submit" ng-click="switchPage()">Next</md-button>
         </div>
 
 
@@ -109,6 +111,56 @@
 
   </div>
 
+  <!--  -->
+  <!--  -->
+
+  <div layout="column" ng-cloak="" class="md-inline-form inputdemoBasicUsage create-project-form-container"
+    ng-if="isNext">
+    <div ng-repeat="reward in rewards">
+      <form name="projectForm" class="create-project-form" ng-submit="printInfo()">
+        <md-content layout-padding="">
+          <!--  md-theme="docs-dark" -->
+          <div layout-padding="">
+            <h3 class="form-subheader">Project Details</h3>
+          </div>
+
+          <div flex="100" layout-gt-sm="row">
+            <md-input-container flex="50">
+              <label>Donation Name</label>
+              <input ng-model="reward.title">
+            </md-input-container>
+
+            <md-input-container flex="50">
+              <label>Donation Amount</label>
+              <input ng-model="reward.amount" type="number" step="1">
+            </md-input-container>
+          </div>
+
+          <div>
+            <md-input-container class="md-block">
+              <label>Description</label>
+              <textarea ng-model="reward.projectDescription" md-maxlength="150" rows="2"
+                md-select-on-focus=""></textarea>
+            </md-input-container>
+          </div>
+
+        </md-content>
+      </form>
+    </div>
+    <md-content layout-gt-sm="column">
+      <div>
+        <div class="moving-button-div">
+          <md-button ng-click="switchPage()">Prev</md-button>
+        </div>
+        <div class="moving-button-div">
+          <md-button type="submit" ng-click="printRewards()">Next</md-button>
+        </div>
+      </div>
+    </md-content>
+  </div>
+  </md-content>
+
+  </div>
 </body>
 
 </html>

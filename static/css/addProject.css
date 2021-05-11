@@ -15,3 +15,9 @@
 .form-subheader{
   margin: 0;
 }
+.form-two-container{
+  width: 100%;
+}
+.moving-button-div{
+  display: inline;
+}

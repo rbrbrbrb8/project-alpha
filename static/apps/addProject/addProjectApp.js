@@ -1,8 +1,17 @@
 const addProjectApp = angular.module('AddProjectApp',['ngMaterial','ngMessages']);
 
 addProjectApp.controller('AddProjectController',['$scope',function($scope){
+    $scope.project= {};
+    $scope.rewards = [{},{}];
+    $scope.isNext = false;
     $scope.printInfo = () =>{
-        console.log($scope.project);  
+        console.log($scope.project);
+    }
+    $scope.printRewards = () =>{
+        console.log($scope.rewards);
+    }
+    $scope.switchPage = () =>{
+        $scope.isNext = !$scope.isNext;
     }
 }]); 
 
@@ -11,7 +20,7 @@ addProjectApp.directive('navbar',[function(){
         restrict: 'E',
         scope:{}, //add user info to scope so the navbar can load username and profile pic
         controller: function($scope){
-
+ 
         },
         templateUrl:'views/navbar.html'
 
