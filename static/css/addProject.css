@@ -21,3 +21,12 @@
 .moving-button-div{
   display: inline;
 }
+
+.single-reward-form-container{
+  border: 1px solid rgba(0,0,0,0.12);
+  margin-top: 2px;
+}
+
+.remove-reward-button{
+  float: right;
+}

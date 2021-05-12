@@ -116,14 +116,10 @@
 
   <div layout="column" ng-cloak="" class="md-inline-form inputdemoBasicUsage create-project-form-container"
     ng-if="isNext">
-    <div ng-repeat="reward in rewards">
+    <div ng-repeat="reward in rewards" class="single-reward-form-container">
       <form name="projectForm" class="create-project-form" ng-submit="printInfo()">
         <md-content layout-padding="">
           <!--  md-theme="docs-dark" -->
-          <div layout-padding="">
-            <h3 class="form-subheader">Project Details</h3>
-          </div>
-
           <div flex="100" layout-gt-sm="row">
             <md-input-container flex="50">
               <label>Donation Name</label>
@@ -143,6 +139,10 @@
                 md-select-on-focus=""></textarea>
             </md-input-container>
           </div>
+          
+            <md-button class="md-icon-button remove-reward-button" aria-label="donate" ng-click="removeDonationOption(reward)">
+              <md-icon md-svg-icon="/images/icons/remove.svg"></md-icon>
+            </md-button>
 
         </md-content>
       </form>
@@ -151,6 +151,9 @@
       <div>
         <div class="moving-button-div">
           <md-button ng-click="switchPage()">Prev</md-button>
+        </div>
+        <div class="moving-button-div">
+          <md-button ng-click="addDonationOption()">Add Donation Option</md-button>
         </div>
         <div class="moving-button-div">
           <md-button type="submit" ng-click="printRewards()">Next</md-button>

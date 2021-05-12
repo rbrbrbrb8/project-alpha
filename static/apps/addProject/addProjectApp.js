@@ -13,6 +13,14 @@ addProjectApp.controller('AddProjectController',['$scope',function($scope){
     $scope.switchPage = () =>{
         $scope.isNext = !$scope.isNext;
     }
+    $scope.addDonationOption = () => {
+        $scope.rewards.push({});
+    }
+    $scope.removeDonationOption = reward => {
+        $scope.rewards = $scope.rewards.filter((value,index,arr) => {
+            return value !== reward;
+        })
+    }
 }]); 
 
 addProjectApp.directive('navbar',[function(){
