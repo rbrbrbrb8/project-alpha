@@ -1,6 +1,6 @@
 const addProjectApp = angular.module('AddProjectApp', ['ngMaterial', 'ngMessages','addProjectModule']);
 
-addProjectApp.controller('AddProjectController', ['$scope', function ($scope) {
+addProjectApp.controller('AddProjectController', ['$scope','addProjectHttpMethods', function ($scope,addProjectHttpMethods) {
     $scope.project = {};
     $scope.rewards = [{}, {}];
     $scope.isNext = false;
