@@ -62,7 +62,7 @@ addProjectApp.controller('AddProjectController', ['$scope', function ($scope) {
         const isValidRewards = verifyRewardsDetails($scope.rewards);
         if (isValidProject && isValidRewards) {
             $scope.project.rewards = $scope.rewards;
-            httpService.requestAddProject($scope.project);
+            addProjectHttpMethods.requestAddProject($scope.project);
         }
     }
     $scope.printRewards = () => {
