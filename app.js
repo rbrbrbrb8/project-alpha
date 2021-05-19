@@ -83,6 +83,9 @@ app.get('/addproject',(req,res)=>{
   res.sendFile('/pages/addProject.html',{root:__dirname});
 });
 
+app.post('/addproject',(req,res)=>{
+  console.log(req.body);
+});
 function checkAuthenticated(req,res,next){
   console.log("auth: " + req.isAuthenticated());
   if(req.isAuthenticated()){

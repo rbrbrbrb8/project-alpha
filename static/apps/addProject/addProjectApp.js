@@ -1,47 +1,105 @@
-const addProjectApp = angular.module('AddProjectApp',['ngMaterial','ngMessages']);
+const addProjectApp = angular.module('AddProjectApp', ['ngMaterial', 'ngMessages','addProjectModule']);
 
-addProjectApp.controller('AddProjectController',['$scope',function($scope){
-    $scope.project= {};
-    $scope.rewards = [{},{}];
+addProjectApp.controller('AddProjectController', ['$scope', function ($scope) {
+    $scope.project = {};
+    $scope.rewards = [{}, {}];
     $scope.isNext = false;
-    $scope.printInfo = () =>{
-        console.log($scope.project);
+    const verifyProjectDetails = project => {
+        const projInfoEntries = Object.entries(project);
+        console.log(projInfoEntries);
+        if (projInfoEntries.length < 8) {
+            alert("need to fill the entire form");
+            return false;
+        }
+        projInfoEntries.forEach(element => {
+            if (!element[1]) {
+                alert("need to fill the entire form");
+                return false;
+            }
+        });
+        const amountEntry = projInfoEntries.find(element => element[0] === "amount");
+        if (isNaN(amountEntry[1])) {
+            alert("amount must be number");
+            return false;
+        }
+
+        const bankDetailEntries = projInfoEntries.filter(element => element[0].includes("bank"));
+        bankDetailEntries.forEach((element, i) => {
+            const validator = new RegExp(`^[0-9]{${2 + i * i}}$`);
+            if(validator.test(element[1])) return false;
+        })
+        return true;
     }
-    $scope.printRewards = () =>{
+
+    const verifyRewardsDetails = rewards => {
+        if(rewards.length === 0){
+            alert("need to include at least 1 reward/donation option");
+            return false;
+        }
+        rewards.forEach(reward => {
+            const rewardInfoEntries = Object.entries(reward);
+            if (rewardInfoEntries.length < 3) {
+                alert("need to fill all reward details");
+                return false;
+            }
+            rewardInfoEntries.forEach(element => {
+                if (!element[1]) {
+                    alert("need to fill all reward details");
+                    return false;
+                }
+            });
+            const donationEntry = rewardInfoEntries.find(element => element[0].includes("donation"));
+            if (isNaN(donationEntry[1])) {
+                alert("donation must be number");
+                return false;
+            }
+
+        });
+        return true;
+    }
+    $scope.verifyAndSend = () => {
+        const isValidProject = verifyProjectDetails($scope.project);
+        const isValidRewards = verifyRewardsDetails($scope.rewards);
+        if (isValidProject && isValidRewards) {
+            $scope.project.rewards = $scope.rewards;
+            httpService.requestAddProject($scope.project);
+        }
+    }
+    $scope.printRewards = () => {
         console.log($scope.rewards);
     }
-    $scope.switchPage = () =>{
+    $scope.switchPage = () => {
         $scope.isNext = !$scope.isNext;
     }
     $scope.addDonationOption = () => {
         $scope.rewards.push({});
     }
     $scope.removeDonationOption = reward => {
-        $scope.rewards = $scope.rewards.filter((value,index,arr) => {
+        $scope.rewards = $scope.rewards.filter((value, index, arr) => {
             return value !== reward;
         })
     }
-}]); 
+}]);
 
-addProjectApp.directive('navbar',[function(){
-    return{
+addProjectApp.directive('navbar', [function () {
+    return {
         restrict: 'E',
-        scope:{}, //add user info to scope so the navbar can load username and profile pic
-        controller: function($scope){
- 
+        scope: {}, //add user info to scope so the navbar can load username and profile pic
+        controller: function ($scope) {
+
         },
-        templateUrl:'views/navbar.html'
+        templateUrl: 'views/navbar.html'
 
 
     }
 }]);
 
-addProjectApp.config(function($mdThemingProvider) {
+addProjectApp.config(function ($mdThemingProvider) {
 
     // Configure a dark theme with primary foreground yellow
 
     $mdThemingProvider.theme('docs-dark', 'default')
-      .primaryPalette('yellow')
-      .dark();
+        .primaryPalette('yellow')
+        .dark();
 
-  });
+});
