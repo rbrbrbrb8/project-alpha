@@ -6,7 +6,7 @@ addProjectApp.controller('AddProjectController', ['$scope','addProjectHttpMethod
     $scope.isNext = false;
     const verifyProjectDetails = project => {
         const projInfoEntries = Object.entries(project);
-        console.log(projInfoEntries);
+        console.log(project);
         if (projInfoEntries.length < 8) {
             alert("need to fill the entire form");
             return false;
@@ -17,7 +17,7 @@ addProjectApp.controller('AddProjectController', ['$scope','addProjectHttpMethod
                 return false;
             }
         });
-        const amountEntry = projInfoEntries.find(element => element[0] === "amount");
+        const amountEntry = projInfoEntries.find(element => element[0].includes("amount"));
         if (isNaN(amountEntry[1])) {
             alert("amount must be number");
             return false;
@@ -59,11 +59,15 @@ addProjectApp.controller('AddProjectController', ['$scope','addProjectHttpMethod
     }
     $scope.verifyAndSend = () => {
         const isValidProject = verifyProjectDetails($scope.project);
-        const isValidRewards = verifyRewardsDetails($scope.rewards);
-        if (isValidProject && isValidRewards) {
-            $scope.project.rewards = $scope.rewards;
-            addProjectHttpMethods.requestAddProject($scope.project);
-        }
+        const isValidRewards = verifyRewardsDetails($scope.rewards); // has bugs!!!! fix
+        console.log("rewards: " + isValidRewards);
+        console.log("project: " + isValidProject); 
+        // if (isValidProject && isValidRewards) {
+        //     $scope.project.rewards = $scope.rewards;
+        //     addProjectHttpMethods.requestAddProject($scope.project).then(res => {
+        //         console.log(res.data);
+        //     });
+        // }
     }
     $scope.printRewards = () => {
         console.log($scope.rewards);

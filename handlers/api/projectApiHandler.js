@@ -4,6 +4,7 @@ let projectApiHandler = {};
 projectApiHandler.init = () => { };
 
 projectApiHandler.requestAddProject = async (project, username) => {
+  console.log("project in route: " + Object.entries(project));
   let isValid = verifyProjectDetails(project) && verifyRewardsDetails(project.rewards);
   if (!isValid) return false;
   try {
@@ -23,18 +24,15 @@ const verifyProjectDetails = project => {
   const projInfoEntries = Object.entries(project);
   console.log(projInfoEntries);
   if (projInfoEntries.length < 8) {
-    alert("need to fill the entire form");
     return false;
   }
   projInfoEntries.forEach(element => {
     if (!element[1]) {
-      alert("need to fill the entire form");
       return false;
     }
   });
-  const amountEntry = projInfoEntries.find(element => element[0] === "amount");
+  const amountEntry = projInfoEntries.find(element => element[0].includes("amount"));
   if (isNaN(amountEntry[1])) {
-    alert("amount must be number");
     return false;
   }
 
@@ -48,24 +46,20 @@ const verifyProjectDetails = project => {
 
 const verifyRewardsDetails = rewards => {
   if (rewards.length === 0) {
-    alert("need to include at least 1 reward/donation option");
     return false;
   }
   rewards.forEach(reward => {
     const rewardInfoEntries = Object.entries(reward);
     if (rewardInfoEntries.length < 3) {
-      alert("need to fill all reward details");
       return false;
     }
     rewardInfoEntries.forEach(element => {
       if (!element[1]) {
-        alert("need to fill all reward details");
         return false;
       }
     });
     const donationEntry = rewardInfoEntries.find(element => element[0].includes("donation"));
     if (isNaN(donationEntry[1])) {
-      alert("donation must be number");
       return false;
     }
 
@@ -74,4 +68,4 @@ const verifyRewardsDetails = rewards => {
 }
 
 
-module.exports = signUpHandler;
+module.exports = projectApiHandler;

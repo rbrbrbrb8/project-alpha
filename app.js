@@ -26,6 +26,7 @@ app.use(flash());
 const signUpRouter = require('./routes/signUpRoute');
 const loginRouter = require('./routes/loginRouter');
 const homepageRouter = require('./routes/homepageRoute');
+const addProjectRouter = require('./routes/addProjectRoute');
 const projectApiRouter = require('./routes/api/projectApi');
 
 mongoose.connect('mongodb+srv://rbrbrbrb8:rbpromongorb23@clusterproject.pzpyd.mongodb.net/ProjectDatabase?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -69,25 +70,9 @@ app.post('/',
 app.get('/',loginRouter);
 app.use('/homepage',checkAuthenticated,homepageRouter);
 app.use('/api/project',checkAuthenticated,projectApiRouter);
+app.use('/addproject',checkAuthenticated,addProjectRouter);
 
 
-// app.get('/signup', (req, res) => {
-//   // res.send("omer tipa gay");
-//     res.sendFile('/pages/signup.html',{root:__dirname});
-//   })
-
-// app.use('/signup', (req, res) => {
-//   res.send("omer tipa gay");
-//     // res.sendFile('/pages/signup.html',{root:__dirname});
-//   })
-  
-app.get('/addproject',(req,res)=>{
-  res.sendFile('/pages/addProject.html',{root:__dirname});
-});
-
-app.post('/addproject',(req,res)=>{
-  console.log(req.body);
-});
 function checkAuthenticated(req,res,next){
   console.log("auth: " + req.isAuthenticated());
   if(req.isAuthenticated()){

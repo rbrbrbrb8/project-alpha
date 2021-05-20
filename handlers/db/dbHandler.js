@@ -45,7 +45,7 @@ dbHandler.findOneDocumentByProperty = async (modelName,propety) => {
     console.log("found doc: " + doc);
     return docFixed;
   } catch (err) {
-    console.log("couldn't find anything");
+    console.log("couldn't find single document",err);
     return err;
   }
 }

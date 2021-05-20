@@ -6,7 +6,8 @@ const dbHandler = require('./handlers/db/dbHandler');
 const initialize = (passport) => {
     const getUserById = async (id) => {
         try {
-            const user = await dbHandler.findDocumentByProperty("user",id);
+            console.log("im in passport config",id);
+            const user = await dbHandler.findOneDocumentByProperty("user",{"_id": id});
             return user;
         } catch (error) {
             return error;
