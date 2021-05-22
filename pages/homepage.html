@@ -25,7 +25,7 @@
   </div>
   <div layout="row" layout-wrap class="all-projects-container">
     <div flex="50" flex-gt-sm="33" flex-gt-md="25" ng-repeat="item in arr" class="project-card-container">
-      <md-card class="project-card">
+      <md-card class="project-card" ng-init="printInit()">
         <md-card-header>
           <md-card-avatar>
             <div>

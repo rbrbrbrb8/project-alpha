@@ -2,7 +2,10 @@ const homepageApp = angular.module('HomepageApp',['ngMaterial']);
 
 
 homepageApp.controller('HomepageController',['$scope',function($scope){
-  
+  $scope.printInit = () => {
+      setTimeout(console.log("initializing card..."),500);
+     
+  }
 }]); 
 
 homepageApp.directive('navbar',[function(){

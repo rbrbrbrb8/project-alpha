@@ -4,15 +4,15 @@ const dbHandler = require('./handlers/db/dbHandler');
 //
 
 const initialize = (passport) => {
-    const getUserById = async (id) => {
-        try {
-            console.log("im in passport config",id);
-            const user = await dbHandler.findOneDocumentByProperty("user",{"_id": id});
-            return user;
-        } catch (error) {
-            return error;
-        }
-    };
+    // const getUserById = async (id) => {
+    //     try {
+    //         console.log("im in passport config",id);
+    //         const user = await dbHandler.findOneDocumentByProperty("user",{"_id": id});
+    //         return user;
+    //     } catch (error) {
+    //         return error;
+    //     }
+    // };
     const authenticateUser = async (username,password,done) => {
         try {
 					const user = await dbHandler.findOneDocumentByProperty("user",{username});
@@ -32,9 +32,10 @@ const initialize = (passport) => {
         
     };
     passport.use(new LocalStrategy({},authenticateUser));
-    passport.serializeUser((user,done) => {done(null,user['_id']) });
-    passport.deserializeUser((id,done) => { 
-        return done(null,getUserById(id));
+    passport.serializeUser((user,done) => {done(null,user) }); //user object will not be changed throughout the session
+    passport.deserializeUser((user,done) => {
+        console.log("desreializing user= " + user.username); 
+        return done(null,user);
     });
 };
 

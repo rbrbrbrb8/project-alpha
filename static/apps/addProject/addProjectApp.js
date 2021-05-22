@@ -62,12 +62,12 @@ addProjectApp.controller('AddProjectController', ['$scope','addProjectHttpMethod
         const isValidRewards = verifyRewardsDetails($scope.rewards); // has bugs!!!! fix
         console.log("rewards: " + isValidRewards);
         console.log("project: " + isValidProject); 
-        // if (isValidProject && isValidRewards) {
-        //     $scope.project.rewards = $scope.rewards;
-        //     addProjectHttpMethods.requestAddProject($scope.project).then(res => {
-        //         console.log(res.data);
-        //     });
-        // }
+        if (isValidProject && isValidRewards) {
+            $scope.project.rewards = $scope.rewards;
+            addProjectHttpMethods.requestAddProject($scope.project).then(res => {
+                console.log(res.data);
+            });
+        }
     }
     $scope.printRewards = () => {
         console.log($scope.rewards);
