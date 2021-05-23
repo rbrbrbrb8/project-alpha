@@ -1,14 +1,27 @@
 const dbHandler = require('../db/dbHandler');
 let projectApiHandler = {};
 projectApiHandler.init = () => { };
+const PROJECT = "project";
 
-projectApiHandler.requestAddProject = async (project, username) => {
+projectApiHandler.requestGetProject = async (id) => {
+  console.log("doc id:" + id);
+  try {
+    const project = await dbHandler.findOneDocumentByProperty("project",id);  
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+  
+  
+};
+
+projectApiHandler.requestAddProject = async (project, userID) => {
   console.log("project in route: " + Object.entries(project));
   let isValid = verifyProjectDetails(project) && verifyRewardsDetails(project.rewards);
   if (!isValid) return false;
   try {
-    project.creatorUser = username;
-    const outcome = await dbHandler.addDocumentToDb("project", project);
+    project.creatorUser = userID;
+    const outcome = await dbHandler.addDocumentToDb(PROJECT, project);
     console.log("success, in projectApiHandler");
     return outcome;
   } catch (error) {
@@ -44,27 +57,34 @@ const verifyProjectDetails = project => {
 }
 
 const verifyRewardsDetails = rewards => {
+  let isValid = true;
   if (rewards.length === 0) {
+    alert("need to include at least 1 reward/donation option");
     return false;
   }
   rewards.forEach(reward => {
     const rewardInfoEntries = Object.entries(reward);
     if (rewardInfoEntries.length < 3) {
-      return false;
+      alert("need to fill all reward details");
+      isValid = false;
     }
     rewardInfoEntries.forEach(element => {
       if (!element[1]) {
-        return false;
+        alert("need to fill all reward details");
+        isValid = false;
       }
     });
     const donationEntry = rewardInfoEntries.find(element => element[0].includes("donation"));
-    if (isNaN(donationEntry[1])) {
-      return false;
+    if (donationEntry) {
+      if (isNaN(donationEntry[1])) {
+        alert("donation must be number");
+        isValid = false;
+      }
     }
 
   });
-  return true;
-}
+  return isValid;
+}      
 
 
 module.exports = projectApiHandler;

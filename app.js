@@ -28,6 +28,7 @@ const loginRouter = require('./routes/loginRouter');
 const homepageRouter = require('./routes/homepageRoute');
 const addProjectRouter = require('./routes/addProjectRoute');
 const projectApiRouter = require('./routes/api/projectApi');
+const allProjectsApiRouter = require('./routes/api/allProjectsApi');
 
 mongoose.connect('mongodb+srv://rbrbrbrb8:rbpromongorb23@clusterproject.pzpyd.mongodb.net/ProjectDatabase?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
@@ -70,6 +71,7 @@ app.post('/',
 app.get('/',loginRouter);
 app.use('/homepage',checkAuthenticated,homepageRouter);
 app.use('/api/project',checkAuthenticated,projectApiRouter);
+app.use('/api/allprojects',checkAuthenticated,allProjectsApiRouter);
 app.use('/addproject',checkAuthenticated,addProjectRouter);
 
 

@@ -50,4 +50,18 @@ dbHandler.findOneDocumentByProperty = async (modelName,propety) => {
   }
 }
 
+dbHandler.findPropertyOfAllDocumentsInCollection = async (modelName,property,filter) => {
+  const Model = getModel(modelName);
+  try{
+    const propertyArr = await Model.find(filter,property);
+    // console.log("filter= " + filter);
+    // console.log(propertyArr);
+    return propertyArr;
+
+  }
+  catch(err){
+    return false;
+  }
+}
+
 module.exports = dbHandler;
