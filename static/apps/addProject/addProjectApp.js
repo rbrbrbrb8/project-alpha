@@ -84,7 +84,6 @@ addProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 			window.location.href = '/addproject';
 		}, function () {
 			window.location.href = '/homepage';
-			$scope.status = 'You decided to keep your debt.';
 		});
 	}
 	$scope.printRewards = () => {

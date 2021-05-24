@@ -4,7 +4,7 @@ let projectApiHandler = {};
 projectApiHandler.init = () => { };
 projectApiHandler.getAllProjectsIdList = async filter => {
     try {
-        const idArrayObjects = await dbHandler.findPropertyOfAllDocumentsInCollection("Project", "_id",filter);
+        const idArrayObjects = await dbHandler.findPropertyOfAllDocumentsInCollection("project", "_id",filter);
         const ids = idArrayObjects.map(element => element._id);
         return idArrayObjects;
     }

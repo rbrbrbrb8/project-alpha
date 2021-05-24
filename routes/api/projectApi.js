@@ -4,10 +4,18 @@ const rootDir = require('../../root_dir');
 const projectApiHandler = require('../../handlers/api/projectApiHandler');
 const projectApiRouter = express.Router();
 
-projectApiRouter.get('/:id', (req, res) => {
+projectApiRouter.get('/:id', async (req, res) => {
   const { id } = req.params;
   console.log("id= " +id);
-  projectApiHandler.requestGetProject(id);
+  try {
+    const proj = await projectApiHandler.requestGetProject(id);
+    if(proj) res.send(proj);
+    else res.send(false);
+  } catch (error) {
+    console.log("error in projectApi router");
+    return false;
+  }
+  
 });
 
 projectApiRouter.post('/', async (req, res) => {

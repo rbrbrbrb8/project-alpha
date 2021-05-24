@@ -6,9 +6,10 @@ const PROJECT = "project";
 projectApiHandler.requestGetProject = async (id) => {
   console.log("doc id:" + id);
   try {
-    const project = await dbHandler.findOneDocumentByProperty("project",id);  
+    const project = await dbHandler.findOneDocumentByProperty(PROJECT,{_id: id});
+    return project;  
   } catch (error) {
-    console.log(error);
+    console.log("error in projectApiHandler");
     return false;
   }
   

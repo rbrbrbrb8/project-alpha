@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const db = mongoose.connection;
 const dbHandler = {};
 const userModel = require('./models/user');
+const Project = require('./models/project');
 function getModel(model)
 {
   
@@ -33,6 +34,19 @@ dbHandler.findManyDocumentsByProperty = async (modelName,propety) => {
     return doc;
   } catch (err) {
     console.log("couldn't find anything");
+    return err;
+  }
+}
+
+dbHandler.findOneDocumentById = async (modelName,id) => {
+  const Model = getModel(modelName);
+  try {
+    const doc = await Model.findById(id);
+    const docFixed = doc['_doc'];
+    console.log("found doc: " + doc);
+    return docFixed;
+  } catch (err) {
+    console.log("couldn't find single document",err);
     return err;
   }
 }
