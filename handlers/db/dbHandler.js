@@ -1,8 +1,15 @@
 const mongoose = require('mongoose');
-const db = mongoose.connection;
 const dbHandler = {};
-const userModel = require('./models/user');
-const Project = require('./models/project');
+
+mongoose.connect('mongodb+srv://rbrbrbrb8:rbpromongorb23@clusterproject.pzpyd.mongodb.net/ProjectDatabase?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+const db = mongoose.connection;
+db.on('error',console.error.bind(console,'connection error:'));
+db.once('open', async () => {
+    console.log('were connected');  
+});
+
+
+
 function getModel(model)
 {
   
