@@ -3,30 +3,22 @@ const homepageApp = angular.module('HomepageApp', ['ngMaterial']);
 
 
 homepageApp.controller('HomepageController', ['$scope', '$http', async function ($scope, $http) {
-	$scope.projects = []
-	$scope.newProjects = []
-	init = async () => {
-		$http.get('/api/allprojects').then(res => {
+	$scope.projects = [];
+	$scope.getProjects = () => {
+		$http.get(`/api/project/firstProjects`).then(res=>{
 			console.log(res.data);
-			$scope.projects = res.data;
-		});
-	}
-	await init();
-	$scope.getProject = async project => {
-		$http.get(`/api/project/${project._id}`).then(res=>{
-			$scope.newProjects.push(res.data);
+			$scope.projects= res.data.firstProjects;
 		});
 
 	}
 	
-	$scope.assignData = (project, data) => {
-		project = data;
-		console.log(project)
+	$scope.printProject = project => {
+		console.log(project);
 	}
 
-	$scope.printProject = project => {
-		project = "yalla"
-		console.log(project);
+	$scope.addProject = () => {
+		console.log($scope.projects);
+		$scope.projects.push({title:'nice'});
 	}
 }]);
 

@@ -18,14 +18,14 @@
   <title>Welcome</title>
 </head>
 
-<body ng-controller="HomepageController" ng-init="arr = [1,2,3,4,5,6,7,8,9,10,11,12]">
+<body ng-controller="HomepageController" ng-init="getProjects()">
   <navbar></navbar>
   <div class="header-div">
     <h1 class="main-header">Explore</h1>
   </div>
   <div layout="row" layout-wrap class="all-projects-container">
-    <div flex="50" flex-gt-sm="33" flex-gt-md="25" ng-repeat="project in projects" class="project-card-container" ng-click="printProject(project)">
-      <md-card class="project-card" ng-init="getProject(project)">
+    <div flex="50" flex-gt-sm="33" flex-gt-md="25" ng-repeat="project in projects" class="project-card-container" ng-click="seeProject()">
+      <md-card class="project-card" ng-init="">
         <md-card-header>
           <md-card-avatar>
             <div>
@@ -33,7 +33,7 @@
             </div>
           </md-card-avatar>
           <md-card-header-text>
-            <span class="md-title" >Guns N' Roses</span> <!-- change data model of project - creatorUid and creatorUsername-->
+            <span class="md-title" >{{project.creatorUser}}</span> <!-- change data model of project - creatorUid and creatorUsername-->
             <span class="md-subhead" >posted on 5.5.2021</span>
           </md-card-header-text>
         </md-card-header>
@@ -42,17 +42,13 @@
         </div>
         <md-card-title>
           <md-card-title-text>
-            <span class="md-headline" ng-model="project.title">Project title</span>
+            <span class="md-headline" ng-model="project.title">{{project.title}}</span>
           </md-card-title-text>
         </md-card-title>
         <md-card-content>
           <div class="project-description-container" ng-model="project.projectDescription">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat.
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              {{project.projectDescription}}
             </p>
           </div>
         </md-card-content>

@@ -42,14 +42,6 @@ app.listen(port, () => {
 
 
 
-function callIdList(){
-  cacheService.retrieveManyByKeys(['idList','firstProjects']);
-}
-
-
-setTimeout(callIdList,10000);
-
-
 
 app.use(express.static('static'));
 //init parsers
@@ -80,10 +72,10 @@ app.post('/',
   }),
   loginRouter);
 app.get('/', loginRouter);
-app.use('/homepage', checkAuthenticated, homepageRouter);
-app.use('/api/project', checkAuthenticated, projectApiRouter);
-app.use('/api/allprojects', checkAuthenticated, allProjectsApiRouter);
-app.use('/addproject', checkAuthenticated, addProjectRouter);
+app.use('/homepage', homepageRouter);  ///ADD CHECK AUTHENTICATED
+app.use('/api/project',  projectApiRouter);
+app.use('/api/allprojects', allProjectsApiRouter);
+app.use('/addproject', addProjectRouter);
 
 
 function checkAuthenticated(req, res, next) {

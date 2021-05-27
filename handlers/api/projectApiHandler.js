@@ -1,4 +1,5 @@
 const dbHandler = require('../db/dbHandler');
+const cacheService = require('../../services/cache/cacheService');
 let projectApiHandler = {};
 projectApiHandler.init = () => { };
 const PROJECT = "project";
@@ -14,6 +15,10 @@ projectApiHandler.requestGetProject = async (id) => {
   }
   
   
+};
+
+projectApiHandler.requestFirstProjectsFromCache = () => {
+  return cacheService.retrieveManyByKeys(['firstProjects']);
 };
 
 projectApiHandler.requestAddProject = async (project, userID) => {
