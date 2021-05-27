@@ -20,6 +20,9 @@ homepageApp.controller('HomepageController', ['$scope', '$http', async function 
 		console.log($scope.projects);
 		$scope.projects.push({title:'nice'});
 	}
+	$scope.seeProjectDate = project => {
+		console.log(typeof project.creationDate);
+	}
 }]);
 
 homepageApp.directive('navbar', [function () {

@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const projectSchema = new Schema({
   creatorUser:{type:String,required:true},
+  creationDate:{type:Object,default:new Date(),immutable:true},
   title:{type:String, required:true},
   amountToRaise:{type:Number,required:true},
   amountAlreadyRaised:{type:Number,required:false,default:0},
