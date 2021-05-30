@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const projectSchema = new Schema({
   creatorUserID:{type:String,required:true},
   creatorUserName:{type:String,required:true},
-  creationDate:{type:Object,default:new Date(),immutable:true},
+  creationDate:{type:Object,default:new Date().toLocaleDateString("en-GB"),immutable:true},
   title:{type:String, required:true},
   amountToRaise:{type:Number,required:true},
   amountAlreadyRaised:{type:Number,required:false,default:0},
