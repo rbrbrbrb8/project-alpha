@@ -7,7 +7,7 @@ const PROJECT = "project";
 projectApiHandler.requestGetProject = async (id) => {
   console.log("doc id:" + id);
   try {
-    const project = await dbHandler.findOneDocumentByProperty(PROJECT,{_id: id});
+    const project = await dbHandler.findOneDocumentByProperty(PROJECT,{_id: id}); //filter bank details!!!!!
     return project;  
   } catch (error) {
     console.log("error in projectApiHandler");
@@ -21,12 +21,13 @@ projectApiHandler.requestFirstProjectsFromCache = () => {
   return cacheService.retrieveManyByKeys(['firstProjects']);
 };
 
-projectApiHandler.requestAddProject = async (project, userID) => {
+projectApiHandler.requestAddProject = async (project, userID,username) => {
   console.log("project in route: " + Object.entries(project));
   let isValid = verifyProjectDetails(project) && verifyRewardsDetails(project.rewards);
   if (!isValid) return false;
   try {
-    project.creatorUser = userID;
+    project.creatorUserID = userID;
+    project.creatorUserName = username;
     const outcome = await dbHandler.addDocumentToDb(PROJECT, project);
     console.log("success, in projectApiHandler");
     return outcome;

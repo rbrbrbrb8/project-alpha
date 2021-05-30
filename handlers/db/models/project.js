@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const projectSchema = new Schema({
-  creatorUser:{type:String,required:true},
+  creatorUserID:{type:String,required:true},
+  creatorUserName:{type:String,required:true},
   creationDate:{type:Object,default:new Date(),immutable:true},
   title:{type:String, required:true},
   amountToRaise:{type:Number,required:true},

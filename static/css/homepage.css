@@ -3,7 +3,9 @@
     vertical-align: center;
 }
 .all-projects-container{
-    margin: 10px;
+    width: 1280px;
+    margin: 0 auto;
+
 }
 .header-div{
     margin-bottom: 30px;

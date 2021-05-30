@@ -39,7 +39,7 @@ projectApiRouter.get('/:id', async (req, res) => {
 
 projectApiRouter.post('/', async (req, res) => {
   console.log("caught add project post request - calling handler...");
-  const isSuccessful = await projectApiHandler.requestAddProject(req.body.project, req.user['_id']);
+  const isSuccessful = await projectApiHandler.requestAddProject(req.body.project, req.user['_id'],req.user.username);
   if (!isSuccessful) {
     console.log("unsuccessful. try again later");
     res.send("couldn't save the project. try again later");
