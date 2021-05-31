@@ -76,7 +76,9 @@ app.use('/homepage', homepageRouter);  ///ADD CHECK AUTHENTICATED
 app.use('/api/project',  projectApiRouter);
 app.use('/api/allprojects', allProjectsApiRouter);
 app.use('/addproject', addProjectRouter);
-
+app.get('/userProfile',(req,res) => {
+  res.sendFile('/pages/userProfile.html',{root:__dirname});
+})
 
 function checkAuthenticated(req, res, next) {
   console.log("auth: " + req.isAuthenticated());
