@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="UserProfileApp">
 
 <head>
 	<meta charset="UTF-8">
@@ -12,7 +12,7 @@
 	<script src="/vendors/angular-animate.min.js"></script>
 	<script src="/vendors/angular-aria.min.js"></script>
 	<script src="/vendors/angular-messages.min.js"></script>
-	<script src="/apps/homepage/homepageApp.js"></script>
+	<script src="/apps/userProfile/userProfileApp.js"></script>
 	<script src="/vendors/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="/vendors/bootstrap.min.css">
 	<link rel="stylesheet" href="/vendors/angular-material.min.css">
@@ -21,6 +21,7 @@
 </head>
 
 <body>
+	<navbar></navbar>
 	<div id="content" class="header-container p-0">
 		<div class="profile-header">
 			<div class="profile-header-cover"></div>
@@ -71,6 +72,53 @@
 		</div>
 	</div>
 	<!-- end row -->
+	<div class="user-projects-header-div">
+    <h1 class="main-user-projects-header">User Projects</h1>
+  </div>
+	<div layout-wrap class="all-projects-container">
+    <div class="user-project-card-container" ng-click="seeProjectDate(project)"> <!--ng-repeat="project in projects"-->
+      <md-card class="project-card" ng-init="">
+        <md-card-header>
+          <md-card-avatar>
+            <div>
+              <img class="md-user-avatar" src="/images/avatar.jpg">
+            </div>
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-title" >username</span> <!-- change data model of project - creatorUid and creatorUsername, {{project.creatorUserName}}-->
+            <span class="md-subhead">Posted on 03.06.21</span> <!-- posted on {{project.creationDate}} -->
+          </md-card-header-text>
+        </md-card-header>
+        <div class="project-image-div">
+          <img ng-src="/images/redhot.jpg" class="md-card-image project-image" alt="image caption">
+        </div>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline" ng-model="project.title">Project Title</span> <!--{{project.title}}-->
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <div class="project-description-container" ng-model="project.projectDescription">
+            <p>
+              Project Description
+            </p> <!--{{project.projectDescription}}-->
+          </div>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="start center">
+          <md-button class="md-icon-button" aria-label="favorite">
+            <md-icon md-svg-icon="/images/icons/favorite.svg"></md-icon>
+          </md-button>
+          <md-button class="md-icon-button" aria-label="comment">
+            <md-icon md-svg-icon="/images/icons/comment.svg"></md-icon>
+          </md-button>
+          <md-button class="md-icon-button" aria-label="donate">
+            <md-icon md-svg-icon="/images/icons/donate.svg"></md-icon>
+          </md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+  </div>
+
 </body>
 
 </html>
