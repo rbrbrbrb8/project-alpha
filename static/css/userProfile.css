@@ -114,13 +114,18 @@ body {
     width: 100%;
     height: 175px;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
 }
 .project-image{
-    max-width: 100%;
+    max-width: auto;
+    max-height:fit-content;
     vertical-align: center;
-    margin: 0 auto;
 }
 .user-project-card-container{
     max-width: 1280px;
     margin: 0 auto;
+}
+.project-description-container{
+    height: 70px;
 }

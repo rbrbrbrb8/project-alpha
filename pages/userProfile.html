@@ -79,22 +79,17 @@
     <div class="user-project-card-container" ng-click="seeProjectDate(project)"> <!--ng-repeat="project in projects"-->
       <md-card class="project-card" ng-init="">
         <md-card-header>
-          <md-card-avatar>
-            <div>
-              <img class="md-user-avatar" src="/images/avatar.jpg">
-            </div>
-          </md-card-avatar>
           <md-card-header-text>
-            <span class="md-title" >username</span> <!-- change data model of project - creatorUid and creatorUsername, {{project.creatorUserName}}-->
+            <span class="md-title" >Title</span> <!--{{project.title}}-->
             <span class="md-subhead">Posted on 03.06.21</span> <!-- posted on {{project.creationDate}} -->
           </md-card-header-text>
         </md-card-header>
         <div class="project-image-div">
-          <img ng-src="/images/redhot.jpg" class="md-card-image project-image" alt="image caption">
+          <img ng-src="/images/profile-background.jpg" class="md-card-image project-image" alt="image caption">
         </div>
         <md-card-title>
           <md-card-title-text>
-            <span class="md-headline" ng-model="project.title">Project Title</span> <!--{{project.title}}-->
+            <!-- <span class="md-headline" ng-model="project.title">Project Title</span>  -->
           </md-card-title-text>
         </md-card-title>
         <md-card-content>
