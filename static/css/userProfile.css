@@ -112,7 +112,6 @@ body {
 
 .project-image-div{
     width: 100%;
-    height: 175px;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -123,9 +122,13 @@ body {
     vertical-align: center;
 }
 .user-project-card-container{
-    max-width: 1280px;
-    margin: 0 auto;
+    max-width: 800px;
+    height: 950px;
+    margin: 0 auto 20px auto;
 }
 .project-description-container{
-    height: 70px;
+    height: 100px;
+}
+.project-card{
+    height: 100%;
 }
