@@ -73,4 +73,6 @@ ul.dropdown-projects-content{
     align-content: center;
     color: white;
 }
-
+.navbar-container a:hover{
+    color: white;
+}

@@ -11,6 +11,7 @@
   <script src="/vendors/angular-material.min.js"></script>
   <script src="/vendors/angular-animate.min.js"></script>
   <script src="/vendors/angular-aria.min.js"></script>
+  <script src="/vendors/angular-cookies.js"></script>
   <script src="/vendors/angular-messages.min.js"></script>
   <script src="/apps/homepage/homepageApp.js"></script>
   <link rel="stylesheet" href="/vendors/angular-material.min.css">
@@ -24,7 +25,7 @@
     <h1 class="main-header">Explore</h1>
   </div>
   <div layout="row" layout-wrap class="all-projects-container">
-    <div flex="50" flex-gt-sm="33" flex-gt-md="25" ng-repeat="project in projects" class="project-card-container" ng-click="seeProjectDate(project)">
+    <div flex="50" flex-gt-sm="33" flex-gt-md="25" ng-repeat="project in projects" class="project-card-container" ng-click="addCookie('blah')">
       <md-card class="project-card" ng-init="">
         <md-card-header>
           <md-card-avatar>

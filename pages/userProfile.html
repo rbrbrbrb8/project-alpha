@@ -11,6 +11,7 @@
 	<script src="/vendors/angular-material.min.js"></script>
 	<script src="/vendors/angular-animate.min.js"></script>
 	<script src="/vendors/angular-aria.min.js"></script>
+	<script src="/vendors/angular-cookies.min.js"></script>
 	<script src="/vendors/angular-messages.min.js"></script>
 	<script src="/apps/userProfile/userProfileApp.js"></script>
 	<script src="/vendors/bootstrap.min.js"></script>
@@ -20,8 +21,9 @@
 	<title>Document</title>
 </head>
 
-<body>
+<body ng-controller="userProfileController">
 	<navbar></navbar>
+	<div class="everything-wrapper"></div>
 	<div id="content" class="header-container p-0">
 		<div class="profile-header">
 			<div class="profile-header-cover"></div>
@@ -76,7 +78,7 @@
     <h1 class="main-user-projects-header">User Projects</h1>
   </div>
 	<div layout-wrap class="all-projects-container">
-    <div class="user-project-card-container" ng-click="seeProjectDate(project)"> <!--ng-repeat="project in projects"-->
+    <div class="user-project-card-container" ng-repeat="project in projects" ng-click="seeProjectDate(project)"> <!--ng-repeat="project in projects"-->
       <md-card class="project-card" ng-init="">
         <md-card-header>
           <md-card-header-text>

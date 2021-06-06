@@ -1,8 +1,8 @@
 
-const homepageApp = angular.module('HomepageApp', ['ngMaterial']);
+const homepageApp = angular.module('HomepageApp', ['ngMaterial','ngCookies']);
 
 
-homepageApp.controller('HomepageController', ['$scope', '$http', async function ($scope, $http) {
+homepageApp.controller('HomepageController', ['$scope', '$http','$cookies', async function ($scope, $http,$cookies) {
 	$scope.projects = [];
 	$scope.getProjects = () => {
 		$http.get(`/api/project/firstProjects`).then(res=>{
@@ -11,18 +11,12 @@ homepageApp.controller('HomepageController', ['$scope', '$http', async function 
 		});
 
 	}
-	
-	$scope.printProject = project => {
-		console.log(project);
+
+	$scope.addCookie = uid => {
+		console.log("adding cookie...");
+		$cookies.put("uid",uid);
 	}
 
-	$scope.addProject = () => {
-		console.log($scope.projects);
-		$scope.projects.push({title:'nice'});
-	}
-	$scope.seeProjectDate = project => {
-		console.log(typeof project.creationDate);
-	}
 }]);
 
 homepageApp.directive('navbar', [function () {

@@ -2,7 +2,7 @@ const userProfileApp = angular.module('UserProfileApp', ['ngMaterial']);
 
 
 userProfileApp.controller('userProfileController', ['$scope', '$http', function ($scope, $http) {
-  $scope.projects = [1,1,1,1,1,1];
+	$scope.projects = [1,2,3]
 }]);
 
 userProfileApp.directive('navbar', [function () {
