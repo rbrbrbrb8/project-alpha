@@ -81,6 +81,7 @@ dbHandler.findPropertyOfAllDocumentsInCollection = async (modelName,property,fil
 
   }
   catch(err){
+    console.log(err);
     return false;
   }
 }

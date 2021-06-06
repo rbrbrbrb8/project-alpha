@@ -14,6 +14,7 @@
 	<script src="/vendors/angular-cookies.min.js"></script>
 	<script src="/vendors/angular-messages.min.js"></script>
 	<script src="/apps/userProfile/userProfileApp.js"></script>
+	<script src="/apps/userProfile/userProfileModule.js"></script>
 	<script src="/vendors/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="/vendors/bootstrap.min.css">
 	<link rel="stylesheet" href="/vendors/angular-material.min.css">
@@ -82,8 +83,8 @@
       <md-card class="project-card" ng-init="">
         <md-card-header>
           <md-card-header-text>
-            <span class="md-title" >Title</span> <!--{{project.title}}-->
-            <span class="md-subhead">Posted on 03.06.21</span> <!-- posted on {{project.creationDate}} -->
+            <span class="md-title" >{{project.title}}</span> <!--{{project.title}}-->
+            <span class="md-subhead">{{project.creationDate}}</span> <!-- posted on {{project.creationDate}} -->
           </md-card-header-text>
         </md-card-header>
         <div class="project-image-div">
@@ -93,7 +94,7 @@
         <md-card-content>
           <div class="project-description-container" ng-model="project.projectDescription">
             <p>
-              Project Description
+              {{project.projectDescription}}
             </p> <!--{{project.projectDescription}}-->
           </div>
         </md-card-content>

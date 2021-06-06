@@ -14,7 +14,7 @@ homepageApp.controller('HomepageController', ['$scope', '$http','$cookies', asyn
 
 	$scope.addCookie = uid => {
 		console.log("adding cookie...");
-		$cookies.put("uid",uid);
+		$cookies.put("userClickedId",uid);
 	}
 
 }]);
