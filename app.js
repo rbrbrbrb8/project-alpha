@@ -30,6 +30,7 @@ const homepageRouter = require('./routes/homepageRoute');
 const addProjectRouter = require('./routes/addProjectRoute');
 const projectApiRouter = require('./routes/api/projectApi');
 const allProjectsApiRouter = require('./routes/api/allProjectsApi');
+const userProfileRouter = require('./routes/userProfileRoute');
 const cacheService = require('./services/cache/cacheService');
 
 
@@ -76,9 +77,7 @@ app.use('/homepage', homepageRouter);  ///ADD CHECK AUTHENTICATED
 app.use('/api/project',  projectApiRouter);
 app.use('/api/allprojects', allProjectsApiRouter);
 app.use('/addproject', addProjectRouter);
-app.get('/userProfile',(req,res) => {
-  res.sendFile('/pages/userProfile.html',{root:__dirname});
-})
+app.use('/userProfile', userProfileRouter);
 
 function checkAuthenticated(req, res, next) {
   console.log("auth: " + req.isAuthenticated());

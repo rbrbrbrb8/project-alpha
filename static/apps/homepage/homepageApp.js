@@ -12,9 +12,9 @@ homepageApp.controller('HomepageController', ['$scope', '$http','$cookies', asyn
 
 	}
 
-	$scope.addCookie = uid => {
-		console.log("adding cookie...");
-		$cookies.put("userClickedId",uid);
+	$scope.moveToProfile = userId => {
+		console.log(userId);
+		window.location.href = `/userProfile?creatorUserID=${userId}`
 	}
 
 }]);

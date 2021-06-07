@@ -1,13 +1,20 @@
 const userProfileApp = angular.module('UserProfileApp', ['ngMaterial','ngCookies','userProfileModule']);
 
 
-userProfileApp.controller('userProfileController', ['$scope', '$http','$cookies','userProfileHttpMethods', function ($scope, $http,$cookies,userProfileHttpMethods) {
-	const uid = $cookies.get('userClickedId');
+// userProfileApp.config('$locationProvider',function($locationProvider){
+// 	$locationProvider.html5Mode(true);
+// })
+
+
+userProfileApp.controller('userProfileController', ['$scope','$cookies','userProfileHttpMethods', function ($scope,$cookies,userProfileHttpMethods) {
 	$scope.projects = [1,2,3];
-	userProfileHttpMethods.requestUserProjects("m123123").then(res => {
+	const query = window.location.search;
+	console.log(query);
+	userProfileHttpMethods.requestUserProjects(query).then(res => {
 		console.log(res.data);
 		$scope.projects = res.data[1];
 	})
+
 }]);
 
 userProfileApp.directive('navbar', [function () {
@@ -17,7 +24,7 @@ userProfileApp.directive('navbar', [function () {
 		controller: function ($scope) {
 
 		},
-		templateUrl: 'views/navbar.html'
+		templateUrl: '../views/navbar.html'
 
 
 	}

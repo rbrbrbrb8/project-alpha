@@ -25,9 +25,9 @@
     <h1 class="main-header">Explore</h1>
   </div>
   <div layout="row" layout-wrap class="all-projects-container">
-    <div flex="50" flex-gt-sm="33" flex-gt-md="25" ng-repeat="project in projects" class="project-card-container" ng-click="addCookie('blah')">
+    <div flex="50" flex-gt-sm="33" flex-gt-md="25" ng-repeat="project in projects" class="project-card-container">
       <md-card class="project-card" ng-init="">
-        <md-card-header>
+        <md-card-header ng-click = "moveToProfile(project.creatorUserID)">
           <md-card-avatar>
             <div>
               <img class="md-user-avatar" src="/images/avatar.jpg">
