@@ -13,7 +13,10 @@ userProfileApp.controller('userProfileController', ['$scope','$cookies','userPro
 	userProfileHttpMethods.requestUserProjects(query).then(res => {
 		console.log(res.data);
 		$scope.projects = res.data[1];
-	})
+	});
+	userProfileHttpMethods.requestUserInfo(query).then(res => {
+		console.log(res.data);
+	});
 
 }]);
 

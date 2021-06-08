@@ -31,6 +31,7 @@ const addProjectRouter = require('./routes/addProjectRoute');
 const projectApiRouter = require('./routes/api/projectApi');
 const allProjectsApiRouter = require('./routes/api/allProjectsApi');
 const userProfileRouter = require('./routes/userProfileRoute');
+const userInfoApiRouter = require('./routes/api/userInfoApi');
 const cacheService = require('./services/cache/cacheService');
 
 
@@ -78,6 +79,7 @@ app.use('/api/project',  projectApiRouter);
 app.use('/api/allprojects', allProjectsApiRouter);
 app.use('/addproject', addProjectRouter);
 app.use('/userProfile', userProfileRouter);
+app.use('/api/userInfo',userInfoApiRouter);
 
 function checkAuthenticated(req, res, next) {
   console.log("auth: " + req.isAuthenticated());

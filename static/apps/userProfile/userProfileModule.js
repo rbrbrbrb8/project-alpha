@@ -18,7 +18,7 @@ function userProfileHttpMethodsFunc($http) {
 		console.log("sending userProfile GET request");
 		return $http({
 			method: "GET",
-			url: `/api/userInfo/extended${query}`,
+			url: `/api/userInfo/${query}`,
 			headers: {
 				'Content-Type': 'application/json'
 			}

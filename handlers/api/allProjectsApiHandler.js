@@ -1,5 +1,4 @@
 const dbHandler = require('../db/dbHandler');
-const bcrypt = require('bcrypt');
 let projectApiHandler = {};
 projectApiHandler.init = () => { };
 projectApiHandler.getAllProjectsIdList = async filter => {

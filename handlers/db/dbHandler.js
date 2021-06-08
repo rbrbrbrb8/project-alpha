@@ -45,10 +45,10 @@ dbHandler.findManyDocumentsByProperty = async (modelName,propety,limit) => {
   }
 }
 
-dbHandler.findOneDocumentById = async (modelName,id) => {
+dbHandler.findOneDocumentById = async (modelName,id,properties) => {
   const Model = getModel(modelName);
   try {
-    const doc = await Model.findById(id);
+    const doc = await Model.findById(id,properties);
     const docFixed = doc['_doc'];
     console.log("found doc: " + doc);
     return docFixed;
