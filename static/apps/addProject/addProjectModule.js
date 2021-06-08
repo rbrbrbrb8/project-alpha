@@ -16,5 +16,18 @@ function addProjectHttpMethodsFunc($http){
             }
         });
     }
+    httpService.requestUpdateUserStartedProjects = () => {
+        console.log("updating user started projects");
+        return $http({
+            method:"POST",
+            url:"/api/userInfo",
+            data:{
+                
+            },
+            headers:{
+                'Content-Type':'application/json'
+            }
+        });
+    }
     return httpService;
 };

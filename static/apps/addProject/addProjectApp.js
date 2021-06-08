@@ -70,6 +70,7 @@ addProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 				console.log(res.data);
 				$scope.showSuccessSaveDialog();
 			});
+			addProjectHttpMethods.requestUpdateUserStartedProjects();
 		}
 	}
 	$scope.showSuccessSaveDialog = () => {

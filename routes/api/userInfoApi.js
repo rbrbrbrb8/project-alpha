@@ -19,6 +19,8 @@ userInfoApiRouter.get('/', async (req, res) => {
 });
 userInfoApiRouter.post('/', (req, res) => {
 	console.log(req.body);
-})
+	// userInfoApiHandler.updateUserDetails();
+});
+
 
 module.exports = userInfoApiRouter;

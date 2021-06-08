@@ -8,6 +8,7 @@ const userProfileApp = angular.module('UserProfileApp', ['ngMaterial','ngCookies
 
 userProfileApp.controller('userProfileController', ['$scope','$cookies','userProfileHttpMethods', function ($scope,$cookies,userProfileHttpMethods) {
 	$scope.projects = [1,2,3];
+	$scope.user = {};
 	const query = window.location.search;
 	console.log(query);
 	userProfileHttpMethods.requestUserProjects(query).then(res => {
@@ -16,6 +17,7 @@ userProfileApp.controller('userProfileController', ['$scope','$cookies','userPro
 	});
 	userProfileHttpMethods.requestUserInfo(query).then(res => {
 		console.log(res.data);
+		$scope.user = res.data;
 	});
 
 }]);

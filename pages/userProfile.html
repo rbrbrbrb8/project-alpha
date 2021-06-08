@@ -33,8 +33,8 @@
 					<img src="/images/avatar.jpg" alt="" class="user-img" />
 				</div>
 				<div class="profile-header-info">
-					<h4 class="m-t-sm">Clyde Stanley</h4>
-					<p class="m-b-sm">UXUI + Frontend Developer</p>
+					<h4 class="m-t-sm">{{user.username}}</h4>
+					<!-- <p class="m-b-sm">UXUI + Frontend Developer</p> -->
 				</div>
 			</div>
 		</div>
@@ -49,7 +49,7 @@
 				<md-card>
 					<div class="card-box tilebox-one"><i class="icon-layers float-right text-muted"></i>
 						<h6 class="text-muted text-uppercase mt-0">Projects Started</h6>
-						<h2 class="blue-text" data-plugin="counterup">30</h2>
+						<h2 class="blue-text" data-plugin="counterup">{{user.projectsStarted}}</h2>
 					</div>
 				</md-card>
 			</div>
@@ -58,7 +58,7 @@
 				<md-card>
 					<div class="card-box tilebox-one"><i class="icon-paypal float-right text-muted"></i>
 						<h6 class="text-muted text-uppercase mt-0">Total Money Raised</h6>
-						<h2 class="green-text">$<span data-plugin="counterup">46,782</span></h2>
+						<h2 class="green-text">$<span data-plugin="counterup">{{user.totalMoneyRaised}}</span></h2>
 					</div>
 				</md-card>
 			</div>
@@ -67,7 +67,7 @@
 				<md-card>
 					<div class="card-box tilebox-one"><i class="icon-rocket float-right text-muted"></i>
 						<h6 class="text-muted text-uppercase mt-0">Projects Supported</h6>
-						<h2 class="blue-text" data-plugin="counterup">45</h2>
+						<h2 class="blue-text" data-plugin="counterup">{{user.projectsSupported}}</h2>
 					</div>
 				</md-card>
 			</div>
