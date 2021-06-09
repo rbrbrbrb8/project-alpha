@@ -58,7 +58,7 @@
 				<md-card>
 					<div class="card-box tilebox-one"><i class="icon-paypal float-right text-muted"></i>
 						<h6 class="text-muted text-uppercase mt-0">Total Money Raised</h6>
-						<h2 class="green-text">$<span data-plugin="counterup">{{user.totalMoneyRaised}}</span></h2>
+						<h2 class="green-text">$<span data-plugin="counterup">{{totalMoneyRaised}}</span></h2>
 					</div>
 				</md-card>
 			</div>
@@ -67,7 +67,7 @@
 				<md-card>
 					<div class="card-box tilebox-one"><i class="icon-rocket float-right text-muted"></i>
 						<h6 class="text-muted text-uppercase mt-0">Projects Supported</h6>
-						<h2 class="blue-text" data-plugin="counterup">{{user.projectsSupported}}</h2>
+						<h2 class="blue-text" data-plugin="counterup">{{supportedProjects.length}}</h2>
 					</div>
 				</md-card>
 			</div>
@@ -76,42 +76,45 @@
 	</div>
 	<!-- end row -->
 	<div class="user-projects-header-div">
-    <h1 class="main-user-projects-header">User Projects</h1>
-  </div>
+		<h1 class="main-user-projects-header">User Projects</h1>
+	</div>
 	<div layout-wrap class="all-projects-container">
-    <div class="user-project-card-container" ng-repeat="project in projects" ng-click="seeProjectDate(project)"> <!--ng-repeat="project in projects"-->
-      <md-card class="project-card" ng-init="">
-        <md-card-header>
-          <md-card-header-text>
-            <span class="md-title" >{{project.title}}</span> <!--{{project.title}}-->
-            <span class="md-subhead">{{project.creationDate}}</span> <!-- posted on {{project.creationDate}} -->
-          </md-card-header-text>
-        </md-card-header>
-        <div class="project-image-div">
-          <img ng-src="/images/profile-background.jpg" class="md-card-image project-image" alt="image caption">
-        </div>
-        </md-card-title>
-        <md-card-content>
-          <div class="project-description-container" ng-model="project.projectDescription">
-            <p>
-              {{project.projectDescription}}
-            </p> <!--{{project.projectDescription}}-->
-          </div>
-        </md-card-content>
-        <md-card-actions layout="row" layout-align="start center">
-          <md-button class="md-icon-button" aria-label="favorite">
-            <md-icon md-svg-icon="/images/icons/favorite.svg"></md-icon>
-          </md-button>
-          <md-button class="md-icon-button" aria-label="comment">
-            <md-icon md-svg-icon="/images/icons/comment.svg"></md-icon>
-          </md-button>
-          <md-button class="md-icon-button" aria-label="donate">
-            <md-icon md-svg-icon="/images/icons/donate.svg"></md-icon>
-          </md-button>
-        </md-card-actions>
-      </md-card>
-    </div>
-  </div>
+		<div class="user-project-card-container" ng-repeat="project in projects" ng-click="seeProjectDate(project)">
+			<!--ng-repeat="project in projects"-->
+			<md-card class="project-card" ng-init="">
+				<md-card-header>
+					<md-card-header-text>
+						<span class="md-title">{{project.title}}</span>
+						<!--{{project.title}}-->
+						<span class="md-subhead">{{project.creationDate}}</span> <!-- posted on {{project.creationDate}} -->
+					</md-card-header-text>
+				</md-card-header>
+				<div class="project-image-div">
+					<img ng-src="/images/profile-background.jpg" class="md-card-image project-image" alt="image caption">
+				</div>
+				</md-card-title>
+				<md-card-content>
+					<div class="project-description-container" ng-model="project.projectDescription">
+						<p>
+							{{project.projectDescription}}
+						</p>
+						<!--{{project.projectDescription}}-->
+					</div>
+				</md-card-content>
+				<md-card-actions layout="row" layout-align="start center">
+					<md-button class="md-icon-button" aria-label="favorite">
+						<md-icon md-svg-icon="/images/icons/favorite.svg"></md-icon>
+					</md-button>
+					<md-button class="md-icon-button" aria-label="comment">
+						<md-icon md-svg-icon="/images/icons/comment.svg"></md-icon>
+					</md-button>
+					<md-button class="md-icon-button" aria-label="donate">
+						<md-icon md-svg-icon="/images/icons/donate.svg"></md-icon>
+					</md-button>
+				</md-card-actions>
+			</md-card>
+		</div>
+	</div>
 
 </body>
 

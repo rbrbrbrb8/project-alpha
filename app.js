@@ -18,7 +18,6 @@ const passport = require('passport');
 const initializePassport = require('./passport-config');
 
 app.use(flash());
-
 // const sessionStore = MongoStore.create({
 //   mongoUrl:'mongodb+srv://rbrbrbrb8:rbpromongorb23@clusterproject.pzpyd.mongodb.net/ProjectDatabase?retryWrites=true&w=majority',
 //   collectionName:'Sessions'
