@@ -7,6 +7,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('express-flash');
+const cookieParser = require('cookie-parser');
 
 const MongoStore = require('connect-mongo').default;
 const app = express();
@@ -48,8 +49,7 @@ app.listen(port, () => {
 app.use(express.static('static'));
 //init parsers
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
+app.use(express.urlencoded({ extended: false}));
 
 //setting up session
 app.use(session({
