@@ -1,13 +1,13 @@
 const userProfileApp = angular.module('UserProfileApp', ['ngMaterial', 'ngCookies', 'userProfileModule']);
 
-const parseCookieToArr = cookie => {
-	const fixedArrString = cookie.substring(cookie.indexOf('[') + 1,cookie.length - 1);
-	const parsedArr = fixedArrString.split(',');
-	return parsedArr;
-}
+// const parseCookieToArr = cookie => {
+// 	const fixedArrString = cookie.substring(cookie.indexOf('[') + 1,cookie.length - 1);
+// 	const parsedArr = fixedArrString.split(',');
+// 	return parsedArr;
+// }
 
 userProfileApp.controller('userProfileController', ['$scope', '$cookies', 'userProfileHttpMethods', function ($scope, $cookies, userProfileHttpMethods) {
-	$scope.supportedProjects = parseCookieToArr($cookies.get("supportedProjects")); //wrong!!!! get from db and then do length
+	 //wrong!!!! get from db and then do length
 	$scope.projects = [1, 2, 3];
 	$scope.totalMoneyRaised = 0;
 	$scope.user = {};

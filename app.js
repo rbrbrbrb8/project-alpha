@@ -7,7 +7,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('express-flash');
-const cookieParser = require('cookie-parser');
+// const cookieParser = require('cookie-parser'); //see stack overflow for this
 
 const MongoStore = require('connect-mongo').default;
 const app = express();
@@ -31,6 +31,7 @@ const addProjectRouter = require('./routes/addProjectRoute');
 const projectApiRouter = require('./routes/api/projectApi');
 const allProjectsApiRouter = require('./routes/api/allProjectsApi');
 const userProfileRouter = require('./routes/userProfileRoute');
+const viewProjectRouter = require('./routes/viewProjectRoute');
 const userInfoApiRouter = require('./routes/api/userInfoApi');
 const cacheService = require('./services/cache/cacheService');
 
@@ -78,6 +79,7 @@ app.use('/api/project',  projectApiRouter);
 app.use('/api/allprojects', allProjectsApiRouter);
 app.use('/addproject', addProjectRouter);
 app.use('/userProfile', userProfileRouter);
+app.use('/viewProject', viewProjectRouter);
 app.use('/api/userInfo',userInfoApiRouter);
 
 function checkAuthenticated(req, res, next) {

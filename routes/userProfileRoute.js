@@ -8,9 +8,4 @@ userProfileRouter.get('/',(req,res) => {
     
 });
 
-userProfileRouter.get('/api/getProjects', (req,res) => {
-    console.log("fetching projects...");
-    res.send("no projects yet");
-})
-
 module.exports = userProfileRouter;
