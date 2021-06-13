@@ -34,7 +34,18 @@
     <div class="project-image-container">
       <img ng-src="/images/profile-background.jpg" class="project-image" alt="image caption">
     </div>
+    <div class="project-description-and-rewards-container" layout="column" layout-gt-sm="row" layout-wrap>
+      <div class="project-description-container" flex="100" flex-gt-md="66">
+        <p>Project Description</p>
+      </div>
+      <div class="project-rewards-container" flex="100" flex-gt-md="33" layout="row" layout-gt-md="column">
+        <div class="project-reward-card" ng-repeat="reward in rewards" flex="50" flex-gt-sm="33" flex-gt-md="100">
+  
+        </div>
+      </div>
+    </div>
   </div>
+  
 </body>
 
 </html>
