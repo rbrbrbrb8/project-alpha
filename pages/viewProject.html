@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="UserProfileApp">
+<html lang="en" ng-app="ViewProjectApp">
 
 <head>
   <meta charset="UTF-8">
@@ -13,8 +13,8 @@
   <script src="/vendors/angular-aria.min.js"></script>
   <script src="/vendors/angular-cookies.min.js"></script>
   <script src="/vendors/angular-messages.min.js"></script>
-  <script src="/apps/userProfile/userProfileApp.js"></script>
-  <script src="/apps/userProfile/userProfileModule.js"></script>
+  <script src="/apps/viewProject/viewProjectApp.js"></script>
+  <!-- <script src="/apps/viewProject/viewProjectModule.js"></script> -->
   <script src="/vendors/bootstrap.min.js"></script>
   <link rel="stylesheet" href="/vendors/bootstrap.min.css">
   <link rel="stylesheet" href="/vendors/angular-material.min.css">
@@ -22,7 +22,7 @@
   <title>View Project</title>
 </head>
 
-<body>
+<body ng-controller="viewProjectController">
   <navbar></navbar>
   <div class="display-project-container">
     <div class="jumbotron">
@@ -34,18 +34,29 @@
     <div class="project-image-container">
       <img ng-src="/images/profile-background.jpg" class="project-image" alt="image caption">
     </div>
-    <div class="project-description-and-rewards-container" layout="column" layout-gt-sm="row" layout-wrap>
+    <div class="project-description-and-rewards-container" layout="column" layout-gt-md="row" layout-wrap>
       <div class="project-description-container" flex="100" flex-gt-md="66">
         <p>Project Description</p>
       </div>
-      <div class="project-rewards-container" flex="100" flex-gt-md="33" layout="row" layout-gt-md="column">
-        <div class="project-reward-card" ng-repeat="reward in rewards" flex="50" flex-gt-sm="33" flex-gt-md="100">
-  
+      <div class="project-rewards-container" flex="100" flex-gt-md="33" layout="row" layout-gt-md="column" layout-wrap>
+        <div class="project-reward-card" ng-repeat="reward in rewards">
+          <div class="project-reward-title-amount-container">
+            <div class="project-reward-title">
+
+            </div>
+            <div class="project-reward-amount">
+
+            </div>
+          </div>
+          <div class="project-reward-description">
+
+          </div>
+
         </div>
       </div>
     </div>
   </div>
-  
+
 </body>
 
 </html>

@@ -13,7 +13,21 @@
     max-width: 100%;
 }
 
+
+
+.project-reward-card{
+    height: 222px;
+    border: 1px solid lightskyblue;
+    max-width: 316px;
+    border-radius: 3px;
+
+}
+.project-rewards-container{
+    height: 100%;
+}
+
 body {
     height: 100%;
     background-color: rgb(250,250,250) !important;
 }
+
