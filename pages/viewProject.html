@@ -34,24 +34,27 @@
     <div class="project-image-container">
       <img ng-src="/images/profile-background.jpg" class="project-image" alt="image caption">
     </div>
+    <textarea ng-model="description"></textarea>
     <div class="project-description-and-rewards-container" layout="column" layout-gt-md="row" layout-wrap>
-      <div class="project-description-container" flex="100" flex-gt-md="66">
+      <div class="project-description-container" flex-gt-md="66">
         <p>Project Description</p>
       </div>
-      <div class="project-rewards-container" flex="100" flex-gt-md="33" layout="row" layout-gt-md="column" layout-wrap>
-        <div class="project-reward-card" ng-repeat="reward in rewards">
-          <div class="project-reward-title-amount-container">
-            <div class="project-reward-title">
-
+      <div class="project-rewards-container" flex-gt-md="33" layout="row" layout-gt-md="column" layout-wrap>
+        <div class="project-reward-card-padding" flex-xs="100" flex-sm="50" flex-md="33" ng-repeat="reward in rewards">
+          <div class="project-reward-card">
+            <div class="project-reward-title-amount-container" layout="row">
+              <div class="project-reward-title" flex="50">
+                <p>Reward Title</p>
+              </div>
+              <div class="project-reward-amount" flex="50">
+                <p>50$</p>
+              </div>
             </div>
-            <div class="project-reward-amount">
-
+            <div class="project-reward-description">
+              <p>{{description}}</p>
             </div>
-          </div>
-          <div class="project-reward-description">
 
           </div>
-
         </div>
       </div>
     </div>

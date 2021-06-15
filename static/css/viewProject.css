@@ -17,13 +17,41 @@
 
 .project-reward-card{
     height: 222px;
-    border: 1px solid lightskyblue;
-    max-width: 316px;
+    border: 2px solid lightskyblue;
     border-radius: 3px;
-
+    margin:0;
 }
+
+.project-reward-amount{
+    display: flex;
+    align-items: center;
+    justify-content:flex-end;
+    color: rgb(58, 136, 238);
+    font-size:50px;
+}
+
+.project-reward-amount p{
+    margin-right: 5px;
+}
+
+.project-reward-title{
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+}
+.project-reward-title p{
+    margin-left: 5px;
+}
+
 .project-rewards-container{
     height: 100%;
+}
+.project-reward-card-padding{
+    padding: 5px;
+}
+.project-reward-description p{
+    margin-left: 5px;
+    white-space: pre-wrap;
 }
 
 body {
