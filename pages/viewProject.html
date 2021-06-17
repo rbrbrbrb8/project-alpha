@@ -26,32 +26,31 @@
   <navbar></navbar>
   <div class="display-project-container">
     <div class="jumbotron">
-      <h1 class="display-4">Project Title</h1>
-      <p class="lead">Created by "Username"</p>
-      <p>Added on Date</p>
+      <h1 class="display-4">{{currentProjectViewed.title}}</h1>
+      <p class="lead">Created by {{currentProjectViewed.creatorUserName}}</p>
+      <p>Added on {{project.creationDate}}</p>
       <hr class="my-4">
     </div>
     <div class="project-image-container">
       <img ng-src="/images/profile-background.jpg" class="project-image" alt="image caption">
     </div>
-    <textarea ng-model="description"></textarea>
     <div class="project-description-and-rewards-container" layout="column" layout-gt-md="row" layout-wrap>
       <div class="project-description-container" flex-gt-md="66">
-        <p>Project Description</p>
+        <p>{{currentProjectViewed.projectDescription}}</p>
       </div>
       <div class="project-rewards-container" flex-gt-md="33" layout="row" layout-gt-md="column" layout-wrap>
-        <div class="project-reward-card-padding" flex-xs="100" flex-sm="50" flex-md="33" ng-repeat="reward in rewards">
+        <div class="project-reward-card-padding" flex-xs="100" flex-sm="50" flex-md="33" ng-repeat="reward in currentViewedProject.rewards">
           <div class="project-reward-card">
             <div class="project-reward-title-amount-container" layout="row">
               <div class="project-reward-title" flex="50">
-                <p>Reward Title</p>
+                <p>{{reward.rewardTitle}}</p>
               </div>
               <div class="project-reward-amount" flex="50">
-                <p>50$</p>
+                <p>{{reward.donationAmount}}$</p>
               </div>
             </div>
             <div class="project-reward-description">
-              <p>{{description}}</p>
+              <p>{{reward.rewardDescription}}</p>
             </div>
 
           </div>

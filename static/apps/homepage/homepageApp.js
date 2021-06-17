@@ -7,7 +7,8 @@ const parseCookieToArr = cookie => {
 	return parsedArr;
 }
 
-homepageApp.controller('HomepageController', ['$scope', '$http','$cookies', async function ($scope, $http,$cookies) {
+homepageApp.controller('HomepageController', ['$scope', '$http','$cookies','$rootScope', async function ($scope, $http,$cookies,$rootScope) {
+	$rootScope.currentProjectViewed = {};
 	$scope.supportedProjects = parseCookieToArr($cookies.get("supportedProjects"));
 	$scope.likedProjects = parseCookieToArr($cookies.get("likedProjects"));
 	$cookies.remove("supportedProjects");
@@ -26,6 +27,12 @@ homepageApp.controller('HomepageController', ['$scope', '$http','$cookies', asyn
 	$scope.moveToProfile = userId => {
 		console.log(userId);
 		window.location.href = `/userProfile?creatorUserID=${userId}`
+	}
+
+	$scope.moveToProject = project => {
+		console.log(project);
+		$rootScope.$broadcast('currentProjectViewed',project);
+		window.location.href = `/viewProject`
 	}
 
 }]);

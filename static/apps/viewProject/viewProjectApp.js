@@ -1,6 +1,10 @@
 const viewProjectApp = angular.module('ViewProjectApp', ['ngMaterial', 'ngCookies']);
 
-viewProjectApp.controller('viewProjectController',['$scope', '$cookies', function ($scope, $cookies) {
+viewProjectApp.controller('viewProjectController',['$scope', '$cookies','$rootScope', function ($scope, $cookies,$rootScope) {
+	$scope.on('currentProjectViewed',(e,project) => {
+		console.log(project);
+	})
+	$scope.currentProjectViewed = $rootScope.currentProjectViewed;
   $scope.rewards = [1,2,3,4,5,6,7,8,9,10];
 
 

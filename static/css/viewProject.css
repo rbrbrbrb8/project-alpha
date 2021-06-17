@@ -54,6 +54,19 @@
     white-space: pre-wrap;
 }
 
+.project-reward-card:hover{
+    cursor: pointer;
+    background-color:rgb(58, 136, 238);
+    border:2px solid rgb(58, 136, 238);
+    color: white;
+    transition: 200ms;
+}
+
+.project-reward-card:hover .project-reward-amount{
+    color:white;
+
+}
+
 body {
     height: 100%;
     background-color: rgb(250,250,250) !important;

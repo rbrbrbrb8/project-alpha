@@ -27,43 +27,46 @@
   <div layout="row" layout-wrap class="all-projects-container">
     <div flex="50" flex-gt-sm="33" flex-gt-md="25" ng-repeat="project in projects" class="project-card-container">
       <md-card class="project-card" ng-init="">
-        <md-card-header ng-click = "moveToProfile(project.creatorUserID)">
+        <md-card-header ng-click="moveToProfile(project.creatorUserID)">
           <md-card-avatar>
             <div>
               <img class="md-user-avatar" src="/images/avatar.jpg">
             </div>
           </md-card-avatar>
           <md-card-header-text>
-            <span class="md-title" >{{project.creatorUserName}}</span> <!-- change data model of project - creatorUid and creatorUsername-->
-            <span class="md-subhead" >posted on {{project.creationDate}}</span>
+            <span class="md-title">{{project.creatorUserName}}</span>
+            <!-- change data model of project - creatorUid and creatorUsername-->
+            <span class="md-subhead">posted on {{project.creationDate}}</span>
           </md-card-header-text>
         </md-card-header>
-        <div class="project-image-div">
-          <img ng-src="/images/redhot.jpg" class="md-card-image project-image" alt="image caption">
-        </div>
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline" ng-model="project.title">{{project.title}}</span>
-          </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-          <div class="project-description-container" ng-model="project.projectDescription">
-            <p>
-              {{project.projectDescription}}
-            </p>
+        <div ng-click="moveToProject(project)">
+          <div class="project-image-div">
+            <img ng-src="/images/redhot.jpg" class="md-card-image project-image" alt="image caption">
           </div>
-        </md-card-content>
-        <md-card-actions layout="row" layout-align="start center">
-          <md-button class="md-icon-button" aria-label="favorite">
-            <md-icon md-svg-icon="/images/icons/favorite.svg"></md-icon>
-          </md-button>
-          <md-button class="md-icon-button" aria-label="comment">
-            <md-icon md-svg-icon="/images/icons/comment.svg"></md-icon>
-          </md-button>
-          <md-button class="md-icon-button" aria-label="donate">
-            <md-icon md-svg-icon="/images/icons/donate.svg"></md-icon>
-          </md-button>
-        </md-card-actions>
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline" ng-model="project.title">{{project.title}}</span>
+            </md-card-title-text>
+          </md-card-title>
+          <md-card-content>
+            <div class="project-description-container" ng-model="project.projectDescription">
+              <p>
+                {{project.projectDescription}}
+              </p>
+            </div>
+          </md-card-content>
+          <md-card-actions layout="row" layout-align="start center">
+            <md-button class="md-icon-button" aria-label="favorite">
+              <md-icon md-svg-icon="/images/icons/favorite.svg"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="comment">
+              <md-icon md-svg-icon="/images/icons/comment.svg"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="donate">
+              <md-icon md-svg-icon="/images/icons/donate.svg"></md-icon>
+            </md-button>
+          </md-card-actions>
+        </div>
       </md-card>
     </div>
   </div>
