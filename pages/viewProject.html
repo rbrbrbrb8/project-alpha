@@ -26,9 +26,9 @@
   <navbar></navbar>
   <div class="display-project-container">
     <div class="jumbotron">
-      <h1 class="display-4">{{currentProjectViewed.title}}</h1>
-      <p class="lead">Created by {{currentProjectViewed.creatorUserName}}</p>
-      <p>Added on {{project.creationDate}}</p>
+      <h1 class="display-4">{{currentViewedProject.title}}</h1>
+      <p class="lead">Created by {{currentViewedProject.creatorUserName}}</p>
+      <p>Added on {{currentViewedProject.creationDate}}</p>
       <hr class="my-4">
     </div>
     <div class="project-image-container">
@@ -36,11 +36,11 @@
     </div>
     <div class="project-description-and-rewards-container" layout="column" layout-gt-md="row" layout-wrap>
       <div class="project-description-container" flex-gt-md="66">
-        <p>{{currentProjectViewed.projectDescription}}</p>
+        <p>{{currentViewedProject.projectDescription}}</p>
       </div>
       <div class="project-rewards-container" flex-gt-md="33" layout="row" layout-gt-md="column" layout-wrap>
         <div class="project-reward-card-padding" flex-xs="100" flex-sm="50" flex-md="33" ng-repeat="reward in currentViewedProject.rewards">
-          <div class="project-reward-card">
+          <div class="project-reward-card" ng-click="donate(reward)">
             <div class="project-reward-title-amount-container" layout="row">
               <div class="project-reward-title" flex="50">
                 <p>{{reward.rewardTitle}}</p>

@@ -1,20 +1,8 @@
 
 const homepageApp = angular.module('HomepageApp', ['ngMaterial','ngCookies']);
 
-const parseCookieToArr = cookie => {
-	const fixedArrString = cookie.substring(cookie.indexOf('[') + 1,cookie.length - 1);
-	const parsedArr = fixedArrString.split(',');
-	return parsedArr;
-}
 
 homepageApp.controller('HomepageController', ['$scope', '$http','$cookies','$rootScope', async function ($scope, $http,$cookies,$rootScope) {
-	$rootScope.currentProjectViewed = {};
-	$scope.supportedProjects = parseCookieToArr($cookies.get("supportedProjects"));
-	$scope.likedProjects = parseCookieToArr($cookies.get("likedProjects"));
-	$cookies.remove("supportedProjects");
-	$cookies.put("supportedProjects",$scope.supportedProjects);
-	$cookies.remove("likedProjects");
-	$cookies.put("likedProjects",$scope.likedProjects);
 	$scope.projects = [];
 	$scope.getProjects = () => {
 		$http.get(`/api/project/firstProjects`).then(res=>{
@@ -31,8 +19,8 @@ homepageApp.controller('HomepageController', ['$scope', '$http','$cookies','$roo
 
 	$scope.moveToProject = project => {
 		console.log(project);
-		$rootScope.$broadcast('currentProjectViewed',project);
-		window.location.href = `/viewProject`
+		window.localStorage.setItem('currentViewedProject',JSON.stringify(project));
+		window.location.href = `/viewProject?_id=${project._id}`
 	}
 
 }]);

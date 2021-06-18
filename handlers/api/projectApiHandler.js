@@ -7,7 +7,7 @@ const PROJECT = "project";
 projectApiHandler.requestGetProject = async (id) => {
   console.log("doc id:" + id);
   try {
-    const project = await dbHandler.findOneDocumentByProperty(PROJECT,{_id: id}); //filter bank details!!!!!
+    const project = await dbHandler.findOneDocumentById(PROJECT,id,"-bankAccount -bankBranchID -bankID"); //filter bank details!!!!!
     return project;  
   } catch (error) {
     console.log("error in projectApiHandler");

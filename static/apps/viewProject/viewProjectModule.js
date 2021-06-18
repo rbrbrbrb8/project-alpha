@@ -1,14 +1,14 @@
-const userProfileModule = angular.module('userProfileModule', []);
-userProfileModule.factory('userProfileHttpMethods', ['$http', userProfileHttpMethodsFunc]);
+const viewProjectModule = angular.module('viewProjectModule', []);
+viewProjectModule.factory('viewProjectHttpMethods', ['$http', viewProjectHttpMethodsFunc]);
 
-function userProfileHttpMethodsFunc($http) {
+function viewProjectHttpMethodsFunc($http) {
 	const httpService = {};
 
-	httpService.requestUserInfo = function (query) {
-		console.log("sending userProfile GET request");
+	httpService.requestCurrentViewedProjectInfo = function (query) {
+		console.log("sending viewProject GET request");
 		return $http({
 			method: "GET",
-			url: `/api/userInfo/${query}`,
+			url: `/api/project${query}`,
 			headers: {
 				'Content-Type': 'application/json'
 			}

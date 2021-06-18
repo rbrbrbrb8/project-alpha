@@ -18,8 +18,8 @@ projectApiRouter.get('/firstProjects', async (req, res) => {
 });
 
 
-projectApiRouter.get('/:id', async (req, res) => {
-  const { id } = req.params;
+projectApiRouter.get('/', async (req, res) => {
+  const id = req.query._id;
   console.log("id= " + id);
   if (id !== 'firstProjects') {
     try {
