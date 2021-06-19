@@ -1,6 +1,6 @@
 const viewProjectApp = angular.module('ViewProjectApp', ['ngMaterial', 'ngCookies','viewProjectModule']);
 
-viewProjectApp.controller('viewProjectController',['$scope', '$cookies','$rootScope','viewProjectHttpMethods', function ($scope, $cookies,$rootScope,viewProjectHttpMethods) {
+viewProjectApp.controller('viewProjectController',['$scope', '$cookies','$mdDialog','viewProjectHttpMethods', function ($scope, $cookies,$mdDialog,viewProjectHttpMethods) {
 	$scope.clearCurrentViewedProjectProperty = () => {
 		window.localStorage.removeItem('currentViewedProject');
 	}
@@ -14,9 +14,24 @@ viewProjectApp.controller('viewProjectController',['$scope', '$cookies','$rootSc
 			if(resData) $scope.currentViewedProject = resData;
 		});
 	}
+	console.log(window.location.search);
 	$scope.clearCurrentViewedProjectProperty();
-	console.log($scope.currentViewedProject);
-
+	$scope.donate = (reward,ev) => {
+		$mdDialog.show({
+      controller: 'viewProjectController',
+      templateUrl: '/views/donateDialog.html',
+      // Appending dialog to document.body to cover sidenav in docs app
+      // Modal dialogs should fully cover application to prevent interaction outside of dialog
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true,
+      fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+    }).then(function (answer) {
+      $scope.status = 'You said the information was "' + answer + '".';
+    }, function () {
+      $scope.status = 'You cancelled the dialog.';
+    });
+	}
 
 	
 	

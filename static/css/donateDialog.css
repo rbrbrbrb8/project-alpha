@@ -1,0 +1,60 @@
+.row {
+  margin: 0
+}
+.icons {
+  margin-left: auto
+}
+
+.header-container{
+	margin-bottom: 10px;
+}
+
+
+.payment-details span {
+  color: rgb(179, 179, 179)
+}
+
+.payment-details {
+  padding: 2vh 0
+}
+
+input {
+  border: 1px solid rgba(0, 0, 0, 0.137);
+  padding: 1vh;
+  margin-bottom: 4vh;
+  outline: none;
+  width: 100%;
+  background-color: rgb(247, 247, 247)
+}
+
+input:focus::-webkit-input-placeholder {
+	color: transparent
+}
+
+.header {
+	font-size: 1.5rem;
+}
+
+.left {
+	background-color: #ffffff;
+	padding: 2vh
+}
+
+.left img {
+	width: 2rem
+}
+
+.left .col-4 {
+	padding-left: 0
+}
+.details-form-container{
+	max-width: 75%;
+	margin: 0 auto;
+}
+#cvv {
+	background-image: linear-gradient(to left, rgba(255, 255, 255, 0.575), rgba(255, 255, 255, 0.541)), url("https://img.icons8.com/material-outlined/24/000000/help.png");
+	background-repeat: no-repeat;
+	background-position-x: 95%;
+	background-position-y: center
+}
+
