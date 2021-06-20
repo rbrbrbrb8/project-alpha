@@ -9,6 +9,9 @@
 	margin-bottom: 10px;
 }
 
+.all-dialog{
+	max-width: 490px;
+}
 
 .payment-details span {
   color: rgb(179, 179, 179)
@@ -37,7 +40,7 @@ input:focus::-webkit-input-placeholder {
 
 .left {
 	background-color: #ffffff;
-	padding: 2vh
+	padding: 2vh 5vh
 }
 
 .left img {
@@ -47,10 +50,13 @@ input:focus::-webkit-input-placeholder {
 .left .col-4 {
 	padding-left: 0
 }
-.details-form-container{
-	max-width: 75%;
-	margin: 0 auto;
+.input-container{
+	margin-bottom: 10px;
 }
+.input-content{
+	margin-top: 2px;
+}
+
 #cvv {
 	background-image: linear-gradient(to left, rgba(255, 255, 255, 0.575), rgba(255, 255, 255, 0.541)), url("https://img.icons8.com/material-outlined/24/000000/help.png");
 	background-repeat: no-repeat;

@@ -1,17 +1,17 @@
-<md-dialog aria-label="Donate">
+<md-dialog aria-label="Donate" class="all-dialog">
 	<form ng-cloak>
 		<md-toolbar>
 			<div class="md-toolbar-tools">
 				<h2>Support a project</h2>
 				<span flex></span>
-				<md-button class="md-icon-button" ng-click="cancelDonation()">
+				<md-button class="md-icon-button" ng-click="cancelTransaction()">
 					<md-icon md-svg-src='/images/icons/ic_close_24px.svg' aria-label="Close Dialog"></md-icon>
 				</md-button>
 			</div>
 		</md-toolbar>
 		<md-dialog-content>
 			<div>
-				<div class="left border">
+				<div class="left all-content">
 					<div class="header-container" layout="row"> <span class="header">Payment</span>
 						<div class="icons">
 							<img src="https://img.icons8.com/color/48/000000/visa.png" />
@@ -20,19 +20,23 @@
 						</div>
 					</div>
 					<div class="details-form-container" layout="column">
-						<form class="payment-details"> <span>Cardholder's name:</span> <input placeholder="Linda Williams">
-							<span>Card
-								Number:</span> <input placeholder="0125 6780 4567 9909">
-							<div layout="row">
-								<div class="col-4"><span>Expiry date:</span> <input placeholder="YY/MM"> </div>
-								<div class="col-4"><span>CVV:</span> <input id="cvv"> </div>
+						<form class="payment-details">
+							<div class="input-container">
+								<span >Cardholder's name:</span> <input class="input-content" placeholder="Linda Williams">
+							</div>
+							<div class="input-container">
+								<span>Card Number:</span> <input class="input-content" placeholder="0125 6780 4567 9909">
+							</div>
+							<div layout="row" layout-align="space-between center">
+								<div class="col-4"><span>Expiry date:</span> <input class="input-content" placeholder="YY/MM"> </div>
+								<div class="col-4"><span>CVV:</span> <input class="input-content" id="cvv"> </div>
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
 		</md-dialog-content>
-		<md-dialog-actions layout="row">
+		<md-dialog-actions layout="row" layout-align="center center">
 			<md-button md-autofocus ng-click="submitTransaction()">
 				confirm
 			</md-button>

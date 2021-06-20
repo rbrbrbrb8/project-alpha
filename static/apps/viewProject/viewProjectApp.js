@@ -14,25 +14,47 @@ viewProjectApp.controller('viewProjectController',['$scope', '$cookies','$mdDial
 			if(resData) $scope.currentViewedProject = resData;
 		});
 	}
+
+ function DialogController($scope,$mdDialog,projectId,currentReward,httpSender){
+	$scope.cancelTransaction = () => {
+		console.log(projectId);
+		console.log(currentReward);
+		$mdDialog.cancel();
+	};
+	$scope.submitTransaction = () => {
+		httpSender.addDonationToProject();
+		$mdDialog.hide();
+	}
+ }
+
 	console.log(window.location.search);
 	$scope.clearCurrentViewedProjectProperty();
 	$scope.donate = (reward,ev) => {
+		console.log('opening donation modal');
 		$mdDialog.show({
-      controller: 'viewProjectController',
+      controller: DialogController,
       templateUrl: '/views/donateDialog.html',
+			locals:{
+				projectId:$scope.currentViewedProject._id,
+				currentReward:reward,
+				httpSender: viewProjectHttpMethods
+			},
+			// scope: $scope,
       // Appending dialog to document.body to cover sidenav in docs app
       // Modal dialogs should fully cover application to prevent interaction outside of dialog
       parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose: true,
       fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-    }).then(function (answer) {
-      $scope.status = 'You said the information was "' + answer + '".';
+    }).then(function (confirmTransaction) {
+			console.log("finished donating");
+			
     }, function () {
+			console.log('You cancelled the dialog.');
+			console.log($scope);
       $scope.status = 'You cancelled the dialog.';
     });
 	}
-
 	
 	
 

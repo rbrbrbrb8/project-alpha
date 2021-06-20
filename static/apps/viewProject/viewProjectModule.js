@@ -14,5 +14,9 @@ function viewProjectHttpMethodsFunc($http) {
 			}
 		});
 	}
+
+  httpService.addDonationToProject = function (){
+    console.log("sending donation POST request");
+  }
 	return httpService;
 };
