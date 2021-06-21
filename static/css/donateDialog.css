@@ -64,3 +64,32 @@ input:focus::-webkit-input-placeholder {
 	background-position-y: center
 }
 
+.progress-container{
+	height: 362px;
+	width: 490px;
+}
+
+.req-completed-div{
+	margin-top: 20px;
+	height: 120px;
+	width: 120px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+.req-completed-img{
+	flex-shrink: 0;
+	min-width: 100%;
+	min-height: 100%
+}
+
+.progress-circel{
+	margin-top: 20px;
+}
+
+.sending-transaction-text{
+	margin-top: 25px;
+	color: rgb(63,81,181);
+}

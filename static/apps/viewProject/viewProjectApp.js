@@ -16,14 +16,25 @@ viewProjectApp.controller('viewProjectController',['$scope', '$cookies','$mdDial
 	}
 
  function DialogController($scope,$mdDialog,projectId,currentReward,httpSender){
+	$scope.isModalConfirmed = false;
+	$scope.isRequestCompleted = true;
+	$scope.afterSec=false;
 	$scope.cancelTransaction = () => {
 		console.log(projectId);
 		console.log(currentReward);
 		$mdDialog.cancel();
 	};
+
+	$scope.changeAnim = () => {
+		$scope.afterSec= true;
+		console.log($scope.afterSec);
+		$scope.$apply();
+	}
 	$scope.submitTransaction = () => {
+		$scope.isModalConfirmed = true;
+		setTimeout($scope.changeAnim,930);
 		httpSender.addDonationToProject();
-		$mdDialog.hide();
+		// $mdDialog.hide();
 	}
  }
 
@@ -44,7 +55,7 @@ viewProjectApp.controller('viewProjectController',['$scope', '$cookies','$mdDial
       // Modal dialogs should fully cover application to prevent interaction outside of dialog
       parent: angular.element(document.body),
       targetEvent: ev,
-      clickOutsideToClose: true,
+      clickOutsideToClose: false,
       fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
     }).then(function (confirmTransaction) {
 			console.log("finished donating");
