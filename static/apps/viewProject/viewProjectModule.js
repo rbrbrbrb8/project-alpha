@@ -15,8 +15,19 @@ function viewProjectHttpMethodsFunc($http) {
 		});
 	}
 
-  httpService.addDonationToProject = function (){
+  httpService.addDonationToProject = function (projectId,donationAmount){
     console.log("sending donation POST request");
+		return $http({
+			method:'POST',
+			url:`/api/project/donate`,
+			data:{
+				'donationAmount':donationAmount,
+				'projectId':projectId
+			},
+			headers:{
+				'Content-Type':'application/json'
+			}
+		})
   }
 	return httpService;
 };

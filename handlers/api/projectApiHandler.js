@@ -17,6 +17,16 @@ projectApiHandler.requestGetProject = async (id) => {
   
 };
 
+projectApiHandler.addDonationAmount = async (projectId,donationAmount) => {
+  console.log('donation amount in project api handler',donationAmount);
+  try {
+    const result = await dbHandler.updateDocumentByIdInCollection(PROJECT,projectId,{$inc:{amountAlreadyRaised: donationAmount}})
+  } catch (error) {
+    console.log('error in projectApiHandler');
+    return false;
+  }
+};
+
 
 projectApiHandler.requestFirstProjectsFromCache = () => {
   return cacheService.retrieveManyByKeys(['firstProjects']);

@@ -60,7 +60,7 @@ dbHandler.findOneDocumentById = async (modelName, id, properties) => {
 dbHandler.updateDocumentByIdInCollection = async (modelName, id, update) => { //update must be an object
   const Model = getModel(modelName);
   try {
-    await Model.findOneAndUpdate({_id:id},update);
+    await Model.findOneAndUpdate({_id:id},update,{useFindAndModify:false});
     console.log("updated single document successfully");
     return true;
   } catch (err) {

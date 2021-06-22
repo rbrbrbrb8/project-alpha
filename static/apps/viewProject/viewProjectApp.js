@@ -17,13 +17,14 @@ viewProjectApp.controller('viewProjectController',['$scope', '$cookies','$mdDial
 
  function DialogController($scope,$mdDialog,projectId,currentReward,httpSender){
 	$scope.isModalConfirmed = false;
-	$scope.isRequestCompleted = true;
+	$scope.isRequestCompleted = false;
 	$scope.afterSec=false;
 	$scope.cancelTransaction = () => {
 		console.log(projectId);
 		console.log(currentReward);
 		$mdDialog.cancel();
 	};
+
 
 	$scope.changeAnim = () => {
 		$scope.afterSec= true;
@@ -32,8 +33,12 @@ viewProjectApp.controller('viewProjectController',['$scope', '$cookies','$mdDial
 	}
 	$scope.submitTransaction = () => {
 		$scope.isModalConfirmed = true;
-		setTimeout($scope.changeAnim,930);
-		httpSender.addDonationToProject();
+		httpSender.addDonationToProject(projectId,currentReward.donationAmount).then(res => {
+			$scope.isRequestCompleted = true;
+			$scope.$apply();
+			console.log(res.data);
+			setTimeout($scope.changeAnim,930);
+		});
 		// $mdDialog.hide();
 	}
  }
