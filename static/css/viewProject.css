@@ -72,3 +72,10 @@ body {
     background-color: rgb(250,250,250) !important;
 }
 
+.before-sec{
+    z-index: 0;
+}
+
+.after-sec{
+    z-index: 1;
+}

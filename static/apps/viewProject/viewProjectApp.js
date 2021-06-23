@@ -1,6 +1,6 @@
 const viewProjectApp = angular.module('ViewProjectApp', ['ngMaterial', 'ngCookies','viewProjectModule']);
 
-viewProjectApp.controller('viewProjectController',['$scope', '$cookies','$mdDialog','viewProjectHttpMethods', function ($scope, $cookies,$mdDialog,viewProjectHttpMethods) {
+viewProjectApp.controller('viewProjectController',['$scope', '$timeout','$mdDialog','viewProjectHttpMethods', function ($scope, $timeout,$mdDialog,viewProjectHttpMethods) {
 	$scope.clearCurrentViewedProjectProperty = () => {
 		window.localStorage.removeItem('currentViewedProject');
 	}
@@ -17,7 +17,6 @@ viewProjectApp.controller('viewProjectController',['$scope', '$cookies','$mdDial
 
  function DialogController($scope,$mdDialog,projectId,currentReward,httpSender){
 	$scope.isModalConfirmed = false;
-	$scope.isRequestCompleted = false;
 	$scope.afterSec=false;
 	$scope.cancelTransaction = () => {
 		console.log(projectId);
@@ -26,18 +25,24 @@ viewProjectApp.controller('viewProjectController',['$scope', '$cookies','$mdDial
 	};
 
 
+	
+
 	$scope.changeAnim = () => {
 		$scope.afterSec= true;
+		$scope.transactionMessage = "Transaction Complete!";
 		console.log($scope.afterSec);
-		$scope.$apply();
+		$timeout($scope.closeModal())
+		// $scope.$apply();
 	}
 	$scope.submitTransaction = () => {
+		$scope.transactionMessage = "Sending Transaction";
 		$scope.isModalConfirmed = true;
+		$scope.isRequestCompleted = false;
+		console.log()
 		httpSender.addDonationToProject(projectId,currentReward.donationAmount).then(res => {
 			$scope.isRequestCompleted = true;
-			$scope.$apply();
-			console.log(res.data);
-			setTimeout($scope.changeAnim,930);
+			// console.log(res.data);
+			$timeout($scope.changeAnim,930);
 		});
 		// $mdDialog.hide();
 	}

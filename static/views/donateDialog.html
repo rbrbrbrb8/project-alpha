@@ -50,15 +50,15 @@
 
 			</md-progress-circular>
 		</div>
-		<div class="req-completed-div" ng-hide="afterSec">
+		<div class="req-completed-div before-sec" ng-if="isRequestCompleted && !afterSec">
 			<img class="req-completed-img" ng-src="/images/icons/checkmarkfixed.gif">
 			
 		</div>
-		<div class="req-completed-div" ng-if="afterSec">
+		<div class="req-completed-div after-sec" ng-if="afterSec">
 			<img class="req-completed-img" ng-src="/images/icons/checkmark_finished.png">
 		</div>
 		<div class="sending-transaction-text">
-			<h2>Sending Transaction...</h2>
+			<h2>{{transactionMessage}}</h2>
 		</div>
 	</div>
 </md-dialog>
