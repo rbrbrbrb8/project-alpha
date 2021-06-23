@@ -18,6 +18,36 @@ viewProjectApp.controller('viewProjectController',['$scope', '$timeout','$mdDial
  function DialogController($scope,$mdDialog,projectId,currentReward,httpSender){
 	$scope.isModalConfirmed = false;
 	$scope.afterSec=false;
+	$scope.paymentDetails = {};
+
+	const verifyPaymentDetails = paymentDetails => {
+		// const projInfoEntries = Object.entries(paymentDetails);
+		console.log(paymentDetails);
+		// if (projInfoEntries.length < 8) {
+		// 	alert("need to fill the entire form");
+		// 	return false;
+		// }
+		// projInfoEntries.forEach(element => {
+		// 	if (!element[1]) {
+		// 		alert("need to fill the entire form");
+		// 		return false;
+		// 	}
+		// });
+		// const amountEntry = projInfoEntries.find(element => element[0].includes("amount"));
+		// if (isNaN(amountEntry[1])) {
+		// 	alert("amount must be number");
+		// 	return false;
+		// }
+
+		// const bankDetailEntries = projInfoEntries.filter(element => element[0].includes("bank"));
+		// bankDetailEntries.forEach((element, i) => {
+		// 	const validator = new RegExp(`^[0-9]{${2 + i * i}}$`);
+		// 	if (validator.test(element[1])) return false;
+		// })
+		// return true;
+	}
+
+
 	$scope.cancelTransaction = () => {
 		console.log(projectId);
 		console.log(currentReward);
@@ -25,24 +55,29 @@ viewProjectApp.controller('viewProjectController',['$scope', '$timeout','$mdDial
 	};
 
 
-	
+	$scope.closeModal = () => {
+		
+	}
 
 	$scope.changeAnim = () => {
 		$scope.afterSec= true;
+		console.log('switching message');
 		$scope.transactionMessage = "Transaction Complete!";
 		console.log($scope.afterSec);
-		$timeout($scope.closeModal())
+		// $timeout($scope.closeModal(),600);
 		// $scope.$apply();
 	}
 	$scope.submitTransaction = () => {
+		verifyPaymentDetails($scope.paymentDetails);
 		$scope.transactionMessage = "Sending Transaction";
 		$scope.isModalConfirmed = true;
 		$scope.isRequestCompleted = false;
 		console.log()
-		httpSender.addDonationToProject(projectId,currentReward.donationAmount).then(res => {
+		httpSender.addDonationToProject(projectId,currentReward.donationAmount).then(async res => {
 			$scope.isRequestCompleted = true;
 			// console.log(res.data);
-			$timeout($scope.changeAnim,930);
+			await $timeout($scope.changeAnim,930);
+			console.log("hiding dialog");
 		});
 		// $mdDialog.hide();
 	}

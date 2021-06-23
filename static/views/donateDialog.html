@@ -21,16 +21,16 @@
 							</div>
 						</div>
 						<div class="details-form-container" layout="column">
-							<form class="payment-details">
+							<form class="payment-details" name="paymentDetails">
 								<div class="input-container">
-									<span>Cardholder's name:</span> <input class="input-content" placeholder="Linda Williams">
+									<span>{{paymentDetails.cardholderName}}</span> <input class="input-content" ng-model="paymentDetails.cardholderName" name="cardholderName" placeholder="Linda Williams" ng-pattern="/^([\w]{3,})+\s+([\w\s]{3,})+$/i">
 								</div>
 								<div class="input-container">
-									<span>Card Number:</span> <input class="input-content" placeholder="0125 6780 4567 9909">
+									<span>Card Number:</span> <input class="input-content" ng-model="paymentDetails.cardNumber" name="cardNumber" placeholder="0125 6780 4567 9909" ng-pattern="/^[0-9]{3}$/">
 								</div>
 								<div layout="row" layout-align="space-between center">
-									<div class="col-4"><span>Expiry date:</span> <input class="input-content" placeholder="YY/MM"> </div>
-									<div class="col-4"><span>CVV:</span> <input class="input-content" id="cvv"> </div>
+									<div class="col-4"><span>Expiry date:</span> <input class="input-content" ng-model="paymentDetails.cardExpiryDate" name="cardExpiryDate" placeholder="MM/YYYY" ng-pattern="/^[\d]{2}\/[\d]{4}/"> </div>
+									<div class="col-4"><span>CVV:</span> <input class="input-content" ng-model="paymentDetails.cardCVV" id="cvv" name="cardCVV" ng-pattern="/^[0-9]{3}$/"> </div>
 								</div>
 							</form>
 						</div>

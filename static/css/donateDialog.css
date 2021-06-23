@@ -57,6 +57,10 @@ input:focus::-webkit-input-placeholder {
 	margin-top: 2px;
 }
 
+.input-content.ng-touched.ng-invalid{
+	border: 2px solid red;
+}
+
 #cvv {
 	background-image: linear-gradient(to left, rgba(255, 255, 255, 0.575), rgba(255, 255, 255, 0.541)), url("https://img.icons8.com/material-outlined/24/000000/help.png");
 	background-repeat: no-repeat;
