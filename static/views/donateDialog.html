@@ -1,64 +1,75 @@
-<md-dialog aria-label="Donate" class="all-dialog">
-	<form ng-cloak>
-		<md-toolbar>
-			<div class="md-toolbar-tools">
-				<h2>Support a project</h2>
-				<span flex></span>
-				<md-button class="md-icon-button" ng-click="cancelTransaction()" ng-if="!isModalConfirmed">
-					<md-icon md-svg-src='/images/icons/ic_close_24px.svg' aria-label="Close Dialog"></md-icon>
-				</md-button>
-			</div>
-		</md-toolbar>
-		<div ng-if="!isModalConfirmed">
-			<md-dialog-content>
-				<div>
-					<div class="left all-content">
-						<div class="header-container" layout="row"> <span class="header">Payment</span>
-							<div class="icons">
-								<img src="https://img.icons8.com/color/48/000000/visa.png" />
-								<img src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
-								<img src="https://img.icons8.com/color/48/000000/maestro.png" />
+<div ng-controller="DialogController">
+	<md-dialog aria-label="Donate" class="all-dialog">
+		<form ng-cloak>
+			<md-toolbar>
+				<div class="md-toolbar-tools">
+					<h2>Support a project</h2>
+					<span flex></span>
+					<md-button class="md-icon-button" ng-click="cancelTransaction()" ng-if="!isModalConfirmed">
+						<md-icon md-svg-src='/images/icons/ic_close_24px.svg' aria-label="Close Dialog"></md-icon>
+					</md-button>
+				</div>
+			</md-toolbar>
+			<div ng-show="!isModalConfirmed">
+				<md-dialog-content>
+					<div>
+						<div class="left all-content">
+							<div class="header-container" layout="row"> <span class="header">Payment</span>
+								<div class="icons">
+									<img src="https://img.icons8.com/color/48/000000/visa.png" />
+									<img src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
+									<img src="https://img.icons8.com/color/48/000000/maestro.png" />
+								</div>
+							</div>
+							<!-- <input ng-model="blabla"> -->
+							<div class="details-form-container" layout="column">
+								<form ng-model="blabla" class="payment-details" name="paymentDetails">
+									<div class="input-container">
+										<input ng-model="paymentDetails.cardholderName2" ng-click="testing()">
+										<input class="input-content"
+											ng-model="paymentDetails.cardholderName" name="cardholderName" placeholder="Linda Williams" ng-click="testing()"
+											ng-pattern="/^([\w]{3,})+\s+([\w\s]{3,})+$/i">
+											<span>{{paymentDetails}}</span> 
+									</div>
+									<div class="input-container">
+										<span>Card Number:</span> <input class="input-content" ng-model="paymentDetails.cardNumber"
+											name="cardNumber" placeholder="0125 6780 4567 9909" ng-pattern="/^[0-9]{3}$/">
+									</div>
+									<div layout="row" layout-align="space-between center">
+										<div class="col-4"><span>Expiry date:</span> <input class="input-content"
+												ng-model="paymentDetails.cardExpiryDate" name="cardExpiryDate" placeholder="MM/YYYY"
+												ng-pattern="/^[\d]{2}\/[\d]{4}/"> </div>
+										<div class="col-4"><span>CVV:</span> <input class="input-content" ng-model="paymentDetails.cardCVV"
+												id="cvv" name="cardCVV" ng-pattern="/^[0-9]{3}$/"> </div>
+									</div>
+								</form>
 							</div>
 						</div>
-						<div class="details-form-container" layout="column">
-							<form class="payment-details" name="paymentDetails">
-								<div class="input-container">
-									<span>{{paymentDetails.cardholderName}}</span> <input class="input-content" ng-model="paymentDetails.cardholderName" name="cardholderName" placeholder="Linda Williams" ng-pattern="/^([\w]{3,})+\s+([\w\s]{3,})+$/i">
-								</div>
-								<div class="input-container">
-									<span>Card Number:</span> <input class="input-content" ng-model="paymentDetails.cardNumber" name="cardNumber" placeholder="0125 6780 4567 9909" ng-pattern="/^[0-9]{3}$/">
-								</div>
-								<div layout="row" layout-align="space-between center">
-									<div class="col-4"><span>Expiry date:</span> <input class="input-content" ng-model="paymentDetails.cardExpiryDate" name="cardExpiryDate" placeholder="MM/YYYY" ng-pattern="/^[\d]{2}\/[\d]{4}/"> </div>
-									<div class="col-4"><span>CVV:</span> <input class="input-content" ng-model="paymentDetails.cardCVV" id="cvv" name="cardCVV" ng-pattern="/^[0-9]{3}$/"> </div>
-								</div>
-							</form>
-						</div>
 					</div>
-				</div>
-			</md-dialog-content>
-			<md-dialog-actions layout="row" layout-align="center center">
-				<md-button md-autofocus ng-click="submitTransaction()">
-					confirm
-				</md-button>
-			</md-dialog-actions>
-		</div>
-	</form>
-	<div class="left progress-container" ng-cloak ng-if="isModalConfirmed" layout="column" layout-align="start center">
-		<div class="progress-circel" ng-if="!isRequestCompleted">
-			<md-progress-circular md-mode="indeterminate" md-diameter="120">
+				</md-dialog-content>
+				<md-dialog-actions layout="row" layout-align="center center">
+					<md-button md-autofocus ng-click="submitTransaction()">
+						confirm
+					</md-button>
+				</md-dialog-actions>
+			</div>
+		</form>
+		<div class="left progress-container" ng-cloak ng-if="isModalConfirmed" layout="column" layout-align="start center">
+			<div class="progress-circel" ng-if="!isRequestCompleted">
+				<md-progress-circular md-mode="indeterminate" md-diameter="120">
 
-			</md-progress-circular>
+				</md-progress-circular>
+			</div>
+			<div class="req-completed-div before-sec" ng-if="isRequestCompleted && !afterSec">
+				<img class="req-completed-img" ng-src="/images/icons/checkmarkfixed.gif">
+
+			</div>
+			<div class="req-completed-div after-sec" ng-if="afterSec">
+				<img class="req-completed-img" ng-src="/images/icons/checkmark_finished.png">
+			</div>
+			<div class="sending-transaction-text">
+				<h2>{{transactionMessage}}</h2>
+			</div>
 		</div>
-		<div class="req-completed-div before-sec" ng-if="isRequestCompleted && !afterSec">
-			<img class="req-completed-img" ng-src="/images/icons/checkmarkfixed.gif">
-			
-		</div>
-		<div class="req-completed-div after-sec" ng-if="afterSec">
-			<img class="req-completed-img" ng-src="/images/icons/checkmark_finished.png">
-		</div>
-		<div class="sending-transaction-text">
-			<h2>{{transactionMessage}}</h2>
-		</div>
-	</div>
-</md-dialog>
+	</md-dialog>
+</div>
