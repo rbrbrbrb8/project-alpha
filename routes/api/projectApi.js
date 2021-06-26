@@ -49,7 +49,9 @@ projectApiRouter.post('/', async (req, res) => {
 
 projectApiRouter.post('/donate', async (req, res) => {
   console.log('caught donation request',req.body.donationAmount);
-  const isSuccessful = await projectApiHandler.addDonationAmount(req.body.projectId,req.body.donationAmount);
+  console.log("projectId",req.body.projectId);
+  console.log("donationAmount",req.body.donationAmount);
+  const isSuccessful = await projectApiHandler.addDonationAmount(req.body.projectId,req.body.donationAmount,req.user._id);
   if(!isSuccessful){
     console.log('added donation successfully');
     res.send({outcome:true});

@@ -8,9 +8,9 @@ homepageRouter.get('/',(req,res) => {
     
 });
 
-homepageRouter.get('/api/getProjects', (req,res) => {
-    console.log("fetching projects...");
-    res.send("no projects yet");
+homepageRouter.get('/getUid', (req,res) => {
+    console.log("sending Uid");
+    res.send(req.user._id);
 })
 
 module.exports = homepageRouter;

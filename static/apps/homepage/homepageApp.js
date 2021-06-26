@@ -10,7 +10,14 @@ homepageApp.controller('HomepageController', ['$scope', '$http','$cookies','$roo
 			$scope.projects= res.data.firstProjects;
 		});
 
-	}
+	};
+	$scope.getUid = () => {
+		$http.get(`/homepage/getUid`).then(res => {
+			console.log(res.data);
+			window.localStorage.setItem('Uid',res.data);
+		})
+	};
+	$scope.getUid();
 
 	$scope.moveToProfile = userId => {
 		console.log(userId);
@@ -22,7 +29,9 @@ homepageApp.controller('HomepageController', ['$scope', '$http','$cookies','$roo
 		window.localStorage.setItem('currentViewedProject',JSON.stringify(project));
 		window.location.href = `/viewProject?_id=${project._id}`
 	}
-
+	$scope.likeProject = projectId => {
+		console.log(projectId);
+	}
 }]);
 
 homepageApp.directive('navbar', [function () {
@@ -30,7 +39,18 @@ homepageApp.directive('navbar', [function () {
 		restrict: 'E',
 		scope: {}, //add user info to scope so the navbar can load username and profile pic
 		controller: function ($scope) {
+			$scope.Uid = window.localStorage.getItem('Uid');
+			$scope.moveToMyProjects= () => {
+				window.location.href = `/projectsGeneral?creatorUserID=${$scope.Uid}`;
+			};
 
+			$scope.moveToSupportedProjects = () => {
+
+			}
+
+			$scope.moveToLikedProjects = () => {
+				
+			}
 		},
 		templateUrl: 'views/navbar.html'
 

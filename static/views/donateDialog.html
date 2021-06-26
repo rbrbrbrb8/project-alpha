@@ -25,15 +25,15 @@
 							<div class="details-form-container" layout="column">
 								<form ng-model="blabla" class="payment-details" name="paymentDetails">
 									<div class="input-container">
-										<input ng-model="paymentDetails.cardholderName2" ng-click="testing()">
+										<span>Cardholder Name</span> 
 										<input class="input-content"
-											ng-model="paymentDetails.cardholderName" name="cardholderName" placeholder="Linda Williams" ng-click="testing()"
+											ng-model="paymentDetails.cardholderName" name="cardholderName" placeholder="Linda Williams"
 											ng-pattern="/^([\w]{3,})+\s+([\w\s]{3,})+$/i">
-											<span>{{paymentDetails}}</span> 
+											
 									</div>
 									<div class="input-container">
 										<span>Card Number:</span> <input class="input-content" ng-model="paymentDetails.cardNumber"
-											name="cardNumber" placeholder="0125 6780 4567 9909" ng-pattern="/^[0-9]{3}$/">
+											name="cardNumber" placeholder="0125 6780 4567 9909" ng-pattern="/^[0-9]{16}$/">
 									</div>
 									<div layout="row" layout-align="space-between center">
 										<div class="col-4"><span>Expiry date:</span> <input class="input-content"

@@ -22,11 +22,11 @@ addProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 			alert("amount must be number");
 			return false;
 		}
-
+		let isValidBankDetails = true;
 		const bankDetailEntries = projInfoEntries.filter(element => element[0].includes("bank"));
 		bankDetailEntries.forEach((element, i) => {
 			const validator = new RegExp(`^[0-9]{${2 + i * i}}$`);
-			if (validator.test(element[1])) return false;
+			if (validator.test(element[1])) isValidBankDetails = false;
 		})
 		return true;
 	}
@@ -70,7 +70,7 @@ addProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 				console.log(res.data);
 				$scope.showSuccessSaveDialog();
 			});
-			addProjectHttpMethods.requestUpdateUserStartedProjects();
+			// addProjectHttpMethods.requestUpdateUserStartedProjects();
 		}
 	}
 	$scope.showSuccessSaveDialog = () => {

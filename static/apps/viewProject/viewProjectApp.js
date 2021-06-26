@@ -1,128 +1,58 @@
-const viewProjectApp = angular.module('ViewProjectApp', ['ngMaterial', 'ngCookies','viewProjectModule']);
+const viewProjectApp = angular.module('ViewProjectApp', ['ngMaterial', 'ngCookies', 'viewProjectModule']);
 
-viewProjectApp.controller('viewProjectController',['$scope', '$timeout','$mdDialog','viewProjectHttpMethods','projectDetails', function ($scope, $timeout,$mdDialog,viewProjectHttpMethods,projectDetails) {
+viewProjectApp.controller('viewProjectController', ['$scope', '$timeout', '$mdDialog', 'viewProjectHttpMethods', 'projectDetails', function ($scope, $timeout, $mdDialog, viewProjectHttpMethods, projectDetails) {
 	$scope.clearCurrentViewedProjectProperty = () => {
 		window.localStorage.removeItem('currentViewedProject');
 	}
 	const currentProjStr = window.localStorage.getItem('currentViewedProject');
 	const query = window.location.search;
-	if(currentProjStr) $scope.currentViewedProject = JSON.parse(window.localStorage.getItem('currentViewedProject'));
-	else{
+	if (currentProjStr) $scope.currentViewedProject = JSON.parse(window.localStorage.getItem('currentViewedProject'));
+	else {
 		$scope.currentViewedProject = {};
 		viewProjectHttpMethods.requestCurrentViewedProjectInfo(query).then(res => {
 			const resData = res.data;
-			if(resData) $scope.currentViewedProject = resData;
+			if (resData) $scope.currentViewedProject = resData;
 		});
 	}
 
 
 
-//  function DialogController($scope,$mdDialog,projectId,currentReward,httpSender){
-// 	$scope.isModalConfirmed = false;
-// 	$scope.afterSec=false;
-// 	$scope.paymentDetails = {cardholderName:"berez"};
-
-// 	const verifyPaymentDetails = paymentDetails => {
-// 		// const projInfoEntries = Object.entries(paymentDetails);
-// 		console.log(paymentDetails);
-// 		// if (projInfoEntries.length < 8) {
-// 		// 	alert("need to fill the entire form");
-// 		// 	return false;
-// 		// }
-// 		// projInfoEntries.forEach(element => {
-// 		// 	if (!element[1]) {
-// 		// 		alert("need to fill the entire form");
-// 		// 		return false;
-// 		// 	}
-// 		// });
-// 		// const amountEntry = projInfoEntries.find(element => element[0].includes("amount"));
-// 		// if (isNaN(amountEntry[1])) {
-// 		// 	alert("amount must be number");
-// 		// 	return false;
-// 		// }
-
-// 		// const bankDetailEntries = projInfoEntries.filter(element => element[0].includes("bank"));
-// 		// bankDetailEntries.forEach((element, i) => {
-// 		// 	const validator = new RegExp(`^[0-9]{${2 + i * i}}$`);
-// 		// 	if (validator.test(element[1])) return false;
-// 		// })
-// 		// return true;
-// 	}
-
-
-// 	$scope.cancelTransaction = () => {
-// 		console.log(projectId);
-// 		console.log(currentReward);
-// 		$mdDialog.cancel();
-// 	};
-
-
-// 	$scope.closeModal = () => {
-
-
-		
-// 	}
-
-// 	$scope.changeAnim = () => {
-// 		$scope.afterSec= true;
-// 		console.log('switching message');
-// 		$scope.transactionMessage = "Transaction Complete!";
-// 		console.log($scope.afterSec);
-// 		// $timeout($scope.closeModal(),600);
-// 		// $scope.$apply();
-// 	}
-// 	$scope.submitTransaction = () => {
-// 		verifyPaymentDetails($scope.paymentDetails);
-// 		$scope.transactionMessage = "Sending Transaction";
-// 		$scope.isModalConfirmed = true;
-// 		$scope.isRequestCompleted = false;
-// 		console.log()
-// 		httpSender.addDonationToProject(projectId,currentReward.donationAmount).then(async res => {
-// 			$scope.isRequestCompleted = true;
-// 			// console.log(res.data);
-// 			await $timeout($scope.changeAnim,930);
-// 			console.log("hiding dialog");
-// 		});
-// 		// $mdDialog.hide();
-// 	}
-//  }
-
 	console.log(window.location.search);
 	$scope.clearCurrentViewedProjectProperty();
-	
-	$scope.donate = (reward,ev) => {
+
+	$scope.donate = (reward, ev) => {
 		projectDetails.currentReward = reward;
 		console.log('opening donation modal');
 		$mdDialog.show({
-      controller: 'DialogController',
-      templateUrl: '/views/donateDialog.html',
-			locals:{
-				projectId:$scope.currentViewedProject._id,
-				currentReward:reward
+			controller: 'DialogController',
+			templateUrl: '/views/donateDialog.html',
+			locals: {
+				projectId: $scope.currentViewedProject._id,
+				currentReward: reward
 				// httpSender: viewProjectHttpMethods
 			},
 			// scope: $scope,
-      // Appending dialog to document.body to cover sidenav in docs app
-      // Modal dialogs should fully cover application to prevent interaction outside of dialog
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose: false,
-      fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-    }).then(function (confirmTransaction) {
+			// Appending dialog to document.body to cover sidenav in docs app
+			// Modal dialogs should fully cover application to prevent interaction outside of dialog
+			parent: angular.element(document.body),
+			targetEvent: ev,
+			clickOutsideToClose: false,
+			fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+		}).then(function (confirmTransaction) {
 			console.log("finished donating");
-			
-    }, function () {
+
+		}, function () {
 			console.log('You cancelled the dialog.');
 			console.log($scope);
-      $scope.status = 'You cancelled the dialog.';
-    });
+			$scope.status = 'You cancelled the dialog.';
+		});
 	}
-	
-	
+
+
 
 }]);
 
-viewProjectApp.factory('projectDetails',['viewProjectHttpMethods',function(viewProjectHttpMethods){
+viewProjectApp.factory('projectDetails', ['viewProjectHttpMethods', function (viewProjectHttpMethods) {
 	const utils = {}
 	const scope = {};
 	utils.clearCurrentViewedProjectProperty = () => {
@@ -130,50 +60,64 @@ viewProjectApp.factory('projectDetails',['viewProjectHttpMethods',function(viewP
 	}
 	const currentProjStr = window.localStorage.getItem('currentViewedProject');
 	const query = window.location.search;
-	if(currentProjStr) scope.currentViewedProject = JSON.parse(window.localStorage.getItem('currentViewedProject'));
-	else{
+	if (currentProjStr) scope.currentViewedProject = JSON.parse(window.localStorage.getItem('currentViewedProject'));
+	else {
 		scope.currentViewedProject = {};
 		viewProjectHttpMethods.requestCurrentViewedProjectInfo(query).then(res => {
 			const resData = res.data;
-			if(resData) scope.currentViewedProject = resData;
+			if (resData) scope.currentViewedProject = resData;
 		});
 	}
 	return scope;
 }]);
 
-viewProjectApp.controller('DialogController',['$scope','$mdDialog','projectDetails','viewProjectHttpMethods','$timeout',function($scope,$mdDialog,projectDetails,viewProjectHttpMethods,$timeout,projectId,currentReward){
+viewProjectApp.controller('DialogController', ['$scope', '$mdDialog', 'projectDetails', 'viewProjectHttpMethods', '$timeout', function ($scope, $mdDialog, projectDetails, viewProjectHttpMethods, $timeout, projectId, currentReward) {
 	$scope.isModalConfirmed = false;
-	$scope.afterSec=false;
-	// $scope.paymentDetails = {a:"a"};
-	$scope.testing = () => {
-		console.log($scope.paymentDetails, 'aasas')
-	};
+	$scope.afterSec = false;
 
 	const verifyPaymentDetails = paymentDetails => {
-		// const projInfoEntries = Object.entries(paymentDetails);
 		console.log($scope.paymentDetails);
-		// if (projInfoEntries.length < 8) {
-		// 	alert("need to fill the entire form");
-		// 	return false;
-		// }
-		// projInfoEntries.forEach(element => {
-		// 	if (!element[1]) {
-		// 		alert("need to fill the entire form");
-		// 		return false;
-		// 	}
-		// });
-		// const amountEntry = projInfoEntries.find(element => element[0].includes("amount"));
-		// if (isNaN(amountEntry[1])) {
-		// 	alert("amount must be number");
-		// 	return false;
-		// }
 
-		// const bankDetailEntries = projInfoEntries.filter(element => element[0].includes("bank"));
-		// bankDetailEntries.forEach((element, i) => {
-		// 	const validator = new RegExp(`^[0-9]{${2 + i * i}}$`);
-		// 	if (validator.test(element[1])) return false;
-		// })
-		// return true;
+		if (!paymentDetails) return false;
+		const paymentInfoEntries = Object.entries(paymentDetails);
+		console.log(paymentInfoEntries);
+		const nameTester = new RegExp('^([\w]{3,})+\s+([\w\s]{3,})+$', 'i');
+		const numberTester = new RegExp('^[0-9]{16}$');
+		const dateTester = new RegExp('^[\d]{2}\/[\d]{4}');
+		const CVVtester = new RegExp('^[0-9]{3}$');
+
+		let isNotEmpty = true;
+
+		if (paymentInfoEntries.length < 4) {
+			alert("need to fill the entire form");
+			return false;
+		}
+		paymentInfoEntries.forEach((element, i) => {
+			if (!element[1]) {
+				console.log("wrong");
+				isNotEmpty = false;
+			}
+		});
+		if(!isNotEmpty) return false;
+
+		if(nameTester.test(paymentDetails.cardholderName)) {
+			console.log('failed name');
+			return false;
+		}
+		if(!numberTester.test(paymentDetails.cardNumber)){
+			console.log('failed number');
+			return false;
+		}
+		if(dateTester.test(paymentDetails.cardExpiryDate)){
+			console.log('failed exp');
+			return false;
+		};
+		if(!CVVtester.test(paymentDetails.cardCVV)){
+			console.log('failed CVV');
+			return false;
+		};
+
+		return true;
 	}
 	$scope.cancelTransaction = () => {
 		console.log(projectId);
@@ -183,11 +127,11 @@ viewProjectApp.controller('DialogController',['$scope','$mdDialog','projectDetai
 
 
 	$scope.closeModal = () => {
-		
+
 	}
 
 	$scope.changeAnim = () => {
-		$scope.afterSec= true;
+		$scope.afterSec = true;
 		console.log('switching message');
 		$scope.transactionMessage = "Transaction Complete!";
 		console.log($scope.afterSec);
@@ -195,20 +139,25 @@ viewProjectApp.controller('DialogController',['$scope','$mdDialog','projectDetai
 		// $scope.$apply();
 	}
 	$scope.submitTransaction = () => {
-		verifyPaymentDetails($scope.paymentDetails);
-		$scope.transactionMessage = "Sending Transaction";
-		$scope.isModalConfirmed = true;
-		$scope.isRequestCompleted = false;
+		const isValid = verifyPaymentDetails($scope.paymentDetails);
+		console.log(isValid);
+		console.log("project details");
 		console.log(projectDetails);
-		viewProjectHttpMethods.addDonationToProject(projectId,0).then(async res => {
-			$scope.isRequestCompleted = true;
-			// console.log(res.data);
-			await $timeout($scope.changeAnim,930);
-			console.log("hiding dialog");
-		});
+		if (isValid) {
+			$scope.transactionMessage = "Sending Transaction";
+			$scope.isModalConfirmed = true;
+			$scope.isRequestCompleted = false;
+			viewProjectHttpMethods.addDonationToProject(projectDetails.currentViewedProject._id, projectDetails.currentReward.donationAmount).then(async res => {
+				$scope.isRequestCompleted = true;
+				// console.log(res.data);
+				await $timeout($scope.changeAnim, 930);
+				console.log("hiding dialog");
+				$timeout($mdDialog.hide,1000);
+			});
+		}
 		// $mdDialog.hide();
 	}
- 
+
 }]);
 
 viewProjectApp.directive('navbar', [function () {

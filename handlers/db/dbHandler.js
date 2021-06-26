@@ -19,13 +19,14 @@ dbHandler.addDocumentToDb = async (modelName, document) => {
   console.log(document);
   const Model = getModel(modelName);
   const newDoc = new Model(document);
+  const docId = newDoc._id;
   try {
-
-    await newDoc.save();
+    await newDoc.save(
+);
     console.log("saved successfully to db");
-    return true;
+    return docId;
   } catch (error) {
-    console.log("couldn't save in db");
+    console.log(error);
     return false;
   }
 
@@ -57,11 +58,12 @@ dbHandler.findOneDocumentById = async (modelName, id, properties) => {
   }
 }
 
-dbHandler.updateDocumentByIdInCollection = async (modelName, id, update) => { //update must be an object
+dbHandler.updateDocumentInCollection = async (modelName, filter, update) => { //update must be an object
   const Model = getModel(modelName);
   try {
-    await Model.findOneAndUpdate({_id:id},update,{useFindAndModify:false});
-    console.log("updated single document successfully");
+    console.log(filter);
+    const doc = await Model.findOneAndUpdate(filter,update,{useFindAndModify:false});
+    console.log(doc);
     return true;
   } catch (err) {
     console.log("couldn't update single document", err);
