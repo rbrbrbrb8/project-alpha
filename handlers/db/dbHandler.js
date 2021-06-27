@@ -28,8 +28,19 @@ dbHandler.addDocumentToDb = async (modelName, document) => {
     console.log(error);
     return false;
   }
+}
 
-
+dbHandler.deleteDocumentInCollection = async (modelName, document) => {
+  console.log(document);
+  const Model = getModel(modelName);
+  try {
+    await Model.deleteOne(document)
+    console.log("deleted successfully from db");
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
 }
 
 dbHandler.findManyDocumentsByProperty = async (modelName, propety, limit) => {

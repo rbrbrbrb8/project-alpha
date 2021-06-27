@@ -4,13 +4,14 @@ homepageModule.factory('homepageHttpMethods', ['$http', homepageHttpMethodsFunc]
 function homepageHttpMethodsFunc($http) {
 	const httpService = {};
 
-  httpService.addLikeToProject = function (projectId){
+  httpService.addLikeToProject = function (projectId,isLiked){
     console.log("sending like POST request");
 		return $http({
 			method:'POST',
 			url:`/api/project/like`,
 			data:{
-				'projectId':projectId
+				'projectId':projectId,
+				'isLiked':isLiked
 			},
 			headers:{
 				'Content-Type':'application/json'

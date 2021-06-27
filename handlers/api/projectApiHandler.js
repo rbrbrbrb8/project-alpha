@@ -43,9 +43,26 @@ projectApiHandler.addLike = async (projectId,userID) => {
   }
   const likePromise = dbHandler.addDocumentToDb('like',doc);
   const projectLikePromise = dbHandler.updateDocumentInCollection(PROJECT,{_id:projectId},{$push:{usersLiked:userID}});
-  const result = await Promise.all([likePromise,projectLikePromise]);
+  const userLikePromise = dbHandler.updateDocumentInCollection('user',{_id:userID},{$push:{likedProjects:projectId}});
+  const result = await Promise.all([likePromise,projectLikePromise,userLikePromise]);
+  const finalRes = result.reduce(res => res ? true : false);
+  console.log(finalRes);
+  return finalRes;
 };
 
+projectApiHandler.removeLike = async (projectId,userID) => {
+  const doc = {
+    'projectID':projectId,
+    'userID':userID
+  }
+  const likePromise = dbHandler.deleteDocumentInCollection('like',doc);
+  const projectLikePromise = dbHandler.updateDocumentInCollection(PROJECT,{_id:projectId},{$pull:{usersLiked:userID}});
+  const userLikePromise = dbHandler.updateDocumentInCollection('user',{_id:userID},{$pull:{likedProjects:projectId}});
+  const result = await Promise.all([likePromise,projectLikePromise,userLikePromise]);
+  const finalRes = result.reduce(res => res ? true : false);
+  console.log(finalRes);
+  return finalRes;
+};
 
 projectApiHandler.requestFirstProjectsFromCache = () => {
   return cacheService.retrieveManyByKeys(['firstProjects']);
@@ -59,10 +76,7 @@ projectApiHandler.requestAddProject = async (project, userID,username) => {
     project.creatorUserID = userID;
     project.creatorUserName = username;
     const docId = await dbHandler.addDocumentToDb(PROJECT, project);
-    const donationPromise = dbHandler.addDocumentToDb('donationList',{projectID:docId});
-    const likesPromise = dbHandler.addDocumentToDb('likesList',{projectID:docId});
-    const result = await Promise.all([donationPromise,likesPromise]);
-    console.log("success, in projectApiHandler",result);
+    console.log("success, in projectApiHandler");
     return docId;
   } catch (error) {
     console.log("error in projectApiHandler");

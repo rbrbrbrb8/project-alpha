@@ -29,35 +29,13 @@ homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMet
 		window.localStorage.setItem('currentViewedProject',JSON.stringify(project));
 		window.location.href = `/viewProject?_id=${project._id}`
 	}
-	$scope.likeProject = projectId => {
-		console.log("liking project: ",projectId);
-		homepageHttpMethods.addLikeToProject(projectId).then(res => {
+	$scope.likeProject = (project) => {
+		console.log("liking project: ",project._id);
+		homepageHttpMethods.addLikeToProject(project._id,project.isLiked).then(res => {
 			console.log(res.data);
-		})
+			project.isLiked = !project.isLiked;
+		});
 
 	}
 }]);
 
-// homepageApp.directive('navbar', [function () {
-// 	return {
-// 		restrict: 'E',
-// 		scope: {}, //add user info to scope so the navbar can load username and profile pic
-// 		controller: function ($scope) {
-// 			$scope.Uid = window.localStorage.getItem('Uid');
-// 			$scope.moveToMyProjects= () => {
-// 				window.location.href = `/projectsGeneral?creatorUserID=${$scope.Uid}`;
-// 			};
-
-// 			$scope.moveToSupportedProjects = () => {
-
-// 			}
-
-// 			$scope.moveToLikedProjects = () => {
-				
-// 			}
-// 		},
-// 		templateUrl: 'views/navbar.html'
-
-
-// 	}
-// }]);

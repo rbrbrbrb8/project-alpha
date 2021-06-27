@@ -64,7 +64,11 @@ projectApiRouter.post('/donate', async (req, res) => {
 
 projectApiRouter.post('/like',async (req,res) => {
   console.log('caught like request for ',req.body.projectId);
-  const isSuccessful = await projectApiHandler.addLike(req.body.projectId,req.user._id);
+  const isSuccessful = {outcome:false};
+  if(!req.body.isLiked) isSuccessful.outcome = await projectApiHandler.addLike(req.body.projectId,req.user._id);
+  else isSuccessful.outcome = await projectApiHandler.removeLike(req.body.projectId,req.user._id);
+  
+  if(isSuccessful.outcome) res.send('nice');
 });
 
 module.exports = projectApiRouter;
