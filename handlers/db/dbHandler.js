@@ -21,8 +21,7 @@ dbHandler.addDocumentToDb = async (modelName, document) => {
   const newDoc = new Model(document);
   const docId = newDoc._id;
   try {
-    await newDoc.save(
-);
+    await newDoc.save();
     console.log("saved successfully to db");
     return docId;
   } catch (error) {

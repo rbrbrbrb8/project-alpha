@@ -13,6 +13,8 @@ const projectSchema = new Schema({
   projectDescription:{type:String,required:true},
   deadlineDate:{type:Object,required:true},
   rewards:{type:Array,required:true},
+  usersLiked:{type:Array,default:[]},
+  usersDonated:{type:Array,default:[]},
   bankID:{type:String,required:true},
   bankBranchID:{type:String,required:true},
   bankAccount:{type:String,required:true}

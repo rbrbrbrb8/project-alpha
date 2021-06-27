@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const likeListSchema = new Schema({
+const likeSchema = new Schema({
   projectID: {type:String, required:true},
-  usersLiked: {type:Array,default:[]}
+  userID: {type:String,required:true}
 },{collection:"Likes"});
 
-module.exports = mongoose.model('Likes',likeListSchema);
+module.exports = mongoose.model('Likes',likeSchema);

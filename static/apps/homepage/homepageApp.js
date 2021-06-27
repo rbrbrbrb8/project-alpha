@@ -1,8 +1,8 @@
 
-const homepageApp = angular.module('HomepageApp', ['ngMaterial','ngCookies']);
+const homepageApp = angular.module('HomepageApp', ['ngMaterial','ngCookies','homepageModule','NavbarApp']);
 
 
-homepageApp.controller('HomepageController', ['$scope', '$http','$cookies','$rootScope', async function ($scope, $http,$cookies,$rootScope) {
+homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMethods', async function ($scope, $http,homepageHttpMethods) { //
 	$scope.projects = [];
 	$scope.getProjects = () => {
 		$http.get(`/api/project/firstProjects`).then(res=>{
@@ -30,30 +30,34 @@ homepageApp.controller('HomepageController', ['$scope', '$http','$cookies','$roo
 		window.location.href = `/viewProject?_id=${project._id}`
 	}
 	$scope.likeProject = projectId => {
-		console.log(projectId);
+		console.log("liking project: ",projectId);
+		homepageHttpMethods.addLikeToProject(projectId).then(res => {
+			console.log(res.data);
+		})
+
 	}
 }]);
 
-homepageApp.directive('navbar', [function () {
-	return {
-		restrict: 'E',
-		scope: {}, //add user info to scope so the navbar can load username and profile pic
-		controller: function ($scope) {
-			$scope.Uid = window.localStorage.getItem('Uid');
-			$scope.moveToMyProjects= () => {
-				window.location.href = `/projectsGeneral?creatorUserID=${$scope.Uid}`;
-			};
+// homepageApp.directive('navbar', [function () {
+// 	return {
+// 		restrict: 'E',
+// 		scope: {}, //add user info to scope so the navbar can load username and profile pic
+// 		controller: function ($scope) {
+// 			$scope.Uid = window.localStorage.getItem('Uid');
+// 			$scope.moveToMyProjects= () => {
+// 				window.location.href = `/projectsGeneral?creatorUserID=${$scope.Uid}`;
+// 			};
 
-			$scope.moveToSupportedProjects = () => {
+// 			$scope.moveToSupportedProjects = () => {
 
-			}
+// 			}
 
-			$scope.moveToLikedProjects = () => {
+// 			$scope.moveToLikedProjects = () => {
 				
-			}
-		},
-		templateUrl: 'views/navbar.html'
+// 			}
+// 		},
+// 		templateUrl: 'views/navbar.html'
 
 
-	}
-}]);
+// 	}
+// }]);
