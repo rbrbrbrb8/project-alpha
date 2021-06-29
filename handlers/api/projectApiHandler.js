@@ -37,14 +37,14 @@ projectApiHandler.addDonationAmount = async (projectId,donationAmount,userID) =>
 };
 
 projectApiHandler.addLike = async (projectId,userID) => {
-  const doc = {
-    'projectID':projectId,
-    'userID':userID
-  }
-  const likePromise = dbHandler.addDocumentToDb('like',doc);
+  // const doc = {
+  //   'projectID':projectId,
+  //   'userID':userID
+  // }
+  // const likePromise = dbHandler.addDocumentToDb('like',doc);
   const projectLikePromise = dbHandler.updateDocumentInCollection(PROJECT,{_id:projectId},{$push:{usersLiked:userID}});
   const userLikePromise = dbHandler.updateDocumentInCollection('user',{_id:userID},{$push:{likedProjects:projectId}});
-  const result = await Promise.all([likePromise,projectLikePromise,userLikePromise]);
+  const result = await Promise.all([projectLikePromise,userLikePromise]);
   const finalRes = result.reduce(res => res ? true : false);
   console.log(finalRes);
   return finalRes;
@@ -55,10 +55,10 @@ projectApiHandler.removeLike = async (projectId,userID) => {
     'projectID':projectId,
     'userID':userID
   }
-  const likePromise = dbHandler.deleteDocumentInCollection('like',doc);
+  // const likePromise = dbHandler.deleteDocumentInCollection('like',doc);
   const projectLikePromise = dbHandler.updateDocumentInCollection(PROJECT,{_id:projectId},{$pull:{usersLiked:userID}});
   const userLikePromise = dbHandler.updateDocumentInCollection('user',{_id:userID},{$pull:{likedProjects:projectId}});
-  const result = await Promise.all([likePromise,projectLikePromise,userLikePromise]);
+  const result = await Promise.all([projectLikePromise,userLikePromise]);
   const finalRes = result.reduce(res => res ? true : false);
   console.log(finalRes);
   return finalRes;

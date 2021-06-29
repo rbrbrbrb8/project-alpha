@@ -135,8 +135,6 @@ viewProjectApp.controller('DialogController', ['$scope', '$mdDialog', 'projectDe
 		console.log('switching message');
 		$scope.transactionMessage = "Transaction Complete!";
 		console.log($scope.afterSec);
-		// $timeout($scope.closeModal(),600);
-		// $scope.$apply();
 	}
 	$scope.submitTransaction = () => {
 		const isValid = verifyPaymentDetails($scope.paymentDetails);
@@ -155,7 +153,6 @@ viewProjectApp.controller('DialogController', ['$scope', '$mdDialog', 'projectDe
 				$timeout($mdDialog.hide,1000);
 			});
 		}
-		// $mdDialog.hide();
 	}
 
 }]);

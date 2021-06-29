@@ -21,7 +21,7 @@
   <title>Welcome</title>
 </head>
 
-<body ng-controller="HomepageController" ng-init="getProjects()">
+<body ng-controller="HomepageController" ng-init="initInfo()">
   <navbar></navbar>
   <div class="header-div">
     <h1 class="main-header">Explore</h1>
@@ -60,8 +60,11 @@
         </div>
         <md-card-actions layout="row" layout-align="start center">
           <md-button class="md-icon-button" aria-label="favorite">
-            <div ng-click="likeProject(project)">
+            <div ng-if="!project.isLiked" ng-click="likeProject(project)">
               <md-icon md-svg-icon="/images/icons/favorite.svg"></md-icon>
+            </div>
+            <div ng-if="project.isLiked" ng-click="likeProject(project)">
+              <md-icon md-svg-icon="/images/icons/favorite_marked.svg"></md-icon>
             </div>
           </md-button>
           <md-button class="md-icon-button" aria-label="comment">

@@ -12,4 +12,17 @@ cacheHandler.requestCacheInfo = () => {
     return false;
   }
 }
+
+cacheHandler.requestCacheInfo = key => {
+  const promiseObj = {};
+  if(key === idList) promiseObj.promise =  dbHandler.findPropertyOfAllDocumentsInCollection('project', '_id',{});
+  else promiseObj.promise = dbHandler.findManyDocumentsByProperty('project',{},16);
+  try {
+    return Promise.all([promiseObj.promise]); 
+  } catch (error) {
+    console.log('Couldnt get info from database in cacheHandler');
+    return false;
+  }
+}
+
 module.exports = cacheHandler;
