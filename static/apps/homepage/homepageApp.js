@@ -9,12 +9,12 @@ homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMet
 	$scope.userInfo = {};
 	const promiseUserInfo = $http.get(`/homepage/getUserInfo`).then(res => { //prev was getUserInfo function
 		console.log(res.data);
-		window.localStorage.setItem('UserInfo',res.data);
+		window.localStorage.setItem('UserInfo',JSON.stringify(res.data));
 		$scope.userInfo = res.data;
 		return true;
 	});
 	const promiseGetProjects = $http.get(`/api/project/firstProjects`).then(res=>{ //prev was getProjects function
-		console.log(res.data);
+		// console.log(res.data);
 		$scope.projects= res.data.firstProjects;
 		return true;
 	});
@@ -23,21 +23,22 @@ homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMet
 
 	$scope.sortIsLiked = () => {
 		$scope.projects.forEach(project => {
+			console.log(project.title," is ", $scope.userInfo.likedProjects[project._id]);
 			project.isLiked = $scope.userInfo.likedProjects[project._id] ? true : false;
 		});
-		console.log($scope.projects);
+		// console.log($scope.projects);
 	}
 
 	$scope.sortIsSupported = () => {
 		$scope.projects.forEach(project => {
 			project.isSupported = $scope.userInfo.supportedProjects[project._id] ? true : false;
 		});
-		console.log($scope.projects);
+		// console.log($scope.projects);
 	}
 
 	$scope.initInfo = async () => {
 		const resultPromises = await Promise.all([promiseUserInfo,promiseGetProjects]); 
-		console.log(resultPromises);
+		// console.log(resultPromises);
 		$scope.sortIsLiked();
 	};
 
@@ -58,6 +59,10 @@ homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMet
 		homepageHttpMethods.addLikeToProject(project._id,project.isLiked).then(res => {
 			console.log(res.data);
 			project.isLiked = !project.isLiked;
+			$scope.userInfo.likedProjects[project._id] = !$scope.userInfo.likedProjects[project._id];
+			window.localStorage.setItem('UserInfo',JSON.stringify($scope.userInfo));
+			const test = JSON.parse(window.localStorage.getItem('UserInfo'));
+			console.log(test);
 		});
 
 	}

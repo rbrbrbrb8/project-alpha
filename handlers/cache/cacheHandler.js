@@ -13,9 +13,9 @@ cacheHandler.requestCacheInfo = () => {
   }
 }
 
-cacheHandler.requestCacheInfo = key => {
+cacheHandler.requestCacheInfoSpecific = key => {
   const promiseObj = {};
-  if(key === idList) promiseObj.promise =  dbHandler.findPropertyOfAllDocumentsInCollection('project', '_id',{});
+  if(key === 'idList') promiseObj.promise =  dbHandler.findPropertyOfAllDocumentsInCollection('project', '_id',{});
   else promiseObj.promise = dbHandler.findManyDocumentsByProperty('project',{},16);
   try {
     return Promise.all([promiseObj.promise]); 

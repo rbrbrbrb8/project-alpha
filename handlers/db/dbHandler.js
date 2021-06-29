@@ -47,7 +47,7 @@ dbHandler.findManyDocumentsByProperty = async (modelName, propety, limit) => {
   const Model = getModel(modelName);
   try {
     const doc = await Model.find(propety).limit(limit);
-    console.log("found documents with limit: " + doc);
+    // console.log("found documents with limit: " + doc);
     return doc;
   } catch (err) {
     console.log("couldn't find anything");

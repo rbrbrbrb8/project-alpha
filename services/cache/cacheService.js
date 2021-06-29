@@ -1,6 +1,6 @@
 const cacheHandler = require('../../handlers/cache/cacheHandler');
 const NodeCache = require('node-cache');
-const myCache = new NodeCache();
+const myCache = new NodeCache({checkperiod:10});
 const cacheService = {};
 
 
@@ -28,10 +28,10 @@ cacheService.retrieveManyByKeys = keys => {
   return value;
 }
 
-myCache.on("expired",async (key,value) => {
+myCache.on("del",async (key,value) => {
   console.log('expired');
-  const resToUpdate = await cacheHandler.requestCacheInfo(key);
-  myCache.set(key,resToUpdate,10);
+  const resToUpdate = await cacheHandler.requestCacheInfoSpecific(key);
+  myCache.set(key,resToUpdate[0],10);
 });
 
 

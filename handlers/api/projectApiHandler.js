@@ -7,28 +7,28 @@ const PROJECT = "project";
 projectApiHandler.requestGetProject = async (id) => {
   console.log("doc id:" + id);
   try {
-    const project = await dbHandler.findOneDocumentById(PROJECT,id,"-bankAccount -bankBranchID -bankID"); //filter bank details!!!!!
-    return project;  
+    const project = await dbHandler.findOneDocumentById(PROJECT, id, "-bankAccount -bankBranchID -bankID"); //filter bank details!!!!!
+    return project;
   } catch (error) {
     console.log("error in projectApiHandler");
     return false;
   }
-  
-  
+
+
 };
 
-projectApiHandler.addDonationAmount = async (projectId,donationAmount,userID) => {
-  console.log('donation amount in project api handler',donationAmount);
+projectApiHandler.addDonationAmount = async (projectId, donationAmount, userID) => {
+  console.log('donation amount in project api handler', donationAmount);
   try {
-    const projectDocPromise = dbHandler.updateDocumentInCollection(PROJECT,{_id:projectId},{$inc:{amountAlreadyRaised: donationAmount}});
-    const projectDonationPromise = dbHandler.updateDocumentInCollection(PROJECT,{_id:projectId},{$push:{usersDonated:userID}});
+    const projectDocPromise = dbHandler.updateDocumentInCollection(PROJECT, { _id: projectId }, { $inc: { amountAlreadyRaised: donationAmount } });
+    const projectDonationPromise = dbHandler.updateDocumentInCollection(PROJECT, { _id: projectId }, { $push: { usersDonated: userID } });
     const donation = {
-      'projectID':projectId,
-      'userID':userID,
-      'donationAmount':donationAmount
+      'projectID': projectId,
+      'userID': userID,
+      'donationAmount': donationAmount
     };
-    const donationListPromise = dbHandler.addDocumentToDb('donation',donation);
-    const result = await Promise.all([donationListPromise,projectDocPromise,projectDonationPromise]);
+    const donationListPromise = dbHandler.addDocumentToDb('donation', donation);
+    const result = await Promise.all([donationListPromise, projectDocPromise, projectDonationPromise]);
     console.log(result);
   } catch (error) {
     console.log(error);
@@ -36,40 +36,44 @@ projectApiHandler.addDonationAmount = async (projectId,donationAmount,userID) =>
   }
 };
 
-projectApiHandler.addLike = async (projectId,userID) => {
+projectApiHandler.addLike = async (projectId, userID) => {
   // const doc = {
   //   'projectID':projectId,
   //   'userID':userID
   // }
   // const likePromise = dbHandler.addDocumentToDb('like',doc);
-  const projectLikePromise = dbHandler.updateDocumentInCollection(PROJECT,{_id:projectId},{$push:{usersLiked:userID}});
-  const userLikePromise = dbHandler.updateDocumentInCollection('user',{_id:userID},{$push:{likedProjects:projectId}});
-  const result = await Promise.all([projectLikePromise,userLikePromise]);
+  const projectLikePromise = dbHandler.updateDocumentInCollection(PROJECT, { _id: projectId }, { $push: { usersLiked: userID } });
+  const userLikePromise = dbHandler.updateDocumentInCollection('user', { _id: userID }, { $push: { likedProjects: projectId } });
+  const result = await Promise.all([projectLikePromise, userLikePromise]);
   const finalRes = result.reduce(res => res ? true : false);
   console.log(finalRes);
   return finalRes;
 };
 
-projectApiHandler.removeLike = async (projectId,userID) => {
+projectApiHandler.removeLike = async (projectId, userID) => {
   const doc = {
-    'projectID':projectId,
-    'userID':userID
+    'projectID': projectId,
+    'userID': userID
   }
-  // const likePromise = dbHandler.deleteDocumentInCollection('like',doc);
-  const projectLikePromise = dbHandler.updateDocumentInCollection(PROJECT,{_id:projectId},{$pull:{usersLiked:userID}});
-  const userLikePromise = dbHandler.updateDocumentInCollection('user',{_id:userID},{$pull:{likedProjects:projectId}});
-  const result = await Promise.all([projectLikePromise,userLikePromise]);
-  const finalRes = result.reduce(res => res ? true : false);
-  console.log(finalRes);
-  return finalRes;
+  const projectLikePromise = dbHandler.updateDocumentInCollection(PROJECT, { _id: projectId }, { $pull: { usersLiked: userID } });
+  const userLikePromise = dbHandler.updateDocumentInCollection('user', { _id: userID }, { $pull: { likedProjects: projectId } });
+  try {
+    const result = await Promise.all([projectLikePromise, userLikePromise]);
+    const finalRes = result.reduce(res => res ? true : false);
+    console.log('finalRes: ',finalRes);
+    return finalRes;
+  }
+  catch(err){
+    console.log('error in projectApiHandler');
+  }
 };
 
 projectApiHandler.requestFirstProjectsFromCache = () => {
   return cacheService.retrieveManyByKeys(['firstProjects']);
 };
 
-projectApiHandler.requestAddProject = async (project, userID,username) => {
-  console.log("project in route: " + Object.entries(project));   
+projectApiHandler.requestAddProject = async (project, userID, username) => {
+  console.log("project in route: " + Object.entries(project));
   let isValid = verifyProjectDetails(project) && verifyRewardsDetails(project.rewards);
   if (!isValid) return false;
   try {
@@ -138,7 +142,7 @@ const verifyRewardsDetails = rewards => {
 
   });
   return isValid;
-}      
+}
 
 
 module.exports = projectApiHandler;

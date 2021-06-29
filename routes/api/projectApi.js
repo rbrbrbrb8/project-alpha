@@ -39,7 +39,7 @@ projectApiRouter.get('/', async (req, res) => {
 
 projectApiRouter.post('/', async (req, res) => {
   console.log("caught add project post request - calling handler...");
-  const isSuccessful = await projectApiHandler.requestAddProject(req.body.project, req.user['_id'],req.user.username);
+  const isSuccessful = await projectApiHandler.requestAddProject(req.body.project, req.user['_id'], req.user.username);
   if (!isSuccessful) {
     console.log("unsuccessful. try again later");
     res.send("couldn't save the project. try again later");
@@ -48,27 +48,45 @@ projectApiRouter.post('/', async (req, res) => {
 });
 
 projectApiRouter.post('/donate', async (req, res) => {
-  console.log('caught donation request',req.body.donationAmount);
-  console.log("projectId",req.body.projectId);
-  console.log("donationAmount",req.body.donationAmount);
-  const isSuccessful = await projectApiHandler.addDonationAmount(req.body.projectId,req.body.donationAmount,req.user._id);
-  if(!isSuccessful){
+  console.log('caught donation request', req.body.donationAmount);
+  console.log("projectId", req.body.projectId);
+  console.log("donationAmount", req.body.donationAmount);
+  const isSuccessful = await projectApiHandler.addDonationAmount(req.body.projectId, req.body.donationAmount, req.user._id);
+  if (!isSuccessful) {
     console.log('added donation successfully');
-    res.send({outcome:true});
+    res.send({ outcome: true });
   }
-  else{
+  else {
     console.log('could not add donation');
-    res.send({outcome:false});
+    res.send({ outcome: false });
   }
 });
 
-projectApiRouter.post('/like',async (req,res) => {
-  console.log('caught like request for ',req.body.projectId);
-  const isSuccessful = {outcome:false};
-  if(!req.body.isLiked) isSuccessful.outcome = await projectApiHandler.addLike(req.body.projectId,req.user._id);
-  else isSuccessful.outcome = await projectApiHandler.removeLike(req.body.projectId,req.user._id);
-  
-  if(isSuccessful.outcome) res.send('nice');
+projectApiRouter.post('/like', async (req, res) => {
+  console.log('caught like request for ', req.body.projectId);
+  const projectId = req.body.projectId;
+  const isSuccessful = { outcome: false };
+  try {
+    if (!req.body.isLiked) {
+      isSuccessful.outcome = await projectApiHandler.addLike(req.body.projectId, req.user._id);
+      req.session.passport.user.likedProjects.push(projectId);
+    }
+    else {
+      isSuccessful.outcome = await projectApiHandler.removeLike(req.body.projectId, req.user._id);
+      req.session.passport.user.likedProjects = req.session.passport.user.likedProjects.filter((value, index, arr) => {
+        return value !== projectId;
+      });
+    };
+    if (isSuccessful.outcome) {
+      // req.session.save(err => {console.log('err')});
+      console.log("passport user:");
+      console.log(req.user);
+      res.send('nice');
+    }
+  }
+  catch (err) {
+    console.log(err);
+  }
 });
 
 module.exports = projectApiRouter;
