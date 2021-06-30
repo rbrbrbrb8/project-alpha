@@ -6,7 +6,7 @@ const homepageRouter = express.Router();
 const arrayToObjectReverse = arr => {
 	const obj = {};
 	arr.forEach((element,i) => {
-		obj[element] = i;
+		obj[element] = i+1;
 	});
 	return obj;
 }
@@ -25,7 +25,7 @@ homepageRouter.get('/getUserInfo', (req,res) => {
     const resObj = {
         'uid': req.user._id,
         'likedProjects': objLiked,
-        'supportedProjects': objSupported
+        'supportedProjects': objSupported  
     };
     res.send(resObj);
 })

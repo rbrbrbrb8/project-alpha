@@ -54,6 +54,8 @@ projectApiRouter.post('/donate', async (req, res) => {
   const isSuccessful = await projectApiHandler.addDonationAmount(req.body.projectId, req.body.donationAmount, req.user._id);
   if (!isSuccessful) {
     console.log('added donation successfully');
+    const isExistAlready = req.session.passport.user.supportedProjects.find(id => id === req.body.projectId);
+    if(!isExistAlready) req.session.passport.user.supportedProjects.push(req.body.projectId);
     res.send({ outcome: true });
   }
   else {

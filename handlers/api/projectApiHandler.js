@@ -28,8 +28,13 @@ projectApiHandler.addDonationAmount = async (projectId, donationAmount, userID) 
       'donationAmount': donationAmount
     };
     const donationListPromise = dbHandler.addDocumentToDb('donation', donation);
-    const result = await Promise.all([donationListPromise, projectDocPromise, projectDonationPromise]);
+    const userSupportPromise = dbHandler.updateDocumentInCollection('user', { _id: userID }, { $push: { supportedProjects: projectId } });
+    const result = await Promise.all([donationListPromise, projectDocPromise, projectDonationPromise, userSupportPromise]);
+    const finalRes = result.reduce(res => res ? true : false);
+    console.log('finalRes',finalRes);
+    console.log('result');
     console.log(result);
+    return finalRes;
   } catch (error) {
     console.log(error);
     return false;
@@ -37,11 +42,6 @@ projectApiHandler.addDonationAmount = async (projectId, donationAmount, userID) 
 };
 
 projectApiHandler.addLike = async (projectId, userID) => {
-  // const doc = {
-  //   'projectID':projectId,
-  //   'userID':userID
-  // }
-  // const likePromise = dbHandler.addDocumentToDb('like',doc);
   const projectLikePromise = dbHandler.updateDocumentInCollection(PROJECT, { _id: projectId }, { $push: { usersLiked: userID } });
   const userLikePromise = dbHandler.updateDocumentInCollection('user', { _id: userID }, { $push: { likedProjects: projectId } });
   const result = await Promise.all([projectLikePromise, userLikePromise]);
@@ -60,10 +60,10 @@ projectApiHandler.removeLike = async (projectId, userID) => {
   try {
     const result = await Promise.all([projectLikePromise, userLikePromise]);
     const finalRes = result.reduce(res => res ? true : false);
-    console.log('finalRes: ',finalRes);
+    console.log('finalRes: ', finalRes);
     return finalRes;
   }
-  catch(err){
+  catch (err) {
     console.log('error in projectApiHandler');
   }
 };

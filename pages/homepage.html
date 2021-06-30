@@ -71,7 +71,12 @@
             <md-icon md-svg-icon="/images/icons/comment.svg"></md-icon>
           </md-button>
           <md-button class="md-icon-button" aria-label="donate">
-            <md-icon md-svg-icon="/images/icons/donate.svg"></md-icon>
+            <div ng-if="!project.isSupported">
+              <md-icon md-svg-icon="/images/icons/donate.svg"></md-icon>
+            </div>
+            <div ng-if="project.isSupported">
+              <md-icon md-svg-icon="/images/icons/donate_already.svg"></md-icon>
+            </div>
           </md-button>
         </md-card-actions>
 

@@ -23,7 +23,7 @@ homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMet
 
 	$scope.sortIsLiked = () => {
 		$scope.projects.forEach(project => {
-			console.log(project.title," is ", $scope.userInfo.likedProjects[project._id]);
+			// console.log(project.title," is ", $scope.userInfo.likedProjects[project._id]);
 			project.isLiked = $scope.userInfo.likedProjects[project._id] ? true : false;
 		});
 		// console.log($scope.projects);
@@ -31,6 +31,7 @@ homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMet
 
 	$scope.sortIsSupported = () => {
 		$scope.projects.forEach(project => {
+			console.log(project.title," is ", $scope.userInfo.supportedProjects[project._id]);
 			project.isSupported = $scope.userInfo.supportedProjects[project._id] ? true : false;
 		});
 		// console.log($scope.projects);
@@ -40,6 +41,7 @@ homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMet
 		const resultPromises = await Promise.all([promiseUserInfo,promiseGetProjects]); 
 		// console.log(resultPromises);
 		$scope.sortIsLiked();
+		$scope.sortIsSupported();
 	};
 
 
