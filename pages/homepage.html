@@ -7,6 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/navbar.css">
   <link rel="stylesheet" href="/css/homepage.css">
+  <link rel="stylesheet" href="/vendors/fontawesome/css/fontawesome.min.css">
+  <link rel="stylesheet" href="/vendors/fontawesome/css/regular.min.css">
+  <link rel="stylesheet" href="/vendors/fontawesome/css/solid.min.css">
   <script src="/vendors/angular.min.js"></script>
   <script src="/vendors/angular-material.min.js"></script>
   <script src="/vendors/angular-animate.min.js"></script>
@@ -60,22 +63,19 @@
         </div>
         <md-card-actions layout="row" layout-align="start center">
           <md-button class="md-icon-button" aria-label="favorite">
-            <div ng-if="!project.isLiked" ng-click="likeProject(project)">
-              <md-icon md-svg-icon="/images/icons/favorite.svg"></md-icon>
+            <div ng-click="likeProject(project)"> 
+              <i ng-class="{fas:project.isLiked}" class="far fa-heart fa-lg"></i>
             </div>
-            <div ng-if="project.isLiked" ng-click="likeProject(project)">
-              <md-icon md-svg-icon="/images/icons/favorite_marked.svg"></md-icon>
-            </div>
-          </md-button>
-          <md-button class="md-icon-button" aria-label="comment">
-            <md-icon md-svg-icon="/images/icons/comment.svg"></md-icon>
           </md-button>
           <md-button class="md-icon-button" aria-label="donate">
-            <div ng-if="!project.isSupported">
-              <md-icon md-svg-icon="/images/icons/donate.svg"></md-icon>
+            <div> 
+              <i class="far fa-comment fa-lg"></i>
             </div>
-            <div ng-if="project.isSupported">
-              <md-icon md-svg-icon="/images/icons/donate_already.svg"></md-icon>
+          </md-button>
+
+          <md-button class="md-icon-button" aria-label="donate">
+            <div> 
+              <i ng-class="{fas:project.isSupported}" class="far fa-money-bill-alt fa-lg"></i>
             </div>
           </md-button>
         </md-card-actions>

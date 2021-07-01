@@ -27,3 +27,14 @@
 .project-description-container{
     overflow: hidden;
 }
+.fa-heart{
+    color: red;
+}
+
+.fa-money-bill-alt{
+    color: #0E7A2D;
+}
+ 
+.fa-comment{
+    color: #158caa;
+}

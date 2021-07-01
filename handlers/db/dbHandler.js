@@ -16,7 +16,7 @@ function getModel(model) {
 }
 
 dbHandler.addDocumentToDb = async (modelName, document) => {
-  console.log(document);
+  // console.log(document);
   const Model = getModel(modelName);
   const newDoc = new Model(document);
   const docId = newDoc._id;

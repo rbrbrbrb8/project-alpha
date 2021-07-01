@@ -19,7 +19,9 @@ homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMet
 		return true;
 	});
 
-	
+	$scope.changeClass = project => {
+		project.isLiked = !project.isLiked;
+	}
 
 	$scope.sortIsLiked = () => {
 		$scope.projects.forEach(project => {
