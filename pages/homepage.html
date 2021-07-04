@@ -19,6 +19,8 @@
   <script src="/apps/homepage/homepageApp.js"></script>
   <script src="/apps/homepage/homepageModule.js"></script>
   <script src="/apps/navbar/navbar.js"></script>
+  <script src="/vendors/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/vendors/bootstrap.min.css">
   <link rel="stylesheet" href="/vendors/angular-material.min.css">
 
   <title>Welcome</title>
@@ -58,6 +60,9 @@
               <p>
                 {{project.projectDescription}}
               </p>
+            </div>
+            <div class="progress project-progress-container" style="height: 10px;">
+              <div class="progress-bar" ng-style="project.progressBarStyle"> {{project.percentage}}%</div>
             </div>
           </md-card-content>
         </div>

@@ -3,20 +3,19 @@ const homepageApp = angular.module('HomepageApp', ['ngMaterial','ngCookies','hom
 
 
 
-homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMethods', async function ($scope, $http,homepageHttpMethods) {
+homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMethods','$rootScope','$q', async function ($scope, $http,homepageHttpMethods,$rootScope,$q) {
 
 	$scope.projects = [];
 	$scope.userInfo = {};
-	const promiseUserInfo = $http.get(`/homepage/getUserInfo`).then(res => { //prev was getUserInfo function
-		console.log(res.data);
-		window.localStorage.setItem('UserInfo',JSON.stringify(res.data));
-		$scope.userInfo = res.data;
-		return true;
+	const promiseUserInfo = homepageHttpMethods.getUserInfo().then(res => { //prev was getUserInfo function
+		console.log('getUserInfo');
+		//console.log(res.data);
+		//window.localStorage.setItem('UserInfo',JSON.stringify(res.data));
+		return res.data;
 	});
-	const promiseGetProjects = $http.get(`/api/project/firstProjects`).then(res=>{ //prev was getProjects function
-		// console.log(res.data);
-		$scope.projects= res.data.firstProjects;
-		return true;
+	const promiseGetProjects = homepageHttpMethods.getFirstProjects().then(res=>{ //prev was getProjects function
+		console.log('getProjects');
+		return res.data.firstProjects;
 	});
 
 	$scope.changeClass = project => {
@@ -25,10 +24,8 @@ homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMet
 
 	$scope.sortIsLiked = () => {
 		$scope.projects.forEach(project => {
-			// console.log(project.title," is ", $scope.userInfo.likedProjects[project._id]);
 			project.isLiked = $scope.userInfo.likedProjects[project._id] ? true : false;
 		});
-		// console.log($scope.projects);
 	}
 
 	$scope.sortIsSupported = () => {
@@ -39,11 +36,43 @@ homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMet
 		// console.log($scope.projects);
 	}
 
-	$scope.initInfo = async () => {
-		const resultPromises = await Promise.all([promiseUserInfo,promiseGetProjects]); 
+	$scope.sortProgress = () => {
+		$scope.projects.forEach(project => {
+			project.percentage = Math.round((project.amountAlreadyRaised/project.amountToRaise)*100);
+			console.log(project.percentage);
+			project.progressBarStyle = {
+				'width' : `${project.percentage}%`
+			};
+		});
+		// console.log($scope.projects);
+	}
+
+	const isLikedByUser = (userInfo,project) => userInfo.likedProjects[project._id];
+
+	const isSupportedByUser = (userInfo,project) => userInfo.likedProjects[project._id];
+
+	const getPercentage = project =>  Math.round((project.amountAlreadyRaised/project.amountToRaise)*100);
+
+	const setBarStyle = project => ({'width':`${project.percentage}%`});
+
+	$scope.initInfo = () => {
+		 $q.all([promiseUserInfo,promiseGetProjects]).then(res => {
+			const [userInfo, projects] = res;
+			console.log(res);
+			const fixProjects = projects.map(project => {
+				const newProject = {...project};
+				newProject.isLiked = isLikedByUser(userInfo, newProject);
+				newProject.isSupported = isSupportedByUser(userInfo, newProject);
+				newProject.percentage = getPercentage(newProject);
+				newProject.progressBarStyle = setBarStyle(newProject);
+				return newProject;
+			});
+			$scope.projects = fixProjects;
+			console.log($scope.projects);
+		}); 
 		// console.log(resultPromises);
-		$scope.sortIsLiked();
-		$scope.sortIsSupported();
+		
+		// $scope.$apply();
 	};
 
 
