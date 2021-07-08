@@ -1,3 +1,9 @@
+import '../../vendors/angular.min.js';
+import './loginModule.js';
+import '../../css/login_and_signup_styles.css';
+
+
+
 const loginApp = angular.module('LoginApp',['loginModule']);
 
 

@@ -1,3 +1,21 @@
+import '../../vendors/angular.min.js';
+import '../../vendors/angular-material.min.js';
+import '../../vendors/angular-animate.min.js';
+import '../../vendors/angular-aria.min.js';
+import '../../vendors/angular-cookies.min.js';
+import '../../vendors/angular-messages.min.js';
+import '../../vendors/bootstrap.min.js';
+import './homepageModule.js';
+import '../navbar/navbar.js';
+import '../../vendors/angular-material.min.css';
+import '../../vendors/bootstrap.min.css';
+import '../../css/navbar.css';
+import '../../css/homepage.css';
+import '../../vendors/fontawesome/css/fontawesome.min.css';
+import '../../vendors/fontawesome/css/regular.css';
+import '../../vendors/fontawesome/css/solid.css';
+
+
 
 const homepageApp = angular.module('HomepageApp', ['ngMaterial','ngCookies','homepageModule','NavbarApp']);
 

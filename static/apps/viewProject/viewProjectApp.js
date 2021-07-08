@@ -1,4 +1,20 @@
-const viewProjectApp = angular.module('ViewProjectApp', ['ngMaterial', 'ngCookies', 'viewProjectModule']);
+import '../../vendors/angular.min.js';
+import '../../vendors/angular-material.min.js';
+import '../../vendors/angular-animate.min.js';
+import '../../vendors/angular-aria.min.js';
+import '../../vendors/angular-cookies.min.js';
+import '../../vendors/angular-messages.min.js';
+import '../../vendors/bootstrap.min.js';
+import './viewProjectModule.js';
+import '../navbar/navbar.js';
+import '../../vendors/angular-material.min.css';
+import '../../vendors/bootstrap.min.css';
+import '../../css/navbar.css';
+import '../../css/viewProject.css';
+import '../../css/donateDialog.css';
+
+
+const viewProjectApp = angular.module('ViewProjectApp', ['ngMaterial', 'ngCookies', 'viewProjectModule','NavbarApp']);
 
 viewProjectApp.controller('viewProjectController', ['$scope', '$timeout', '$mdDialog', 'viewProjectHttpMethods', 'projectDetails', function ($scope, $timeout, $mdDialog, viewProjectHttpMethods, projectDetails) {
 	$scope.clearCurrentViewedProjectProperty = () => {
@@ -157,15 +173,15 @@ viewProjectApp.controller('DialogController', ['$scope', '$mdDialog', 'projectDe
 
 }]);
 
-viewProjectApp.directive('navbar', [function () {
-	return {
-		restrict: 'E',
-		scope: {}, //add user info to scope so the navbar can load username and profile pic
-		controller: function ($scope) {
+// viewProjectApp.directive('navbar', [function () {
+// 	return {
+// 		restrict: 'E',
+// 		scope: {}, //add user info to scope so the navbar can load username and profile pic
+// 		controller: function ($scope) {
 
-		},
-		templateUrl: '../views/navbar.html'
+// 		},
+// 		templateUrl: '../views/navbar.html'
 
 
-	}
-}]);
+// 	}
+// }]);

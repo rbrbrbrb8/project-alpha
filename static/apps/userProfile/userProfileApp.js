@@ -1,12 +1,26 @@
-const userProfileApp = angular.module('UserProfileApp', ['ngMaterial', 'ngCookies', 'userProfileModule']);
 
-// const parseCookieToArr = cookie => {
-// 	const fixedArrString = cookie.substring(cookie.indexOf('[') + 1,cookie.length - 1);
-// 	const parsedArr = fixedArrString.split(',');
-// 	return parsedArr;
-// }
+import '../../vendors/angular.min.js';
+import '../../vendors/angular-material.min.js';
+import '../../vendors/angular-animate.min.js';
+import '../../vendors/angular-aria.min.js';
+import '../../vendors/angular-cookies.min.js';
+import '../../vendors/angular-messages.min.js';
+import 'bootstrap';
+import '../../images/profile-background.jpg'
+import './userProfileModule.js';
+import '../navbar/navbar.js';
+import '../../vendors/angular-material.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import '../../css/navbar.css';
+import '../../css/userProfile.css';
 
-userProfileApp.controller('userProfileController', ['$scope', '$cookies', 'userProfileHttpMethods', function ($scope, $cookies, userProfileHttpMethods) {
+
+
+const userProfileApp = angular.module('UserProfileApp', [ 'ngCookies', 'userProfileModule','NavbarApp']); 
+// 'ngMaterial',
+
+
+userProfileApp.controller('userProfileController', ['$scope', 'userProfileHttpMethods', function ($scope, userProfileHttpMethods) {
 	 //wrong!!!! get from db and then do length
 	$scope.projects = [1, 2, 3];
 	$scope.totalMoneyRaised = 0;
@@ -25,17 +39,4 @@ userProfileApp.controller('userProfileController', ['$scope', '$cookies', 'userP
 
 	
 
-}]);
-
-userProfileApp.directive('navbar', [function () {
-	return {
-		restrict: 'E',
-		scope: {}, //add user info to scope so the navbar can load username and profile pic
-		controller: function ($scope) {
-
-		},
-		templateUrl: '../views/navbar.html'
-
-
-	}
 }]);

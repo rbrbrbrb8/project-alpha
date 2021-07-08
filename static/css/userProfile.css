@@ -23,7 +23,7 @@
     overflow: hidden;
 }
 .profile-header .profile-header-cover {
-    background: url(/images/profile-background.jpg) center no-repeat;
+    background: url(http://localhost:3000/images/profile-background.jpg) center no-repeat;
     background-size: 100% auto;
     position: absolute;
     left: 0;

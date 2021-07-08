@@ -1,4 +1,18 @@
-const addProjectApp = angular.module('AddProjectApp', ['ngMaterial', 'ngMessages', 'addProjectModule']);
+import '../../vendors/angular.min.js';
+import '../../vendors/angular-material.min.js';
+import '../../vendors/angular-animate.min.js';
+import '../../vendors/angular-aria.min.js';
+import '../../vendors/angular-cookies.min.js';
+import '../../vendors/angular-messages.min.js';
+import './addProjectModule.js';
+import '../navbar/navbar.js';
+import '../../vendors/angular-material.min.css';
+import '../../css/navbar.css';
+import '../../css/addProject.css';
+
+
+
+const addProjectApp = angular.module('AddProjectApp', ['ngMaterial', 'ngMessages', 'addProjectModule','NavbarApp']);
 
 addProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMethods', '$mdDialog', function ($scope, addProjectHttpMethods, $mdDialog) {
 	$scope.project = {};
@@ -103,18 +117,6 @@ addProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 	}
 }]);
 
-addProjectApp.directive('navbar', [function () {
-	return {
-		restrict: 'E',
-		scope: {}, //add user info to scope so the navbar can load username and profile pic
-		controller: function ($scope) {
-
-		},
-		templateUrl: 'views/navbar.html'
-
-
-	}
-}]);
 
 addProjectApp.config(function ($mdThemingProvider) {
 

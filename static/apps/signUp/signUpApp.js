@@ -1,5 +1,8 @@
-// 'use strict';
-// require('./signUpModule');
+import '../../vendors/angular.min.js';
+import './signUpModule.js';
+import '../../css/login_and_signup_styles.css';
+
+
 const signUpApp = angular.module('SignUpApp',['signUpModule']);
 
 
