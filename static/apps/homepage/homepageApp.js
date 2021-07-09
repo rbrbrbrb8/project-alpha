@@ -21,7 +21,7 @@ const homepageApp = angular.module('HomepageApp', ['ngMaterial','ngCookies','hom
 
 
 
-homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMethods','$rootScope','$q', async function ($scope, $http,homepageHttpMethods,$rootScope,$q) {
+homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMethods','$rootScope','$q',function ($scope, $http,homepageHttpMethods,$rootScope,$q) {
 
 	$scope.projects = [];
 	$scope.userInfo = {};
