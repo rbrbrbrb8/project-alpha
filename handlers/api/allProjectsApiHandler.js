@@ -1,10 +1,9 @@
 const dbHandler = require('../db/dbHandler');
-let projectApiHandler = {};
+const projectApiHandler = {};
 projectApiHandler.init = () => { };
-projectApiHandler.getAllProjectsIdList = async filter => {
+projectApiHandler.getAllProjectsIdList = filter => {
 	try {
-		const idArrayObjects = await dbHandler.findPropertyOfAllDocumentsInCollection("project", "_id", filter);
-		return idArrayObjects;
+		return dbHandler.findPropertyOfAllDocumentsInCollection("project", "_id", filter);
 	}
 	catch (e) {
 		console.log("error in allProjectsApi handler");
@@ -14,14 +13,14 @@ projectApiHandler.getAllProjectsIdList = async filter => {
 }
 
 projectApiHandler.getFirstProjectsAndIdList = filter => {
-	const projectIdList =  dbHandler.findPropertyOfAllDocumentsInCollection('project', '_id',filter);
-	const firstDisplayProjects = dbHandler.findManyDocumentsByProperty('project',filter,5);
+	const projectIdList = dbHandler.findPropertyOfAllDocumentsInCollection('project', '_id', filter);
+	const firstDisplayProjects = dbHandler.findManyDocumentsByProperty('project', filter, 5);
 	try {
-		return Promise.all([projectIdList,firstDisplayProjects]); 
-	  } catch (error) {
+		return Promise.all([projectIdList, firstDisplayProjects]);
+	} catch (error) {
 		console.log('Couldnt get info from database in allProjectsApiHandler');
 		return false;
-	  }
+	}
 }
 
 

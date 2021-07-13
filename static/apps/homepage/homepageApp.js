@@ -25,7 +25,8 @@ homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMet
 
 	$scope.projects = [];
 	$scope.userInfo = {};
-	const promiseUserInfo = homepageHttpMethods.getUserInfo().then(res => { //prev was getUserInfo function
+	const promiseUserInfo = homepageHttpMethods.getUserInfo()
+	.then(res => { //prev was getUserInfo function
 		console.log('getUserInfo');
 		//console.log(res.data);
 		//window.localStorage.setItem('UserInfo',JSON.stringify(res.data));

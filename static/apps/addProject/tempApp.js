@@ -1,5 +1,4 @@
 
-import '../../css/addProject.css';
 import '../../vendors/angular.min.js';
 import '../../vendors/angular-material.min.js';
 import '../../vendors/angular-animate.min.js';
@@ -12,7 +11,9 @@ import '../../vendors/angular-material.min.css';
 import '../../css/navbar.css';
 
 
-const AddProjectApp = angular.module('AddProjectApp', ['ngMaterial', 'ngMessages', 'addProjectModule', 'NavbarApp']);
+
+
+const AddProjectApp = angular.module('AddProjectApp', ['ngMaterial', 'ngMessages', 'addProjectModule','NavbarApp']);
 
 AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMethods', '$mdDialog', function ($scope, addProjectHttpMethods, $mdDialog) {
 	$scope.project = {};
@@ -25,17 +26,12 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 			alert("need to fill the entire form");
 			return false;
 		}
-		const isNoData = projInfoEntries.find(element => !element[i]);
-		if (isNoData) {
-			alert("need to fill the entire form");
-			return false;
-		}
-		// projInfoEntries.forEach(element => {
-		// 	if (!element[1]) {
-		// 		alert("need to fill the entire form");
-		// 		return false;
-		// 	}
-		// });
+		projInfoEntries.forEach(element => {
+			if (!element[1]) {
+				alert("need to fill the entire form");
+				return false;
+			}
+		});
 		const amountEntry = projInfoEntries.find(element => element[0].includes("amount"));
 		if (isNaN(amountEntry[1])) {
 			alert("amount must be number");
@@ -49,7 +45,6 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 		})
 		return true;
 	}
-
 	const verifyRewardsDetails = rewards => {
 		let isValid = true;
 		if (rewards.length === 0) {
@@ -103,7 +98,7 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 
 		$mdDialog.show(confirm).then(function () {
 			window.location.href = '/addproject';
-		}, () => {
+		}, function () {
 			window.location.href = '/homepage';
 		});
 	}
@@ -117,7 +112,9 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 		$scope.rewards.push({});
 	}
 	$scope.removeDonationOption = reward => {
-		$scope.rewards = $scope.rewards.filter(value => value !== reward)
+		$scope.rewards = $scope.rewards.filter((value, index, arr) => {
+			return value !== reward;
+		})
 	}
 }]);
 

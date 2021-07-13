@@ -10,8 +10,8 @@ function homepageHttpMethodsFunc($http) {
 			method:'POST',
 			url:`/api/project/like`,
 			data:{
-				'projectId':projectId,
-				'isLiked':isLiked
+				projectId,
+				isLiked
 			},
 			headers:{
 				'Content-Type':'application/json'

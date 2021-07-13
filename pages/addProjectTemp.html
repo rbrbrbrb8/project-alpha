@@ -1,26 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="AddProjectApp">
+<html lang="en" ng-app="test">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=, initial-scale=1.0">
-  <!-- <link rel="stylesheet" href="/css/navbar.css">
-  <link rel="stylesheet" href="/css/addProject.css"> -->
-  <script src="/bundles/addProject.js"></script>
-  <!-- <script src="/vendors/angular.min.js"></script>
-  <script src="/apps/addProject/addProjectApp.js"></script>
-  <script src="/apps/addProject/addProjectModule.js"></script>
-  <script src="/apps/navbar/navbar.js"></script>
+  <link rel="stylesheet" href="/css/navbar.css">
+  <link rel="stylesheet" href="/css/addProject.css">
+  <!-- <script src="/bundles/addProject.js"></script> -->
+  <script src="/vendors/angular.min.js"></script>
   <script src="/vendors/angular-material.min.js"></script>
   <script src="/vendors/angular-animate.min.js"></script>
   <script src="/vendors/angular-aria.min.js"></script>
   <script src="/vendors/angular-messages.min.js"></script>
-  <link rel="stylesheet" href="/vendors/angular-material.min.css"> -->
+  <!-- <script src="/apps/addProject/addProjectModule.js"></script> -->
+  <script src="/apps/addProject/addProjectApp.js"></script>
+  <link rel="stylesheet" href="/vendors/angular-material.min.css">
   <title>Create a Project</title>
 </head>
 
-<body ng-controller="AddProjectController" ng-init="categorys=['Software','Food','Sports']">
+<body ng-controller="" ng-init="categorys=['Software','Food','Sports']">
   <navbar></navbar>
   <div class="header-div">
     <h1 class="main-header">Add Project</h1>
@@ -47,8 +46,7 @@
 
             <md-input-container flex="33" style="display: inline-block;">
               <label>Deadline</label>
-              <md-datepicker ng-model="project.deadlineDate" aria-label="Enter date" name="deadlineDate" required>
-              </md-datepicker>
+              <md-datepicker ng-model="project.deadlineDate" aria-label="Enter date" name="deadlineDate" required></md-datepicker>
             </md-input-container>
 
           </div>
@@ -56,58 +54,57 @@
       </md-content>
 
       <md-content layout-padding="">
-        <div flex="25">
-          <label>Category</label>
-          <md-select ng-model="project.category" name="category" required>
-            <md-option ng-repeat="category in categorys" value="{{category}}">
-              {{category}}
-            </md-option>
-          </md-select>
+          <div flex="25">
+            <label>Category</label>
+            <md-select ng-model="project.category" name="category" required>
+              <md-option ng-repeat="category in categorys" value="{{category}}">
+                {{category}}
+              </md-option>
+            </md-select>
 
-        </div>
+          </div>
 
-        <md-input-container class="md-block">
-          <label>Project Description</label>
-          <textarea ng-model="project.projectDescription" md-maxlength="150" rows="4" md-select-on-focus=""
-            name="projectDescription" required></textarea>
-        </md-input-container>
-
-        <div>
-          <h3 class="form-subheader">Banking Details</h3>
-        </div>
-        <div layout-gt-sm="row" class="bank-info-container">
-          <md-input-container class="md-block" flex-gt-sm="">
-            <label>Bank ID</label>
-            <input name="bankID" ng-model="project.bankID" required ng-pattern="/^[0-9]{2}$/" md-maxlength="2">
-            <div ng-messages="projectForm.bankID.$error" role="alert">
-              <div ng-message="required" class="my-message">You must supply a bank ID.</div>
-              <div ng-message="pattern" class="my-message">That doesn't look like a valid bank ID.</div>
-            </div>
+          <md-input-container class="md-block">
+            <label>Project Description</label>
+            <textarea ng-model="project.projectDescription" md-maxlength="150" rows="4"
+              md-select-on-focus="" name="projectDescription" required></textarea>
           </md-input-container>
 
-          <md-input-container class="md-block" flex-gt-sm="">
-            <label>Branch ID</label>
-            <input name="bankBranchID" ng-model="project.bankBranchID" required="" ng-pattern="/^[0-9]{3}$/"
-              md-maxlength="3">
-            <div ng-messages="projectForm.bankBranchID.$error" role="alert" multiple="">
-              <div ng-message="required" class="my-message">You must supply a branch ID.</div>
-              <div ng-message="pattern" class="my-message">That doesn't look like a valid branch ID.</div>
-            </div>
-          </md-input-container>
+          <div>
+            <h3 class="form-subheader">Banking Details</h3>
+          </div>
+          <div layout-gt-sm="row" class="bank-info-container">
+            <md-input-container class="md-block" flex-gt-sm="">
+              <label>Bank ID</label>
+              <input name="bankID" ng-model="project.bankID" required ng-pattern="/^[0-9]{2}$/" md-maxlength="2">
+              <div ng-messages="projectForm.bankID.$error" role="alert">
+                <div ng-message="required" class="my-message">You must supply a bank ID.</div>
+                <div ng-message="pattern" class="my-message">That doesn't look like a valid bank ID.</div>
+              </div>
+            </md-input-container>
 
-          <md-input-container class="md-block" flex-gt-sm="">
-            <label>Account Number</label>
-            <input name="bankAccount" ng-model="project.bankAccount" required="" ng-pattern="/^[0-9]{6}$/"
-              md-maxlength="6">
-            <div ng-messages="projectForm.bankAccount.$error" role="alert" multiple="">
-              <div ng-message="required" class="my-message">You must supply an account number.</div>
-              <div ng-message="pattern" class="my-message">That doesn't look like a valid account number.</div>
-            </div>
-          </md-input-container>
-        </div>
-        <div>
-          <md-button ng-click="switchPage()">Next</md-button>
-        </div>
+            <md-input-container class="md-block" flex-gt-sm="">
+              <label>Branch ID</label>
+              <input name="bankBranchID" ng-model="project.bankBranchID" required="" ng-pattern="/^[0-9]{3}$/" md-maxlength="3">
+              <div ng-messages="projectForm.bankBranchID.$error" role="alert" multiple="">
+                <div ng-message="required" class="my-message">You must supply a branch ID.</div>
+                <div ng-message="pattern" class="my-message">That doesn't look like a valid branch ID.</div>
+              </div>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-sm="">
+              <label>Account Number</label>
+              <input name="bankAccount" ng-model="project.bankAccount" required="" ng-pattern="/^[0-9]{6}$/"
+                md-maxlength="6">
+              <div ng-messages="projectForm.bankAccount.$error" role="alert" multiple="">
+                <div ng-message="required" class="my-message">You must supply an account number.</div>
+                <div ng-message="pattern" class="my-message">That doesn't look like a valid account number.</div>
+              </div>
+            </md-input-container>
+          </div>
+          <div>
+            <md-button ng-click="switchPage()">Next</md-button>
+          </div>
 
 
     </div>
@@ -125,7 +122,7 @@
           <div flex="100" layout-gt-sm="row">
             <md-input-container flex="50">
               <label>Donation Name</label>
-              <input ng-model="reward.rewardTitle">
+              <input ng-model="reward.rewardTitle" >
             </md-input-container>
 
             <md-input-container flex="50">
@@ -165,6 +162,7 @@
 
     </div>
   </form>
+
 
 </body>
 

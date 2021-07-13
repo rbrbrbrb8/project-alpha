@@ -7,8 +7,7 @@ const PROJECT = "project";
 projectApiHandler.requestGetProject = async (id) => {
   console.log("doc id:" + id);
   try {
-    const project = await dbHandler.findOneDocumentById(PROJECT, id, "-bankAccount -bankBranchID -bankID"); //filter bank details!!!!!
-    return project;
+    return dbHandler.findOneDocumentById(PROJECT, id, "-bankAccount -bankBranchID -bankID"); //filter bank details!!!!!
   } catch (error) {
     console.log("error in projectApiHandler");
     return false;
@@ -20,18 +19,23 @@ projectApiHandler.requestGetProject = async (id) => {
 projectApiHandler.addDonationAmount = async (projectId, donationAmount, userID) => {
   console.log('donation amount in project api handler', donationAmount);
   try {
-    const projectDocPromise = dbHandler.updateDocumentInCollection(PROJECT, { _id: projectId }, { $inc: { amountAlreadyRaised: donationAmount } });
-    const projectDonationPromise = dbHandler.updateDocumentInCollection(PROJECT, { _id: projectId }, { $push: { usersDonated: userID } });
     const donation = {
       'projectID': projectId,
       'userID': userID,
       'donationAmount': donationAmount
     };
+    const projectDocPromise = dbHandler.updateDocumentInCollection(PROJECT, { _id: projectId }, { $inc: { amountAlreadyRaised: donationAmount } });
+    const projectDonationPromise = dbHandler.updateDocumentInCollection(PROJECT, { _id: projectId }, { $push: { usersDonated: userID } });
     const donationListPromise = dbHandler.addDocumentToDb('donation', donation);
     const userSupportPromise = dbHandler.updateDocumentInCollection('user', { _id: userID }, { $push: { supportedProjects: projectId } });
-    const result = await Promise.all([donationListPromise, projectDocPromise, projectDonationPromise, userSupportPromise]);
-    const finalRes = result.reduce(res => res ? true : false);
-    console.log('finalRes',finalRes);
+    const result = await Promise.all([
+      donationListPromise,
+      projectDocPromise,
+      projectDonationPromise,
+      userSupportPromise
+    ]).catch(err => console.log(err))
+    const finalRes = result.find(res => !res);
+    console.log('finalRes', finalRes);
     console.log('result');
     console.log(result);
     return finalRes;

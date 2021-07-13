@@ -17,7 +17,6 @@ import '../../css/userProfile.css';
 
 
 const userProfileApp = angular.module('UserProfileApp', [ 'ngCookies', 'userProfileModule','NavbarApp']); 
-// 'ngMaterial',
 
 
 userProfileApp.controller('userProfileController', ['$scope', 'userProfileHttpMethods', function ($scope, userProfileHttpMethods) {

@@ -4,11 +4,15 @@ const rootDir = require('../root_dir');
 const homepageRouter = express.Router();
 
 const arrayToObjectReverse = arr => {
-	const obj = {};
-	arr.forEach((element,i) => {
-		obj[element] = i+1;
-	});
-	return obj;
+    return arr.reduce((curObj, element,i) => {
+        curObj[element] = i +1;
+        return curObj;
+    } ,{})
+	// const obj = {};
+	// arr.forEach((element,i) => {
+	// 	obj[element] = i+1;
+	// );
+	// return obj;
 }
 
 
@@ -19,7 +23,6 @@ homepageRouter.get('/',(req,res) => {
 
 
 homepageRouter.get('/getUserInfo', (req,res) => {
-    console.log("sending User Info");
     const objLiked = arrayToObjectReverse(req.user.likedProjects);
 	const objSupported = arrayToObjectReverse(req.user.supportedProjects);	
     const resObj = {
