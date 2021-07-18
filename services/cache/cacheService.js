@@ -29,7 +29,7 @@ cacheService.retrieveManyByKeys = keys => {
 }
 
 myCache.on("del",async (key,value) => {
-  // console.log('expired'); replace with logger so it will be known that cache is renewed
+  // console.log('expired'); replace with logger so it will be known that cache is renewed 
   const resToUpdate = await cacheHandler.requestCacheInfoSpecific(key);
   myCache.set(key,resToUpdate[0],10);
 });

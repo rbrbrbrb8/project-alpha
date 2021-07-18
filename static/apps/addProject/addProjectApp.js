@@ -16,8 +16,15 @@ const AddProjectApp = angular.module('AddProjectApp', ['ngMaterial', 'ngMessages
 
 AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMethods', '$mdDialog', function ($scope, addProjectHttpMethods, $mdDialog) {
 	$scope.project = {};
-	$scope.rewards = [{}, {}];
+	$scope.rewards = [{}];
 	$scope.isNext = false;
+
+	$scope.$watchCollection('rewards',() => {
+		console.log('moving to bottom');
+		window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+	});
+
+
 	const verifyProjectDetails = project => {
 		const projInfoEntries = Object.entries(project);
 		console.log(project);
@@ -25,60 +32,52 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 			alert("need to fill the entire form");
 			return false;
 		}
-		const isNoData = projInfoEntries.find(element => !element[i]);
+		const isNoData = projInfoEntries.find(element => !element[1]);
 		if (isNoData) {
 			alert("need to fill the entire form");
 			return false;
 		}
-		// projInfoEntries.forEach(element => {
-		// 	if (!element[1]) {
-		// 		alert("need to fill the entire form");
-		// 		return false;
-		// 	}
-		// });
-		const amountEntry = projInfoEntries.find(element => element[0].includes("amount"));
-		if (isNaN(amountEntry[1])) {
+	
+		if (isNaN(project.amountToRaise)) {
 			alert("amount must be number");
 			return false;
 		}
-		let isValidBankDetails = true;
-		const bankDetailEntries = projInfoEntries.filter(element => element[0].includes("bank"));
-		bankDetailEntries.forEach((element, i) => {
-			const validator = new RegExp(`^[0-9]{${2 + i * i}}$`);
-			if (validator.test(element[1])) isValidBankDetails = false;
-		})
-		return true;
+		const bankDetailEntries = [project.bankID,project.bankBranchID,project.bankAccount];
+		const isBankDetailsNotValid = bankDetailEntries.find((detail,index) => !detail.match(`/^[0-9]{${2 + index * index}}$/`));
+		return isBankDetailsNotValid;
 	}
 
 	const verifyRewardsDetails = rewards => {
-		let isValid = true;
 		if (rewards.length === 0) {
 			alert("need to include at least 1 reward/donation option");
 			return false;
 		}
-		rewards.forEach(reward => {
-			const rewardInfoEntries = Object.entries(reward);
+		const isOneInvalid = rewards.find(reward => !checkSingleReward(reward));
+		return isOneInvalid;
+	}
+
+	const checkSingleReward = reward => {
+		const rewardInfoEntries = Object.entries(reward);
 			if (rewardInfoEntries.length < 3) {
 				alert("need to fill all reward details");
-				isValid = false;
-			}
-			rewardInfoEntries.forEach(element => {
-				if (!element[1]) {
-					alert("need to fill all reward details");
-					isValid = false;
-				}
-			});
-			const donationEntry = rewardInfoEntries.find(element => element[0].includes("donation"));
-			if (donationEntry) {
-				if (isNaN(donationEntry[1])) {
-					alert("donation must be number");
-					isValid = false;
-				}
+				return false;
 			}
 
-		});
-		return isValid;
+			const isEmptyRewardDetails = rewardInfoEntries.find(rewardDetail => !rewardDetail[1]);
+			if (isEmptyRewardDetails) {
+				alert("need to fill all reward details");
+				return false;
+			}
+
+			if (reward.donationAmount) {
+				if (isNaN(reward.donationAmount)) {
+					alert("donation must be number");
+					return false;
+				}
+			}
+		return true;
 	}
+	
 	$scope.verifyAndSend = () => {
 		const isValidProject = verifyProjectDetails($scope.project);
 		const isValidRewards = verifyRewardsDetails($scope.rewards);
@@ -90,7 +89,6 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 				console.log(res.data);
 				$scope.showSuccessSaveDialog();
 			});
-			// addProjectHttpMethods.requestUpdateUserStartedProjects();
 		}
 	}
 	$scope.showSuccessSaveDialog = () => {
@@ -107,14 +105,14 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 			window.location.href = '/homepage';
 		});
 	}
-	$scope.printRewards = () => {
-		console.log($scope.rewards);
-	}
 	$scope.switchPage = () => {
 		$scope.isNext = !$scope.isNext;
 	}
 	$scope.addDonationOption = () => {
 		$scope.rewards.push({});
+		const btn = document.getElementById('addRewardButton');
+		console.log(btn);
+
 	}
 	$scope.removeDonationOption = reward => {
 		$scope.rewards = $scope.rewards.filter(value => value !== reward)

@@ -140,12 +140,7 @@ viewProjectApp.controller('DialogController', ['$scope', '$mdDialog', 'projectDe
 		console.log(currentReward);
 		$mdDialog.cancel();
 	};
-
-
-	$scope.closeModal = () => {
-
-	}
-
+``
 	$scope.changeAnim = () => {
 		$scope.afterSec = true;
 		console.log('switching message');
@@ -163,25 +158,10 @@ viewProjectApp.controller('DialogController', ['$scope', '$mdDialog', 'projectDe
 			$scope.isRequestCompleted = false;
 			viewProjectHttpMethods.addDonationToProject(projectDetails.currentViewedProject._id, projectDetails.currentReward.donationAmount).then(async res => {
 				$scope.isRequestCompleted = true;
-				// console.log(res.data);
 				await $timeout($scope.changeAnim, 930);
-				console.log("hiding dialog");
 				$timeout($mdDialog.hide,1000);
 			});
 		}
 	}
 
 }]);
-
-// viewProjectApp.directive('navbar', [function () {
-// 	return {
-// 		restrict: 'E',
-// 		scope: {}, //add user info to scope so the navbar can load username and profile pic
-// 		controller: function ($scope) {
-
-// 		},
-// 		templateUrl: '../views/navbar.html'
-
-
-// 	}
-// }]);

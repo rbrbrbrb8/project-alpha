@@ -26,44 +26,17 @@ homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMet
 	$scope.projects = [];
 	$scope.userInfo = {};
 	const promiseUserInfo = homepageHttpMethods.getUserInfo()
-	.then(res => { //prev was getUserInfo function
+	.then(res => { 
 		console.log('getUserInfo');
-		//console.log(res.data);
-		//window.localStorage.setItem('UserInfo',JSON.stringify(res.data));
 		return res.data;
 	});
-	const promiseGetProjects = homepageHttpMethods.getFirstProjects().then(res=>{ //prev was getProjects function
+	const promiseGetProjects = homepageHttpMethods.getFirstProjects().then(res=>{
 		console.log('getProjects');
 		return res.data.firstProjects;
 	});
 
 	$scope.changeClass = project => {
 		project.isLiked = !project.isLiked;
-	}
-
-	$scope.sortIsLiked = () => {
-		$scope.projects.forEach(project => {
-			project.isLiked = $scope.userInfo.likedProjects[project._id] ? true : false;
-		});
-	}
-
-	$scope.sortIsSupported = () => {
-		$scope.projects.forEach(project => {
-			console.log(project.title," is ", $scope.userInfo.supportedProjects[project._id]);
-			project.isSupported = $scope.userInfo.supportedProjects[project._id] ? true : false;
-		});
-		// console.log($scope.projects);
-	}
-
-	$scope.sortProgress = () => {
-		$scope.projects.forEach(project => {
-			project.percentage = Math.round((project.amountAlreadyRaised/project.amountToRaise)*100);
-			console.log(project.percentage);
-			project.progressBarStyle = {
-				'width' : `${project.percentage}%`
-			};
-		});
-		// console.log($scope.projects);
 	}
 
 	const isLikedByUser = (userInfo,project) => userInfo.likedProjects[project._id];
@@ -89,9 +62,6 @@ homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMet
 			$scope.projects = fixProjects;
 			console.log($scope.projects);
 		}); 
-		// console.log(resultPromises);
-		
-		// $scope.$apply();
 	};
 
 
