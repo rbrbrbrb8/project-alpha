@@ -1,3 +1,5 @@
+
+require('regenerator-runtime/runtime');
 import '../../vendors/angular.min.js';
 import '../../vendors/angular-material.min.js';
 import '../../vendors/angular-animate.min.js';
@@ -102,19 +104,17 @@ viewProjectApp.controller('DialogController', ['$scope', '$mdDialog', 'projectDe
 		const dateTester = new RegExp('^[\d]{2}\/[\d]{4}');
 		const CVVtester = new RegExp('^[0-9]{3}$');
 
-		let isNotEmpty = true;
-
 		if (paymentInfoEntries.length < 4) {
 			alert("need to fill the entire form");
 			return false;
 		}
-		paymentInfoEntries.forEach((element, i) => {
-			if (!element[1]) {
-				console.log("wrong");
-				isNotEmpty = false;
-			}
-		});
-		if(!isNotEmpty) return false;
+
+		const isOneEmpty = paymentInfoEntries.find(entry => !entry[1]);
+		if(isOneEmpty){ 
+			alert('need to fill out everything');
+			return false;
+
+		}
 
 		if(nameTester.test(paymentDetails.cardholderName)) {
 			console.log('failed name');

@@ -30,19 +30,12 @@ module.exports = {
         use: [{
             loader: 'file-loader',
             options: {
-            // name: '[name].[ext]',
-            // outputPath: '../fonts/',  
-            // publicPath: '../static/fonts' 
             }
         }]
       },{
         test: /\.js$/,
-        // exclude: /(node_modules|bower_components)/,
         use: {
             loader:'babel-loader',
-            options:{
-              presets:['@babel/preset-env']
-            }
           }
         
       }
