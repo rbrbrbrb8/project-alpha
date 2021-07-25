@@ -8,6 +8,7 @@ projectApiRouter.get('/firstProjects', async (req, res) => {
   try {
     console.log("caught request");
     const firstProjects = projectApiHandler.requestFirstProjectsFromCache();
+    console.log(firstProjects);
     if (firstProjects) res.send(firstProjects);
     else res.send(false);
   } catch (error) {

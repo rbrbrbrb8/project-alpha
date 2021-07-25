@@ -1,19 +1,20 @@
 <div class="navbar-container">
-  <div class="image-div">
+  <div class="image-div" ng-click="moveToMyUser()">
     <img class="user-image" alt="user_img" ng-src="../images/redhot.jpg">
-  </div>
-  <a class="navbar-button-profile navbar-button-general">my profile</a>
-  <a href="/homepage" class="navbar-button-search navbar-button-general">home</a>
-  <div class="dropdown-projects">
-    
-    <button class="dropdown-button">projects</button>
-    <div class="abosoluteDiv">
-      <ul class="dropdown-projects-content">
-        <li><a ng-click="moveToMyProjects()">my projects</a></li>
-        <li><a ng-click="moveToLikedProjects()">liked projects</a></li>
-        <li><a ng-click="moveToSupportedProjects()">my investments</a></li>
-      </ul>
+  </div><!--
+  --><div class="wrap brdr" ng-click="moveToMyUser()"><a class="navbar-button-profile navbar-button-general">my profile</a></div><!--
+  --><div class="wrap brdr"><a href="/homepage" class="navbar-button-search navbar-button-general">home</a></div><!--
+  --><div class="wrap brdr">
+      <div class="dropdown-projects">
+        <button class="dropdown-button ">projects</button>
+        <div class="abosoluteDiv">
+          <ul class="dropdown-projects-content">
+            <li><a ng-click="moveToMyProjects()">my projects</a></li>
+            <li><a ng-click="moveToLikedProjects()">liked projects</a></li>
+            <li><a ng-click="moveToSupportedProjects()">my investments</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
   <a class="navbar-button-create navbar-button-general" href="/addproject">add project</a>
 </div>

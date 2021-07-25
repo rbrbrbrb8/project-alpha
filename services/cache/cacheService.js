@@ -1,5 +1,7 @@
 const cacheHandler = require('../../handlers/cache/cacheHandler');
 const NodeCache = require('node-cache');
+const { async } = require('regenerator-runtime');
+const Async = require('async');
 const myCache = new NodeCache({checkperiod:10});
 const cacheService = {};
 
@@ -24,8 +26,20 @@ cacheService.retrieveOneByKey = key => {
 }
 cacheService.retrieveManyByKeys = keys => {
   const value = myCache.mget(keys);
-  console.log("cache values: ",value);
+  // const value = await checkGetManyFromCache(keys);
+  // console.log("cache values: ",value);
   return value;
+}
+ 
+const test = async keys => {
+  const value = myCache.mget(keys);
+  if(Object.values(value).length === 0) throw new Error('no info in cache');
+  else return value;
+}
+const checkGetManyFromCache = keys => {
+  Async.retry({times:5,interval:1000},test,(err,res) => {
+    console.log('attempt');
+  });
 }
 
 myCache.on("del",async (key,value) => {
