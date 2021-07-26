@@ -2,21 +2,19 @@ const { Router } = require('express');
 const express = require('express');
 const rootDir = require('../root_dir');
 const homepageRouter = express.Router();
+const logger = require('../handlers/logger/loggerHandler');
+
 
 const arrayToObjectReverse = arr => {
     return arr.reduce((curObj, element,i) => {
         curObj[element] = i +1;
         return curObj;
     } ,{})
-	// const obj = {};
-	// arr.forEach((element,i) => {
-	// 	obj[element] = i+1;
-	// );
-	// return obj;
 }
 
 
 homepageRouter.get('/',(req,res) => { 
+    logger.info(`user ${req.user.username} entered homepage`);
     res.sendFile('/pages/homepage.html',{root:rootDir});
     
 });

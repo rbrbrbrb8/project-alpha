@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 const dbHandler = {};
+const logger = require('../logger/loggerHandler');
 
 mongoose.connect('mongodb+srv://rbrbrbrb8:rbpromongorb23@clusterproject.pzpyd.mongodb.net/ProjectDatabase?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', async () => {
-  console.log('were connected');
+  logger.info('formed new connection to db');
 });
 
 
@@ -16,29 +17,27 @@ function getModel(model) {
 }
 
 dbHandler.addDocumentToDb = async (modelName, document) => {
-  // console.log(document);
   const Model = getModel(modelName);
   const newDoc = new Model(document);
   const docId = newDoc._id;
   try {
     await newDoc.save();
-    console.log("saved successfully to db");
+    logger.info('saved new document to db of type ' + modelName);
     return docId;
   } catch (error) {
-    console.log(error);
+    logger.error(`error in adding document to db of type ${modelName}: `, error);
     return false;
   }
 }
 
 dbHandler.deleteDocumentInCollection = async (modelName, document) => {
-  console.log(document);
   const Model = getModel(modelName);
   try {
     await Model.deleteOne(document)
-    console.log("deleted successfully from db");
+    logger.info(`deleted document from db of type ${modelName}`);
     return true;
   } catch (error) {
-    console.log(error);
+    logger.error(`error in deleting document from db of type ${modelName}: `,error);
     return false;
   }
 }
@@ -47,38 +46,37 @@ dbHandler.findManyDocumentsByProperty = async (modelName, propety, limit) => {
   const Model = getModel(modelName);
   try {
     const doc = await Model.find(propety).limit(limit);
-    // console.log("found documents with limit: " + doc);
+    logger.info('pulled documents from database of type: ' + modelName);
     return doc;
-  } catch (err) {
-    console.log("couldn't find anything");
-    return err;
+  } catch (error) {
+    logger.error(`couldn't find single document of ${modelName} in database, error: ${error}`);
+    return error;
   }
 }
 
 dbHandler.findOneDocumentById = async (modelName, id, properties) => {
   const Model = getModel(modelName);
   try {
-    const doc = await Model.findById(id, properties).catch((err) => console.log(err));
+    const doc = await Model.findById(id, properties).catch((err) => logger.error(`couldn't find   `));
     if (!doc) return {found: false}
     const docFixed = doc['_doc'];
-    console.log("found doc: " + doc);
+    logger.info("pulled single document from database of type: " + modelName);
     return docFixed;
-  } catch (err) {
-    console.log("couldn't find single document", err);
-    return err;
+  } catch (error) {
+    logger.error(`couldn't find single document of ${modelName} in database, error: ${error}`);
+    return error;
   }
 }
 
 dbHandler.updateDocumentInCollection = async (modelName, filter, update) => { //update must be an object
   const Model = getModel(modelName);
   try {
-    console.log(filter);
     const doc = await Model.findOneAndUpdate(filter,update,{useFindAndModify:false});
-    console.log(doc);
+    logger.info(`updated document of type ${modelName}`);
     return true;
-  } catch (err) {
-    console.log("couldn't update single document", err);
-    return err;
+  } catch (error) {
+    logger.error(`couldn't update document of type ${modelName}: `, error);
+    return error;
   }
 }
 
@@ -87,11 +85,11 @@ dbHandler.findOneDocumentByProperty = async (modelName, propety) => {
   try {
     const doc = await Model.findOne(propety);
     const docFixed = doc['_doc'];
-    console.log("found doc: " + doc);
+    logger.info(`pulled one document from db of type ${modelName}`);
     return docFixed;
-  } catch (err) {
-    console.log("couldn't find single document", err);
-    return err;
+  } catch (error) {
+    logger.error(`couldn't pull single document from db of type ${modelName}: `, error);
+    return error;
   }
 }
 
@@ -99,13 +97,12 @@ dbHandler.findPropertyOfAllDocumentsInCollection = async (modelName, property, f
   const Model = getModel(modelName);
   try {
     const propertyArr = await Model.find(filter, property);
-    // console.log("filter= " + filter);
-    // console.log(propertyArr);
+    logger.info(`pulled property ${property} from documents of type ${modelName} in db`);
     return propertyArr;
 
   }
-  catch (err) {
-    console.log(err);
+  catch (error) {
+    logger.error(`couldn't pull property ${property} from documents of type ${modelName} in db: `, error);
     return false;
   }
 }

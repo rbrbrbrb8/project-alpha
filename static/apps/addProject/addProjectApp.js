@@ -10,16 +10,23 @@ import './addProjectModule.js';
 import '../navbar/navbar.js';
 import '../../vendors/angular-material.min.css';
 import '../../css/navbar.css';
-
+import Dropzone from 'dropzone';
+import "dropzone/dist/dropzone.css";
+import '../../vendors/fontawesome/css/fontawesome.min.css';
+import '../../vendors/fontawesome/css/regular.css';
+import '../../vendors/fontawesome/css/solid.css';
 
 const AddProjectApp = angular.module('AddProjectApp', ['ngMaterial', 'ngMessages', 'addProjectModule', 'NavbarApp']);
+
+
 
 AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMethods', '$mdDialog', function ($scope, addProjectHttpMethods, $mdDialog) {
 	$scope.project = {};
 	$scope.rewards = [{}];
 	$scope.isNext = false;
+	
 
-	$scope.$watchCollection('rewards',() => {
+	$scope.$watchCollection('rewards', () => {
 		console.log('moving to bottom');
 		window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
 	});
@@ -37,13 +44,13 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 			alert("need to fill the entire form");
 			return false;
 		}
-	
+
 		if (isNaN(project.amountToRaise)) {
 			alert("amount must be number");
 			return false;
 		}
-		const bankDetailEntries = [project.bankID,project.bankBranchID,project.bankAccount];
-		const isBankDetailsNotValid = bankDetailEntries.find((detail,index) => !detail.match(`/^[0-9]{${2 + index * index}}$/`));
+		const bankDetailEntries = [project.bankID, project.bankBranchID, project.bankAccount];
+		const isBankDetailsNotValid = bankDetailEntries.find((detail, index) => !detail.match(`/^[0-9]{${2 + index * index}}$/`));
 		return isBankDetailsNotValid;
 	}
 
@@ -58,26 +65,26 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 
 	const checkSingleReward = reward => {
 		const rewardInfoEntries = Object.entries(reward);
-			if (rewardInfoEntries.length < 3) {
-				alert("need to fill all reward details");
+		if (rewardInfoEntries.length < 3) {
+			alert("need to fill all reward details");
+			return false;
+		}
+
+		const isEmptyRewardDetails = rewardInfoEntries.find(rewardDetail => !rewardDetail[1]);
+		if (isEmptyRewardDetails) {
+			alert("need to fill all reward details");
+			return false;
+		}
+
+		if (reward.donationAmount) {
+			if (isNaN(reward.donationAmount)) {
+				alert("donation must be number");
 				return false;
 			}
-
-			const isEmptyRewardDetails = rewardInfoEntries.find(rewardDetail => !rewardDetail[1]);
-			if (isEmptyRewardDetails) {
-				alert("need to fill all reward details");
-				return false;
-			}
-
-			if (reward.donationAmount) {
-				if (isNaN(reward.donationAmount)) {
-					alert("donation must be number");
-					return false;
-				}
-			}
+		}
 		return true;
 	}
-	
+
 	$scope.verifyAndSend = () => {
 		const isValidProject = verifyProjectDetails($scope.project);
 		const isValidRewards = verifyRewardsDetails($scope.rewards);
@@ -117,6 +124,7 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 	$scope.removeDonationOption = reward => {
 		$scope.rewards = $scope.rewards.filter(value => value !== reward)
 	}
+
 }]);
 
 

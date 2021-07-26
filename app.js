@@ -7,6 +7,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('express-flash');
+const logger = require('./handlers/logger/loggerHandler');
 // const cookieParser = require('cookie-parser'); //see stack overflow for this
 
 const MongoStore = require('connect-mongo').default;
@@ -40,7 +41,7 @@ const cacheService = require('./services/cache/cacheService');
 
 
 app.listen(port, () => {
-  console.log(`app listening at http://localhost:${port}`);
+  logger.warn(`started app server at http://localhost:${port}`);
 });
 
 

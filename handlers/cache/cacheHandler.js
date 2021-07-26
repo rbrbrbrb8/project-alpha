@@ -1,4 +1,5 @@
 const dbHandler = require('../db/dbHandler');
+const logger = require('../logger/loggerHandler');
 let cacheHandler = {};
 cacheHandler.init = () => {};
 
@@ -8,7 +9,7 @@ cacheHandler.requestCacheInfo = () => {
   try {
     return Promise.all([projectIdList,firstDisplayProjects]); 
   } catch (error) {
-    console.log('Couldnt get info from database in cacheHandler');
+    logger.error(`Couldn't get info from database in cacheHandler: `, error);
     return false;
   }
 }
@@ -20,7 +21,7 @@ cacheHandler.requestCacheInfoSpecific = key => {
   try {
     return Promise.all([promiseObj.promise]); 
   } catch (error) {
-    console.log('Couldnt get info from database in cacheHandler');
+    logger.error(`Couldnt get info from database in cacheHandler: `, error);
     return false;
   }
 }
