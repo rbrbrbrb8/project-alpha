@@ -18,6 +18,39 @@ body {
   color: lightskyblue;
 }
 
+.preview-container{
+  display: flex;
+}
+
+.dz-progress{
+  display: none !important;
+}
+
+.dz-remove{
+  text-decoration: none;
+  color: white;
+  background-color: lightskyblue;
+  border-radius: 4px;
+  margin-top:4px;
+}
+.dz-remove:hover{
+  text-decoration: none !important;
+}
+
+.dz-filename:hover{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+.icon-div{
+  cursor: pointer !important;
+}
+
+.upload-icon{
+  cursor: pointer !important;
+}
 
 .create-project-form-container{
   margin: 50px;

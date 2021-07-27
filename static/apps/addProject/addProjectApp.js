@@ -16,6 +16,10 @@ import '../../vendors/fontawesome/css/fontawesome.min.css';
 import '../../vendors/fontawesome/css/regular.css';
 import '../../vendors/fontawesome/css/solid.css';
 
+
+
+
+
 const AddProjectApp = angular.module('AddProjectApp', ['ngMaterial', 'ngMessages', 'addProjectModule', 'NavbarApp']);
 
 
@@ -24,7 +28,22 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 	$scope.project = {};
 	$scope.rewards = [{}];
 	$scope.isNext = false;
-	
+	Dropzone.autoDiscover = false;
+	const dzOptions = {
+		maxFiles: 1,
+		acceptedFiles: 'image/*',
+		autoProcessQueue: false,
+		url: '/api/image',
+		addRemoveLinks:true,
+		clickable: ['div#icon-container', 'div#my-awesome-dropzone'],
+		// previewTemplate: document.querySelector('#preview-container').innerHTML,	
+		"error": function (file, message, xhr) {
+			this.removeFile(file);
+			alert(message);
+		}
+	}
+	const myDropzone = new Dropzone("div#my-awesome-dropzone", dzOptions);
+
 
 	$scope.$watchCollection('rewards', () => {
 		console.log('moving to bottom');
