@@ -37,7 +37,7 @@ const userInfoApiRouter = require('./routes/api/userInfoApi');
 const cacheService = require('./services/cache/cacheService');
 
 
-
+cacheService.initCache();
 
 
 app.listen(port, () => {

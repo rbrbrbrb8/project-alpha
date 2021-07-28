@@ -43,7 +43,9 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 		}
 	}
 	const myDropzone = new Dropzone("div#my-awesome-dropzone", dzOptions);
-
+	myDropzone.on('thumbnail',(file,dataURL) => {
+		$scope.project.thumbnail = dataURL;
+	});
 
 	$scope.$watchCollection('rewards', () => {
 		console.log('moving to bottom');
@@ -72,6 +74,7 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 		const isBankDetailsNotValid = bankDetailEntries.find((detail, index) => !detail.match(`/^[0-9]{${2 + index * index}}$/`));
 		return isBankDetailsNotValid;
 	}
+	
 
 	const verifyRewardsDetails = rewards => {
 		if (rewards.length === 0) {
@@ -79,7 +82,7 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 			return false;
 		}
 		const isOneInvalid = rewards.find(reward => !checkSingleReward(reward));
-		return isOneInvalid;
+		return !isOneInvalid;
 	}
 
 	const checkSingleReward = reward => {
@@ -111,6 +114,7 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 		console.log("project: " + isValidProject);
 		if (isValidProject && isValidRewards) {
 			$scope.project.rewards = $scope.rewards;
+			console.log($scope.project.thumbnail);
 			addProjectHttpMethods.requestAddProject($scope.project).then(res => {
 				console.log(res.data);
 				$scope.showSuccessSaveDialog();
