@@ -28,6 +28,7 @@ userProfileApp.controller('userProfileController', ['$scope', 'userProfileHttpMe
 	console.log(query);
 	userProfileHttpMethods.requestUserProjects(query).then(res => {
 		console.log(res.data);
+		$scope.projectsStarted = res.data[0].length;
 		$scope.projects = res.data[1];
 		$scope.totalMoneyRaised = $scope.projects.reduce((total,project) => total + project.amountAlreadyRaised,0);
 	});

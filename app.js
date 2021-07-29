@@ -74,7 +74,7 @@ app.post('/',
   }),
   loginRouter);
 app.get('/', loginRouter);
-app.use('/homepage', homepageRouter);  ///ADD CHECK AUTHENTICATED
+app.use('/homepage',checkAuthenticated,homepageRouter);  ///ADD CHECK AUTHENTICATED
 app.use('/api/project',  projectApiRouter);
 app.use('/api/allprojects', allProjectsApiRouter);
 app.use('/addproject', addProjectRouter);

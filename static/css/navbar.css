@@ -29,6 +29,7 @@
     list-style-type: none;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    position: relative;
 }
 ul.dropdown-projects-content{
     padding: 0;
@@ -45,6 +46,8 @@ ul.dropdown-projects-content{
 
 .dropdown-projects-content li {
     background: #243b55;
+    z-index: 80;
+    overflow: visible;
 }
 
 .dropdown-projects-content a:hover{

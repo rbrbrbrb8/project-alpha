@@ -13,6 +13,10 @@ navbarApp.controller('NavbarController', ['$scope', function ($scope) {
   $scope.moveToLikedProjects = () => {
     
   }
+
+  $scope.moveToMyUser = Uid => {
+		window.location.href = `/userProfile?creatorUserID=${Uid}`
+	}
 }]);
 
 navbarApp.directive('navbar', [function () {
