@@ -10,16 +10,46 @@ import './addProjectModule.js';
 import '../navbar/navbar.js';
 import '../../vendors/angular-material.min.css';
 import '../../css/navbar.css';
+import Dropzone from 'dropzone';
+import "dropzone/dist/dropzone.css";
+import '../../vendors/fontawesome/css/fontawesome.min.css';
+import '../../vendors/fontawesome/css/regular.css';
+import '../../vendors/fontawesome/css/solid.css';
+
+
+
 
 
 const AddProjectApp = angular.module('AddProjectApp', ['ngMaterial', 'ngMessages', 'addProjectModule', 'NavbarApp']);
+
+
 
 AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMethods', '$mdDialog', function ($scope, addProjectHttpMethods, $mdDialog) {
 	$scope.project = {};
 	$scope.rewards = [{}];
 	$scope.isNext = false;
+	Dropzone.autoDiscover = false;
+	const dzOptions = {
+		maxFiles: 1,
+		acceptedFiles: 'image/*',
+		autoProcessQueue: false,
+		url: '/api/image',
+		addRemoveLinks:true,
+		clickable: ['div#icon-container', 'div#my-awesome-dropzone'],
+		// previewTemplate: document.querySelector('#preview-container').innerHTML,	
+		"error": function (file, message, xhr) {
+			this.removeFile(file);
+			alert(message);
+		}
+	}
+	const myDropzone = new Dropzone("div#my-awesome-dropzone", dzOptions);
+	myDropzone.on('thumbnail',(file,dataURL) => {
+		console.log(file);
+		$scope.file = file;
+	
+	});
 
-	$scope.$watchCollection('rewards',() => {
+	$scope.$watchCollection('rewards', () => {
 		console.log('moving to bottom');
 		window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
 	});
@@ -37,15 +67,16 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 			alert("need to fill the entire form");
 			return false;
 		}
-	
+
 		if (isNaN(project.amountToRaise)) {
 			alert("amount must be number");
 			return false;
 		}
-		const bankDetailEntries = [project.bankID,project.bankBranchID,project.bankAccount];
-		const isBankDetailsNotValid = bankDetailEntries.find((detail,index) => !detail.match(`/^[0-9]{${2 + index * index}}$/`));
+		const bankDetailEntries = [project.bankID, project.bankBranchID, project.bankAccount];
+		const isBankDetailsNotValid = bankDetailEntries.find((detail, index) => !detail.match(`/^[0-9]{${2 + index * index}}$/`));
 		return isBankDetailsNotValid;
 	}
+	
 
 	const verifyRewardsDetails = rewards => {
 		if (rewards.length === 0) {
@@ -53,38 +84,41 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 			return false;
 		}
 		const isOneInvalid = rewards.find(reward => !checkSingleReward(reward));
-		return isOneInvalid;
+		return !isOneInvalid;
 	}
 
 	const checkSingleReward = reward => {
 		const rewardInfoEntries = Object.entries(reward);
-			if (rewardInfoEntries.length < 3) {
-				alert("need to fill all reward details");
+		if (rewardInfoEntries.length < 3) {
+			alert("need to fill all reward details");
+			return false;
+		}
+
+		const isEmptyRewardDetails = rewardInfoEntries.find(rewardDetail => !rewardDetail[1]);
+		if (isEmptyRewardDetails) {
+			alert("need to fill all reward details");
+			return false;
+		}
+
+		if (reward.donationAmount) {
+			if (isNaN(reward.donationAmount)) {
+				alert("donation must be number");
 				return false;
 			}
-
-			const isEmptyRewardDetails = rewardInfoEntries.find(rewardDetail => !rewardDetail[1]);
-			if (isEmptyRewardDetails) {
-				alert("need to fill all reward details");
-				return false;
-			}
-
-			if (reward.donationAmount) {
-				if (isNaN(reward.donationAmount)) {
-					alert("donation must be number");
-					return false;
-				}
-			}
+		}
 		return true;
 	}
-	
+
 	$scope.verifyAndSend = () => {
+		console.log($scope.file.dataURL);
 		const isValidProject = verifyProjectDetails($scope.project);
 		const isValidRewards = verifyRewardsDetails($scope.rewards);
 		console.log("rewards: " + isValidRewards);
 		console.log("project: " + isValidProject);
 		if (isValidProject && isValidRewards) {
 			$scope.project.rewards = $scope.rewards;
+			$scope.project.thumbnail = $scope.file.dataURL;
+			console.log($scope.project.thumbnail);
 			addProjectHttpMethods.requestAddProject($scope.project).then(res => {
 				console.log(res.data);
 				$scope.showSuccessSaveDialog();
@@ -117,6 +151,7 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 	$scope.removeDonationOption = reward => {
 		$scope.rewards = $scope.rewards.filter(value => value !== reward)
 	}
+
 }]);
 
 

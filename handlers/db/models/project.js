@@ -6,6 +6,7 @@ const projectSchema = new Schema({
   creatorUserName:{type:String,required:true},
   creationDate:{type:Object,default:new Date().toLocaleDateString("en-GB"),immutable:true},
   title:{type:String, required:true},
+  thumbnail:{type:String,required:false},
   amountToRaise:{type:Number,required:true},
   amountAlreadyRaised:{type:Number,required:false,default:0},
   category:{type:String,required:true},

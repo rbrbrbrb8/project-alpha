@@ -7,17 +7,15 @@ const cacheService = {};
 
 
 cacheService.initCache = async () => {
-  console.log('initing cache');
   try {
     const [idList,firstProjectsList] = await cacheHandler.requestCacheInfo();
-    myCache.mset([{key:'idList',val:idList,ttl:120,deleteOnExpire:false},{key:'firstProjects',val:firstProjectsList,ttl:5,deleteOnExpire:false}]);
-    
+    myCache.mset([{key:'idList',val:idList,ttl:120,deleteOnExpire:false},{key:'firstProjects',val:firstProjectsList,ttl:120,deleteOnExpire:false}]);
   } catch (error) {
     
   }
 }
 
-cacheService.initCache();
+
 
 cacheService.retrieveOneByKey = key => {
   const value = myCache.get(key);
@@ -42,10 +40,12 @@ const checkGetManyFromCache = keys => {
   });
 }
 
-myCache.on("del",async (key,value) => {
+myCache.on("del", async (key,value) => {
+  console.log('deleted cache')
   // console.log('expired'); replace with logger so it will be known that cache is renewed 
   const resToUpdate = await cacheHandler.requestCacheInfoSpecific(key);
-  myCache.set(key,resToUpdate[0],10);
+  console.log('updated cache')
+  return myCache.set(key,resToUpdate[0],10);
 });
 
 

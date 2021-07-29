@@ -7,6 +7,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('express-flash');
+const logger = require('./handlers/logger/loggerHandler');
 // const cookieParser = require('cookie-parser'); //see stack overflow for this
 
 const MongoStore = require('connect-mongo').default;
@@ -36,11 +37,11 @@ const userInfoApiRouter = require('./routes/api/userInfoApi');
 const cacheService = require('./services/cache/cacheService');
 
 
-
+cacheService.initCache();
 
 
 app.listen(port, () => {
-  console.log(`app listening at http://localhost:${port}`);
+  logger.warn(`started app server at http://localhost:${port}`);
 });
 
 
@@ -48,8 +49,8 @@ app.listen(port, () => {
 
 app.use(express.static('static'));
 //init parsers
-app.use(express.json());
-app.use(express.urlencoded({ extended: false}));
+app.use(express.json({limit:'50mb'}));
+app.use(express.urlencoded({ limit:'50mb',extended: false}));
 
 //setting up session
 app.use(session({

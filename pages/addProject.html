@@ -25,13 +25,22 @@
   <div class="header-div">
     <h1 class="main-header">Add Project</h1>
   </div>
+  <md-content ng-show="!isNext">
+    <div class="dz-container">
+      <div class="dz dropzone" id="my-awesome-dropzone">
+        <div class="icon-div" flex="100" layout="row" layout-align="center center" id="icon-container">
+          <i class="fas fa-upload fa-5x upload-icon"></i>
+        </div>
+      </div>
+    </div>
+  </md-content>
   <form name="projectForm" class="create-project-form" ng-submit="verifyAndSend()">
     <div layout="column" ng-cloak="" class="md-inline-form inputdemoBasicUsage create-project-form-container"
       ng-if="!isNext">
       <md-content layout-padding="">
         <!--  md-theme="docs-dark" -->
         <div layout-padding="">
-          <h3 class="form-subheader">Project Details</h3>
+          <h3 class="form-subheader" ng-click="check()">Project Details</h3>
         </div>
         <md-content layout-gt-sm="row">
           <div flex="100" layout-gt-sm="row">
@@ -108,7 +117,7 @@
         <div>
           <md-button ng-click="switchPage()">Next</md-button>
         </div>
-
+      </md-content>
 
     </div>
 
@@ -155,7 +164,7 @@
             <md-button type="button" ng-click="switchPage()">Prev</md-button>
           </div>
           <div class="moving-button-div" id="addRewardButton">
-            <md-button  type="button" ng-click="addDonationOption()">Add Donation Option</md-button>
+            <md-button type="button" ng-click="addDonationOption()">Add Donation Option</md-button>
           </div>
           <div class="moving-button-div">
             <md-button type="submit" ng-click="printRewards()">Next</md-button>
