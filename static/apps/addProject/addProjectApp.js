@@ -44,7 +44,9 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 	}
 	const myDropzone = new Dropzone("div#my-awesome-dropzone", dzOptions);
 	myDropzone.on('thumbnail',(file,dataURL) => {
-		$scope.project.thumbnail = dataURL;
+		console.log(file);
+		$scope.file = file;
+	
 	});
 
 	$scope.$watchCollection('rewards', () => {
@@ -108,12 +110,14 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 	}
 
 	$scope.verifyAndSend = () => {
+		console.log($scope.file.dataURL);
 		const isValidProject = verifyProjectDetails($scope.project);
 		const isValidRewards = verifyRewardsDetails($scope.rewards);
 		console.log("rewards: " + isValidRewards);
 		console.log("project: " + isValidProject);
 		if (isValidProject && isValidRewards) {
 			$scope.project.rewards = $scope.rewards;
+			$scope.project.thumbnail = $scope.file.dataURL;
 			console.log($scope.project.thumbnail);
 			addProjectHttpMethods.requestAddProject($scope.project).then(res => {
 				console.log(res.data);
