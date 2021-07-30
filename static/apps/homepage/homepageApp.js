@@ -60,10 +60,27 @@ homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMet
 				return newProject;
 			});
 			$scope.projects = fixProjects;
-			console.log($scope.projects);
+			$scope.getImages(fixProjects);
 		}); 
 	};
 
+	$scope.getImages = projects => {
+		projects.forEach(project => {
+			if(project.thumbnailID) homepageHttpMethods.getImage(project.thumbnailID)
+			.then(res => {
+				console.log(res.data);
+				project.thumbnail = res.data.dataURL;
+			})
+		});
+		$scope.projects = projects;
+	}
+
+	$scope.logThumbnail = project => {
+		console.log('thumbnail');
+		console.log(project.thumbnail);
+		console.log('thumbnailID');
+		console.log(project.thumbnailID);
+	}
 
 	$scope.moveToProfile = userId => {
 		console.log(userId);

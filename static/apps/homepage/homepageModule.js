@@ -29,6 +29,16 @@ function homepageHttpMethodsFunc($http) {
 		})
 	}
 
+	httpService.getImage = function(id){
+		return $http({
+			method: "GET",
+			url: `/api/image?_id=${id}`,
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+	}
+
 	httpService.getFirstProjects = function(){
 		return $http({
 			method: "GET",

@@ -48,7 +48,10 @@
         </md-card-header>
         <div ng-click="moveToProject(project)">
           <div class="project-image-div">
-            <img ng-src="{{project.thumbnail}}" class="md-card-image project-image" alt="image caption">
+            <div ng-if="project.thumbnail">
+              <img ng-src="{{project.thumbnail}}" class="md-card-image project-image"
+                alt="image caption">
+            </div>
           </div>
           <md-card-title>
             <md-card-title-text>
@@ -68,18 +71,18 @@
         </div>
         <md-card-actions layout="row" layout-align="start center">
           <md-button class="md-icon-button" aria-label="favorite">
-            <div ng-click="likeProject(project)"> 
+            <div ng-click="likeProject(project)">
               <i ng-class="{fas:project.isLiked}" class="far fa-heart fa-lg"></i>
             </div>
           </md-button>
           <md-button class="md-icon-button" aria-label="donate">
-            <div> 
+            <div ng-click="logThumbnail(project)">
               <i class="far fa-comment fa-lg"></i>
             </div>
           </md-button>
 
           <md-button class="md-icon-button" aria-label="donate">
-            <div> 
+            <div>
               <i ng-class="{fas:project.isSupported}" class="far fa-money-bill-alt fa-lg"></i>
             </div>
           </md-button>

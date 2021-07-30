@@ -30,6 +30,29 @@ dbHandler.addDocumentToDb = async (modelName, document) => {
   }
 }
 
+dbHandler.createDocumentAndReturn = (modelName, document) => {
+  const Model = getModel(modelName);
+  const newDoc = new Model(document);
+  return newDoc;
+}
+
+dbHandler.addCreatedDocumentToDb = async document => {
+  try {
+    await document.save();
+    console.log('saved created document to db');
+    return {
+      status:true
+    }
+  } catch {
+    logger.error(`error in adding created document to db  `, error);
+    return {
+      status:false,
+      err:error
+    };
+  }
+}
+
+
 dbHandler.deleteDocumentInCollection = async (modelName, document) => {
   const Model = getModel(modelName);
   try {
@@ -37,7 +60,7 @@ dbHandler.deleteDocumentInCollection = async (modelName, document) => {
     logger.info(`deleted document from db of type ${modelName}`);
     return true;
   } catch (error) {
-    logger.error(`error in deleting document from db of type ${modelName}: `,error);
+    logger.error(`error in deleting document from db of type ${modelName}: `, error);
     return false;
   }
 }
@@ -58,7 +81,7 @@ dbHandler.findOneDocumentById = async (modelName, id, properties) => {
   const Model = getModel(modelName);
   try {
     const doc = await Model.findById(id, properties).catch((err) => logger.error(`couldn't find   `));
-    if (!doc) return {found: false}
+    if (!doc) return { found: false }
     const docFixed = doc['_doc'];
     logger.info("pulled single document from database of type: " + modelName);
     return docFixed;
@@ -71,7 +94,7 @@ dbHandler.findOneDocumentById = async (modelName, id, properties) => {
 dbHandler.updateDocumentInCollection = async (modelName, filter, update) => { //update must be an object
   const Model = getModel(modelName);
   try {
-    const doc = await Model.findOneAndUpdate(filter,update,{useFindAndModify:false});
+    const doc = await Model.findOneAndUpdate(filter, update, { useFindAndModify: false });
     logger.info(`updated document of type ${modelName}`);
     return true;
   } catch (error) {
