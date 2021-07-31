@@ -1,3 +1,8 @@
+/* .html,body{
+    min-height: 100%;
+    overflow: auto;
+} */
+
 .profile-header-img-div {
     float: left;
     width: 7.5rem;
@@ -113,6 +118,7 @@ body {
 
 .project-image-div{
     width: 100%;
+    height: 682px;
     overflow: hidden;
     display: flex;
     justify-content: center;

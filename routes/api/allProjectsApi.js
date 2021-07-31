@@ -30,18 +30,15 @@ allProjectsApiRouter.get('/extended', async (req, res) => {
 	console.log('filter= ');
 	console.log(filter);
 	try {
-		const idListAndFirstProjectsArr = await allProjectsApiHandler.getFirstProjectsAndIdList(filter);
-		console.log(idListAndFirstProjectsArr);
-		res.send(idListAndFirstProjectsArr);
+		const projectsArr = await allProjectsApiHandler.getAmountOfProjects(filter,5);
+		console.log(projectsArr);
+		res.send(projectsArr);
 	}
 	catch (e) {
 		console.log("error in all projects api router");
 		res.send(e);
 	}
 });
-allProjectsApiRouter.post('/', (req, res) => {
-	console.log(req.body);
-})
 
 
 module.exports = allProjectsApiRouter;

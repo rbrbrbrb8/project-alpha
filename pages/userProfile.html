@@ -49,7 +49,7 @@
 				<md-card>
 					<div class="card-box tilebox-one"><i class="icon-layers float-right text-muted"></i>
 						<h6 class="text-muted text-uppercase mt-0">Projects Started</h6>
-						<h2 class="blue-text" data-plugin="counterup">{{projectsStarted}}</h2>
+						<h2 class="blue-text" data-plugin="counterup">{{projectsStarted.length}}</h2>
 					</div>
 				</md-card>
 			</div>
@@ -78,8 +78,9 @@
 	<div class="user-projects-header-div">
 		<h1 class="main-user-projects-header">User Projects</h1>
 	</div>
-	<div layout-wrap class="all-projects-container">
-		<div class="user-project-card-container" ng-repeat="project in projects" ng-click="seeProjectDate(project)">
+	<div layout-wrap class="all-projects-container" infinite-scroll="showMore(projectsStarted,lastProjectShownIndex)" infinite-scroll-disabled="loadingDocs || projects.length === projectsStarted"
+	 infinite-scroll-distance="1" infinite-scroll-parent="true" ng-init="initInfo()" >
+		<div class="user-project-card-container" ng-repeat="project in projects" ng-click="seeProjectDate(project)" >
 			<!--ng-repeat="project in projects"-->
 			<md-card class="project-card" ng-init="">
 				<md-card-header>
@@ -90,7 +91,7 @@
 					</md-card-header-text>
 				</md-card-header>
 				<div class="project-image-div">
-					<img ng-src="/images/profile-background.jpg" class="md-card-image project-image" alt="image caption">
+					<img ng-src="{{project.thumbnail}}" class="md-card-image project-image" alt="image caption">
 				</div>
 				</md-card-title>
 				<md-card-content>

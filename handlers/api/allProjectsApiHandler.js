@@ -23,6 +23,15 @@ projectApiHandler.getFirstProjectsAndIdList = filter => {
 	}
 }
 
+projectApiHandler.getIdList = filter => {
+	const projectIdList = dbHandler.findPropertyOfAllDocumentsInCollection('project', '_id', filter);
+	return projectIdList;
+}
+
+projectApiHandler.getAmountOfProjects = (filter,limit) => {
+	const displayProjects = dbHandler.findManyDocumentsByProperty('project',filter,limit);
+	return displayProjects;
+}
 
 
 

@@ -75,12 +75,6 @@ homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMet
 		$scope.projects = projects;
 	}
 
-	$scope.logThumbnail = project => {
-		console.log('thumbnail');
-		console.log(project.thumbnail);
-		console.log('thumbnailID');
-		console.log(project.thumbnailID);
-	}
 
 	$scope.moveToProfile = userId => {
 		console.log(userId);
