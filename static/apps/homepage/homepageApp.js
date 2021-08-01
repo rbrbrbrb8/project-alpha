@@ -65,13 +65,14 @@ homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMet
 	};
 
 	$scope.getImages = projects => {
-		projects.forEach(project => {
+		projects.forEach((project, i) => {
 			if(project.thumbnailID) homepageHttpMethods.getImage(project.thumbnailID)
 			.then(res => {
-				console.log(res.data);
+				console.log(i);
 				project.thumbnail = res.data.dataURL;
 			})
 		});
+		console.log('finish');
 		$scope.projects = projects;
 	}
 

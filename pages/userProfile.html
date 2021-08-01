@@ -78,8 +78,8 @@
 	<div class="user-projects-header-div">
 		<h1 class="main-user-projects-header">User Projects</h1>
 	</div>
-	<div layout-wrap class="all-projects-container" infinite-scroll="showMore(projectsStarted,lastProjectShownIndex)" infinite-scroll-disabled="loadingDocs || projects.length === projectsStarted"
-	 infinite-scroll-distance="1" infinite-scroll-parent="true" ng-init="initInfo()" >
+	<div ng-init="initInfo()" layout-wrap class="all-projects-container" infinite-scroll="showMore(projectsStarted,lastProjectShownIndex)" infinite-scroll-disabled="loadingDocs || projects.length === projectsStarted"
+	 infinite-scroll-distance="1" infinite-scroll-parent="true"  >
 		<div class="user-project-card-container" ng-repeat="project in projects" ng-click="seeProjectDate(project)" >
 			<!--ng-repeat="project in projects"-->
 			<md-card class="project-card" ng-init="">

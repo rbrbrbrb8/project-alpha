@@ -40,6 +40,7 @@ userProfileApp.controller('userProfileController', ['$scope', 'userProfileHttpMe
 
 	$scope.initInfo = () => {
 		userProfileHttpMethods.requestProjects(query).then(res => {
+			console.log('got request project response');
 			const projects = res.data;
 			$scope.projects = projects;
 			$scope.totalMoneyRaised = projects.reduce((total, project) => total + project.amountAlreadyRaised, 0);
@@ -65,10 +66,11 @@ userProfileApp.controller('userProfileController', ['$scope', 'userProfileHttpMe
 	});
 
 	$scope.showMore = (projectsIds,lastProjectsShownIndex) => {
-		console.log('requesting more projects...');
+		console.log(lastProjectsShownIndex);
 		$scope.loadingDocs = true;
-		const idsArr = projectsIds.slice(lastProjectsShownIndex+1,lastProjectsShownIndex+5);
-		const searchQuery = '?_id' + idsArr.toString();
+		const idsArr = projectsIds.slice(1,3);
+		console.log(idsArr);
+		const searchQuery = '?_id=' + idsArr.toString();
 		userProfileHttpMethods.requestProjects(searchQuery).then(res => {
 			console.log('requested more projects, heres the data: ');
 			console.log(res.data);
