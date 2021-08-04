@@ -2,6 +2,7 @@ const { Router } = require('express');
 const express = require('express');
 const rootDir = require('../../root_dir');
 const allProjectsApiHandler = require('../../handlers/api/allProjectsApiHandler');
+const { query } = require('../../handlers/logger/loggerHandler');
 const allProjectsApiRouter = express.Router();
 
 allProjectsApiRouter.get('/', async (req, res) => {
@@ -25,17 +26,18 @@ allProjectsApiRouter.post('/', (req, res) => {
 
 
 allProjectsApiRouter.get('/extended', async (req, res) => {
-	const filter = req.query;
+	const idCheck = req.query._id;
+	const filter = idCheck ? {_id:JSON.parse(idCheck)} : req.query; 
 	console.log(filter);
-	// try {
-	// 	const projectsArr = await allProjectsApiHandler.getAmountOfProjects(filter,5);
-	// 	console.log(projectsArr);
-	// 	res.send(projectsArr);
-	// }
-	// catch (e) {
-	// 	console.log("error in all projects api router");
-	// 	res.send(e);
-	// }
+	try {
+		const projectsArr = await allProjectsApiHandler.getAmountOfProjects(filter,5);
+		console.log(projectsArr);
+		res.send(projectsArr);
+	}
+	catch (e) {
+		console.log("error in all projects api router");
+		res.send(e);
+	}
 });
 
 
