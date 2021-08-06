@@ -29,7 +29,7 @@ userProfileApp.controller('userProfileController', ['$scope', 'userProfileHttpMe
 
 	$scope.getImages = projects => {
 		projects.forEach(project => {
-			if (project.thumbnailID) homepageHttpMethods.getImage(project.thumbnailID)
+			if (project.thumbnailID) userProfileHttpMethods.getImage(project.thumbnailID)
 				.then(res => {
 					console.log(res.data);
 					project.thumbnail = res.data.dataURL;
@@ -38,13 +38,18 @@ userProfileApp.controller('userProfileController', ['$scope', 'userProfileHttpMe
 		// $scope.projects = projects;
 	}
 
+	$scope.moveToProject = project => {
+		window.localStorage.setItem('currentViewedProject',JSON.stringify(project));
+		window.location.href = `/viewProject?_id=${project._id}`
+	}
+
 	$scope.initInfo = () => {
 		userProfileHttpMethods.requestProjects(query).then(res => {
 			console.log('got request project response');
 			const projects = res.data;
 			
 			$scope.totalMoneyRaised = projects.reduce((total, project) => total + project.amountAlreadyRaised, 0);
-			$scope.lastProjectShownIndex = 4;
+			$scope.lastProjectShownIndex = projects.length - 1;
 			$scope.getImages(projects);
 			$scope.projects = projects;
 		});
@@ -52,16 +57,6 @@ userProfileApp.controller('userProfileController', ['$scope', 'userProfileHttpMe
 			$scope.projectsStarted = res.data.map(projectId => projectId._id);
 		});
 	}
-
-	// userProfileHttpMethods.requestUserProjects(query).then(res => {
-	// 	console.log(res.data);
-	// 	$scope.projectsStarted = res.data[0];
-	// 	const projects = res.data[1];
-	// 	$scope.projects = projects;
-	// 	$scope.totalMoneyRaised = $scope.projects.reduce((total, project) => total + project.amountAlreadyRaised, 0);
-	// 	$scope.lastProjectShownIndex = 5;
-	// 	$scope.getImages(projects);
-	// });
 	userProfileHttpMethods.requestUserInfo(query).then(res => {
 		$scope.user = res.data;
 	});
@@ -74,11 +69,11 @@ userProfileApp.controller('userProfileController', ['$scope', 'userProfileHttpMe
 		const searchQuery = '?_id=' + JSON.stringify(idsArr);
 		userProfileHttpMethods.requestProjects(searchQuery).then(res => {
 			const newProjects = res.data;
+			$scope.getImages(newProjects);
 			$scope.projects = $scope.projects.concat(newProjects);
-			console.log($scope.projects);
-			// $scope.getImages(newProjects);
 			$scope.loadingDocs = false;
-			$scope.lastProjectShownIndex+=4;
+			$scope.lastProjectShownIndex+=newProjects.length;
+			console.log($scope.lastProjectShownIndex);
 		});
 	}
 

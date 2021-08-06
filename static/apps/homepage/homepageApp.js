@@ -17,20 +17,20 @@ import '../../vendors/fontawesome/css/solid.css';
 
 
 
-const homepageApp = angular.module('HomepageApp', ['ngMaterial','ngCookies','homepageModule','NavbarApp']);
+const homepageApp = angular.module('HomepageApp', ['ngMaterial', 'ngCookies', 'homepageModule', 'NavbarApp']);
 
 
 
-homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMethods','$rootScope','$q',function ($scope, $http,homepageHttpMethods,$rootScope,$q) {
+homepageApp.controller('HomepageController', ['$scope', '$http', 'homepageHttpMethods', '$rootScope', '$q', function ($scope, $http, homepageHttpMethods, $rootScope, $q) {
 
 	$scope.projects = [];
 	$scope.userInfo = {};
 	const promiseUserInfo = homepageHttpMethods.getUserInfo()
-	.then(res => { 
-		console.log('getUserInfo');
-		return res.data;
-	});
-	const promiseGetProjects = homepageHttpMethods.getFirstProjects().then(res=>{
+		.then(res => {
+			console.log('getUserInfo');
+			return res.data;
+		});
+	const promiseGetProjects = homepageHttpMethods.getFirstProjects().then(res => {
 		console.log('getProjects');
 		return res.data.firstProjects;
 	});
@@ -39,41 +39,41 @@ homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMet
 		project.isLiked = !project.isLiked;
 	}
 
-	const isLikedByUser = (userInfo,project) => userInfo.likedProjects[project._id];
+	const isLikedByUser = (userInfo, project) => userInfo.likedProjects[project._id];
 
-	const isSupportedByUser = (userInfo,project) => userInfo.likedProjects[project._id];
+	const isSupportedByUser = (userInfo, project) => userInfo.likedProjects[project._id];
 
-	const getPercentage = project =>  Math.round((project.amountAlreadyRaised/project.amountToRaise)*100);
+	const getPercentage = project => Math.round((project.amountAlreadyRaised / project.amountToRaise) * 100);
 
-	const setBarStyle = project => ({'width':`${project.percentage}%`});
+	const setBarStyle = project => ({ 'width': `${project.percentage}%` });
 
 	$scope.initInfo = () => {
-		 $q.all([promiseUserInfo,promiseGetProjects]).then(res => {
+		$q.all([promiseUserInfo, promiseGetProjects]).then(res => {
 			const [userInfo, projects] = res;
 			console.log(res);
 			const fixProjects = projects.map(project => {
-				const newProject = {...project};
+				const newProject = { ...project };
 				newProject.isLiked = isLikedByUser(userInfo, newProject);
 				newProject.isSupported = isSupportedByUser(userInfo, newProject);
 				newProject.percentage = getPercentage(newProject);
 				newProject.progressBarStyle = setBarStyle(newProject);
 				return newProject;
 			});
-			$scope.projects = fixProjects;
 			$scope.getImages(fixProjects);
-		}); 
+			$scope.projects = fixProjects;
+			$scope.lastProjectShownIndex = fixProjects.length - 1;
+
+		});
 	};
 
 	$scope.getImages = projects => {
-		projects.forEach((project, i) => {
-			if(project.thumbnailID) homepageHttpMethods.getImage(project.thumbnailID)
-			.then(res => {
-				console.log(i);
-				project.thumbnail = res.data.dataURL;
-			})
+		projects.forEach(project => {
+			if (project.thumbnailID) homepageHttpMethods.getImage(project.thumbnailID)
+				.then(res => {
+					console.log(res.data);
+					project.thumbnail = res.data.dataURL;
+				})
 		});
-		console.log('finish');
-		$scope.projects = projects;
 	}
 
 
@@ -84,21 +84,39 @@ homepageApp.controller('HomepageController', ['$scope', '$http','homepageHttpMet
 
 	$scope.moveToProject = project => {
 		console.log(project);
-		window.localStorage.setItem('currentViewedProject',JSON.stringify(project));
+		window.localStorage.setItem('currentViewedProject', JSON.stringify(project));
 		window.location.href = `/viewProject?_id=${project._id}`
 	}
 	$scope.likeProject = (project) => {
-		console.log("liking project: ",project._id);
+		console.log("liking project: ", project._id);
 
-		homepageHttpMethods.addLikeToProject(project._id,project.isLiked).then(res => {
+		homepageHttpMethods.addLikeToProject(project._id, project.isLiked).then(res => {
 			console.log(res.data);
 			project.isLiked = !project.isLiked;
 			$scope.userInfo.likedProjects[project._id] = !$scope.userInfo.likedProjects[project._id];
-			window.localStorage.setItem('UserInfo',JSON.stringify($scope.userInfo));
+			window.localStorage.setItem('UserInfo', JSON.stringify($scope.userInfo));
 			const test = JSON.parse(window.localStorage.getItem('UserInfo'));
 			console.log(test);
 		});
 
 	}
+
+	$scope.showMore = (projectsIds, lastProjectsShownIndex) => {
+		console.log(lastProjectsShownIndex);
+		$scope.loadingDocs = true;
+		const idsArr = projectsIds.slice(lastProjectsShownIndex + 1, lastProjectsShownIndex + 5);
+		console.log(idsArr);
+		const searchQuery = '?_id=' + JSON.stringify(idsArr);
+		homepageHttpMethods.requestProjects(searchQuery).then(res => {
+			const newProjects = res.data;
+			$scope.getImages(newProjects);
+			$scope.projects = $scope.projects.concat(newProjects);
+			console.log($scope.projects);
+			$scope.loadingDocs = false;
+			$scope.lastProjectShownIndex += newProjects.length - 1;
+		});
+	}
+
+
 }]);
 

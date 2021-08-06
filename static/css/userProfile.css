@@ -132,6 +132,7 @@ body {
     max-width: 800px;
     height: 950px;
     margin: 0 auto 20px auto;
+    cursor: pointer;
 }
 .project-description-container{
     height: 100px;
