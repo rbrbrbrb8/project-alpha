@@ -31,7 +31,7 @@
   <div class="header-div">
     <h1 class="main-header">Explore</h1>
   </div>
-  <div layout="row" layout-wrap class="all-projects-container" infinite-scroll="showMore(projectsStarted,lastProjectShownIndex)" infinite-scroll-disabled="loadingDocs || lastProjectShownIndex >= projectsStarted.length - 1"
+  <div layout="row" layout-wrap class="all-projects-container" infinite-scroll="showMore(projectsIds,lastProjectShownIndex)" infinite-scroll-disabled="loadingDocs || lastProjectShownIndex >= projectsStarted.length - 1"
     infinite-scroll-distance="1" infinite-scroll-parent="true"  >
     <div flex="50" flex-gt-sm="33" flex-gt-md="25" ng-repeat="project in projects" class="project-card-container">
       <md-card class="project-card" ng-init="">

@@ -79,8 +79,11 @@ projectApiHandler.requestFirstProjectsFromCache = () => {
 
 projectApiHandler.requestItemFromCache = key => {
   const item = cacheService.retrieveOneByKey(key);
-  if(!Object.keys(item).length){
-    
+  console.log(key,item);
+  if(!item){
+    console.log('item in cache is empty, sending from db');
+    const itemFromDb = cacheService.requestFromDbByKey(key);
+    return itemFromDb;
   }
   return item;
 }

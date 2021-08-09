@@ -20,7 +20,8 @@ projectApiRouter.get('/firstProjects', async (req, res) => {
 
 projectApiRouter.get('/cache',async (req,res) => {
   const key = req.query.key;
-  const item = projectApiHandler.requestItemFromCache(key);
+  const item = await projectApiHandler.requestItemFromCache(key);
+  res.send(item);
 });
 
 

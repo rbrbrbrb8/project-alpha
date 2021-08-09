@@ -30,16 +30,16 @@ homepageApp.controller('HomepageController', ['$scope', '$http', 'homepageHttpMe
 			console.log('getUserInfo');
 			return res.data;
 		});
-	const promiseGetProjects = homepageHttpMethods.getFirstProjects()
+	const promiseGetProjects = homepageHttpMethods.getItemFromCache('firstProjects')
 		.then(res => {
-			console.log('getProjects');
-			return res.data.firstProjects;
+			return res.data;
 		});
 
-	const promiseTest = homepageHttpMethods.getItemFromCache('firstProjects')
-	.then(res=>{
-		console.log('got here');
-	})
+	const promiseGetProjectsIdList = homepageHttpMethods.getItemFromCache('idList')
+		.then(res => {
+			console.log('getProjects');
+			return res.data;
+		})
 	$scope.changeClass = project => {
 		project.isLiked = !project.isLiked;
 	}
@@ -53,8 +53,8 @@ homepageApp.controller('HomepageController', ['$scope', '$http', 'homepageHttpMe
 	const setBarStyle = project => ({ 'width': `${project.percentage}%` });
 
 	$scope.initInfo = () => {
-		$q.all([promiseUserInfo, promiseGetProjects]).then(res => {
-			const [userInfo, projects] = res;
+		$q.all([promiseUserInfo, promiseGetProjects,promiseGetProjectsIdList]).then(res => {
+			const [userInfo, projects,projectsIds] = res;
 			console.log(res);
 			const fixProjects = projects.map(project => {
 				const newProject = { ...project };
@@ -67,7 +67,7 @@ homepageApp.controller('HomepageController', ['$scope', '$http', 'homepageHttpMe
 			$scope.getImages(fixProjects);
 			$scope.projects = fixProjects;
 			$scope.lastProjectShownIndex = fixProjects.length - 1;
-
+			$scope.projectsIds = projectsIds;
 		});
 	};
 
