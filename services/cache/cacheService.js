@@ -15,7 +15,9 @@ cacheService.initCache = async () => {
   }
 }
 
-
+cacheService.requestFromDbByKey = key => {
+  return cacheHandler.requestCacheInfoSpecific(key);
+}
 
 cacheService.retrieveOneByKey = key => {
   const value = myCache.get(key);

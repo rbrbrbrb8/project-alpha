@@ -19,7 +19,7 @@ cacheHandler.requestCacheInfoSpecific = key => {
   if(key === 'idList') promiseObj.promise =  dbHandler.findPropertyOfAllDocumentsInCollection('project', '_id',{});
   else promiseObj.promise = dbHandler.findManyDocumentsByProperty('project',{},16);
   try {
-    return Promise.all([promiseObj.promise]); 
+    return promiseObj.promise; 
   } catch (error) {
     logger.error(`Couldnt get info from database in cacheHandler: `, error);
     return false;

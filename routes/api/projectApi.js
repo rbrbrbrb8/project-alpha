@@ -18,6 +18,11 @@ projectApiRouter.get('/firstProjects', async (req, res) => {
 
 });
 
+projectApiRouter.get('/cache',async (req,res) => {
+  const key = req.query.key;
+  const item = projectApiHandler.requestItemFromCache(key);
+});
+
 
 projectApiRouter.get('/', async (req, res) => {
   const id = req.query._id;

@@ -77,6 +77,15 @@ projectApiHandler.requestFirstProjectsFromCache = () => {
   return cacheService.retrieveManyByKeys(['firstProjects']);
 };
 
+projectApiHandler.requestItemFromCache = key => {
+  const item = cacheService.retrieveOneByKey(key);
+  if(!Object.keys(item).length){
+    
+  }
+  return item;
+}
+
+
 projectApiHandler.requestAddProject = async (project, userID, username, thumbnail) => {
   console.log("project in route: " + Object.entries(project));
   const isValid = verifyProjectDetails(project) && verifyRewardsDetails(project.rewards);

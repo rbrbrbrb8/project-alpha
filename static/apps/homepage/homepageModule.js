@@ -48,5 +48,15 @@ function homepageHttpMethodsFunc($http) {
 			}
 		})
 	}
+
+	httpService.getItemFromCache = function(key){
+		return $http({
+			method: "GET",
+			url: `/api/project/cache?key=${key}`,
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+	}
 	return httpService;
 };

@@ -30,11 +30,16 @@ homepageApp.controller('HomepageController', ['$scope', '$http', 'homepageHttpMe
 			console.log('getUserInfo');
 			return res.data;
 		});
-	const promiseGetProjects = homepageHttpMethods.getFirstProjects().then(res => {
-		console.log('getProjects');
-		return res.data.firstProjects;
-	});
+	const promiseGetProjects = homepageHttpMethods.getFirstProjects()
+		.then(res => {
+			console.log('getProjects');
+			return res.data.firstProjects;
+		});
 
+	const promiseTest = homepageHttpMethods.getItemFromCache('firstProjects')
+	.then(res=>{
+		console.log('got here');
+	})
 	$scope.changeClass = project => {
 		project.isLiked = !project.isLiked;
 	}
