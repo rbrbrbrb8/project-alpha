@@ -6,12 +6,17 @@
 .project-image-container{
     display: flex;
     justify-content: center;
+    justify-items: center;
+    margin: 0 auto;
     margin-bottom: 20px;
+    max-width: 900px;
+    max-height: 900px;
 }
 
 .project-image{
     width: 100%;
     height: 100%;
+    margin: 0 auto;
 }
 
 
@@ -22,6 +27,12 @@
     border-radius: 3px;
     margin:0;
     transition: 200ms;
+    overflow: hidden;
+    max-width: 417px;
+}
+
+.reward-description-p{
+    word-wrap: break-word;
 }
 
 .project-reward-amount{
@@ -34,7 +45,9 @@
 
 .project-reward-amount p{
     margin-right: 5px;
+    font-size: 2.5vw;
 }
+
 
 .project-reward-title{
     font-size: 30px;
@@ -43,6 +56,7 @@
 }
 .project-reward-title p{
     margin-left: 5px;
+    font-size: 2vw;
 }
 
 .project-rewards-container{

@@ -25,6 +25,7 @@
   <div class="header-div">
     <h1 class="main-header">Add Project</h1>
   </div>
+  <div class="form-part-one-container">
   <md-content ng-show="!isNext">
     <div class="dz-container">
       <div class="dz dropzone" id="my-awesome-dropzone">
@@ -121,7 +122,7 @@
 
     </div>
 
-
+  </div>
 
     <!--  -->
     <!--  -->
@@ -129,34 +130,36 @@
     <div layout="column" ng-cloak="" class="md-inline-form inputdemoBasicUsage create-project-form-container"
       ng-if="isNext">
       <div ng-repeat="reward in rewards" class="single-reward-form-container">
-        <md-content layout-padding="">
-          <!--  md-theme="docs-dark" -->
-          <div flex="100" layout-gt-sm="row">
-            <md-input-container flex="50">
-              <label>Donation Name</label>
-              <input ng-model="reward.rewardTitle">
-            </md-input-container>
+        <div id="reward_{{$index}}">
+          <md-content layout-padding="">
+            <!--  md-theme="docs-dark" -->
+            <div flex="100" layout-gt-sm="row">
+              <md-input-container flex="50">
+                <label>Donation Name</label>
+                <input ng-model="reward.rewardTitle">
+              </md-input-container>
 
-            <md-input-container flex="50">
-              <label>Donation Amount</label>
-              <input ng-model="reward.donationAmount" type="number" step="1">
-            </md-input-container>
-          </div>
+              <md-input-container flex="50">
+                <label>Donation Amount</label>
+                <input ng-model="reward.donationAmount" type="number" step="1">
+              </md-input-container>
+            </div>
 
-          <div>
-            <md-input-container class="md-block">
-              <label>Description</label>
-              <textarea ng-model="reward.rewardDescription" md-maxlength="150" rows="2"
-                md-select-on-focus=""></textarea>
-            </md-input-container>
-          </div>
+            <div>
+              <md-input-container>
+                <label>Description</label>
+                <textarea ng-model="reward.rewardDescription" md-maxlength="150"
+                  md-select-on-focus=""></textarea>
+              </md-input-container>
+            </div>
 
-          <md-button class="md-icon-button remove-reward-button" aria-label="donate"
-            ng-click="removeDonationOption(reward)">
-            <md-icon md-svg-icon="/images/icons/remove.svg"></md-icon>
-          </md-button>
+            <md-button class="md-icon-button remove-reward-button" aria-label="donate"
+              ng-click="removeDonationOption(reward)">
+              <md-icon md-svg-icon="/images/icons/remove.svg"></md-icon>
+            </md-button>
 
-        </md-content>
+          </md-content>
+        </div>
       </div>
       <md-content layout-gt-sm="column">
         <div>

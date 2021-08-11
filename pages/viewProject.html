@@ -5,21 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <link rel="stylesheet" href="/css/navbar.css">
-  <link rel="stylesheet" href="/css/donateDialog.css">
-  <link rel="stylesheet" href="/css/viewProject.css"> -->
   <script src="/bundles/viewProject.js"></script>
-  <!-- <script src="/vendors/angular-material.min.js"></script>
-  <script src="/vendors/angular-animate.min.js"></script>
-  <script src="/vendors/angular-aria.min.js"></script>
-  <script src="/vendors/angular-cookies.min.js"></script>
-  <script src="/vendors/angular-messages.min.js"></script>
-  <script src="/apps/viewProject/viewProjectApp.js"></script>
-  <script src="/apps/viewProject/viewProjectModule.js"></script>
-  <script src="/vendors/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="/vendors/bootstrap.min.css">
-  <link rel="stylesheet" href="/vendors/angular-material.min.css"> -->
-
   <title>View Project</title>
 </head>
 
@@ -36,22 +22,22 @@
       <img ng-src="{{currentViewedProject.thumbnail}}" class="project-image" alt="image caption">
     </div>
     <div class="project-description-and-rewards-container" layout="column" layout-gt-md="row" layout-wrap>
-      <div class="project-description-container" flex-gt-md="66">
+      <div class="project-description-container" flex="100">
         <p>{{currentViewedProject.projectDescription}}</p>
       </div>
-      <div class="project-rewards-container" flex-gt-md="33" layout="row" layout-gt-md="column" layout-wrap>
-        <div class="project-reward-card-padding" flex-xs="100" flex-sm="50" flex-md="33" ng-repeat="reward in currentViewedProject.rewards">
+      <div class="project-rewards-container" flex="100" layout="row" layout-wrap>
+        <div class="project-reward-card-padding" flex-xs="100" flex-sm="50" flex-md="33" flex-gt-md="25" ng-repeat="reward in currentViewedProject.rewards">
           <div class="project-reward-card" ng-click="donate(reward,$event)">
             <div class="project-reward-title-amount-container" layout="row">
               <div class="project-reward-title" flex="50">
                 <p>{{reward.rewardTitle}}</p>
               </div>
               <div class="project-reward-amount" flex="50">
-                <p>{{reward.donationAmount}}$</p>
+                <p>{{reward.donationAmount}}$</p> 
               </div>
             </div>
             <div class="project-reward-description">
-              <p>{{reward.rewardDescription}}</p>
+              <p class="reward-description-p">{{reward.rewardDescription}}</p>
             </div>
 
           </div>

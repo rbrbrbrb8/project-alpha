@@ -24,7 +24,7 @@ const AddProjectApp = angular.module('AddProjectApp', ['ngMaterial', 'ngMessages
 
 
 
-AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMethods', '$mdDialog', function ($scope, addProjectHttpMethods, $mdDialog) {
+AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMethods', '$mdDialog','$location','$anchorScroll', function ($scope, addProjectHttpMethods, $mdDialog,$location,$anchorScroll) {
 	$scope.project = {};
 	$scope.rewards = [{}];
 	$scope.isNext = false;
@@ -49,10 +49,10 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 	
 	});
 
-	$scope.$watchCollection('rewards', () => {
-		console.log('moving to bottom');
-		window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
-	});
+	// $scope.$watchCollection('rewards', () => {
+	// 	console.log('moving to bottom');
+	// 	window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+	// });
 
 
 	const verifyProjectDetails = project => {
@@ -141,8 +141,9 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 	}
 	$scope.addDonationOption = () => {
 		$scope.rewards.push({});
-		const btn = document.getElementById('addRewardButton');
-		console.log(btn);
+		const id = 'reward_' + ($scope.rewards.length - 1);
+		$location.hash(id);
+		$anchorScroll();
 
 	}
 	$scope.removeDonationOption = reward => {

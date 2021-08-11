@@ -12,6 +12,10 @@ body {
   margin:0 auto;
 }
 
+/* .form-part-one-container{
+  border: 2px solid gray;
+} */
+
 .dz{
   border: 2px dashed lightskyblue !important;
   font-size: 18px;
