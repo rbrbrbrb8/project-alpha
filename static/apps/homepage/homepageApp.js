@@ -52,18 +52,22 @@ homepageApp.controller('HomepageController', ['$scope', '$http', 'homepageHttpMe
 
 	const setBarStyle = project => ({ 'width': `${project.percentage}%` });
 
+	const fixProjectsArr = (projects,userInfo) => {
+		return projects.map(project => {
+			const newProject = { ...project };
+			newProject.isLiked = isLikedByUser(userInfo, newProject);
+			newProject.isSupported = isSupportedByUser(userInfo, newProject);
+			newProject.percentage = getPercentage(newProject);
+			newProject.progressBarStyle = setBarStyle(newProject);
+			return newProject;
+		});
+	}
+
 	$scope.initInfo = () => {
-		$q.all([promiseUserInfo, promiseGetProjects,promiseGetProjectsIdList]).then(res => {
-			const [userInfo, projects,projectsIds] = res;
+		$q.all([promiseUserInfo, promiseGetProjects, promiseGetProjectsIdList]).then(res => {
+			const [userInfo, projects, projectsIds] = res;
 			console.log(res);
-			const fixProjects = projects.map(project => {
-				const newProject = { ...project };
-				newProject.isLiked = isLikedByUser(userInfo, newProject);
-				newProject.isSupported = isSupportedByUser(userInfo, newProject);
-				newProject.percentage = getPercentage(newProject);
-				newProject.progressBarStyle = setBarStyle(newProject);
-				return newProject;
-			});
+			const fixProjects = fixProjectsArr((Array.isArray(projects) ? projects : [projects]),userInfo);
 			$scope.getImages(fixProjects);
 			$scope.projects = fixProjects;
 			$scope.lastProjectShownIndex = fixProjects.length - 1;

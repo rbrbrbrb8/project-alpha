@@ -116,12 +116,12 @@ dbHandler.findOneDocumentByProperty = async (modelName, propety) => {
   }
 }
 
-dbHandler.findPropertyOfAllDocumentsInCollection = async (modelName, property, filter) => {
+dbHandler.findPropertyOfAllDocumentsInCollection = (modelName, property, filter) => {
   const Model = getModel(modelName);
   try {
-    const propertyArr = await Model.find(filter, property);
+    const propertyArrPromise = Model.find(filter, property); // add async await if neccessary
     logger.info(`pulled property ${property} from documents of type ${modelName} in db`);
-    return propertyArr;
+    return propertyArrPromise;
 
   }
   catch (error) {

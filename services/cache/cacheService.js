@@ -33,8 +33,8 @@ myCache.on("del", async (key,value) => {
   console.log('deleted cache')
   // console.log('expired'); replace with logger so it will be known that cache is renewed 
   const resToUpdate = await cacheHandler.requestCacheInfoSpecific(key);
-  console.log('updated cache')
-  return myCache.set(key,resToUpdate[0],10);
+  myCache.set(key,resToUpdate,10);
+
 });
 
 
