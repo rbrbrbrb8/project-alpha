@@ -15,9 +15,8 @@ navbarApp.controller('NavbarController', ['$scope', function ($scope) {
   }
 
   $scope.moveToMyUser = ()=> {
-    const userInfo = window.localStorage.getItem('UserInfo');
-    console.log(userInfo.uid);
-		// window.location.href = `/userProfile?creatorUserID=${userInfo.uid}`;
+    const userInfo = JSON.parse(window.localStorage.getItem('UserInfo'));
+		window.location.href = `/userProfile?creatorUserID=${userInfo.uid}`;
 	}
 }]);
 
