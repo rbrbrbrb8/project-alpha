@@ -8,35 +8,26 @@ const allProjectsApiRouter = express.Router();
 allProjectsApiRouter.get('/', async (req, res) => {
 
 	const filter = req.query;
-	console.log('filter= ');
-	console.log(filter);
 	try {
 		const projectsArr = await allProjectsApiHandler.getAllProjectsIdList(filter);
-		console.log(projectsArr);
 		res.send(projectsArr);
 	}
 	catch (e) {
-		console.log("error in all projects api router");
-		res.send(e);
+		res.status(500);
 	}
 });
-allProjectsApiRouter.post('/', (req, res) => {
-	console.log(req.body);
-})
+
 
 
 allProjectsApiRouter.get('/extended', async (req, res) => {
 	const idCheck = req.query._id;
 	const filter = idCheck ? {_id:JSON.parse(idCheck)} : req.query; 
-	console.log(filter);
 	try {
 		const projectsArr = await allProjectsApiHandler.getAmountOfProjects(filter,5);
-		console.log(projectsArr);
 		res.send(projectsArr);
 	}
 	catch (e) {
-		console.log("error in all projects api router");
-		res.send(e);
+		res.status(500);
 	}
 });
 

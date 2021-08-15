@@ -45,6 +45,8 @@
     "popper.js": "^1.16.1",
     "regenerator-runtime": "^0.13.7",
     "style-loader": "^3.0.0",
+    "ts-loader": "^9.2.5",
+    "typescript": "^4.3.5",
     "webpack": "^5.42.0",
     "winston": "^3.3.3"
   },

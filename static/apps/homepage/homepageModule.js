@@ -5,7 +5,6 @@ function homepageHttpMethodsFunc($http) {
 	const httpService = {};
 
   httpService.addLikeToProject = function (projectId,isLiked){
-    console.log("sending like POST request");
 		return $http({
 			method:'POST',
 			url:`/api/project/like`,

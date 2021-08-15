@@ -4,7 +4,6 @@ loginModule.factory('loginHttpMethods',['$http',loginHttpMethodsFunc]);
 function loginHttpMethodsFunc($http){
     const httpService = {};
     httpService.requestLogin = function(username,password){
-        console.log("sending login POST request");
         return $http({
             method:"POST",
             url:"/",

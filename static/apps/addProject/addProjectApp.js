@@ -16,13 +16,7 @@ import '../../vendors/fontawesome/css/fontawesome.min.css';
 import '../../vendors/fontawesome/css/regular.css';
 import '../../vendors/fontawesome/css/solid.css';
 
-
-
-
-
 const AddProjectApp = angular.module('AddProjectApp', ['ngMaterial', 'ngMessages', 'addProjectModule', 'NavbarApp']);
-
-
 
 AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMethods', '$mdDialog','$location','$anchorScroll', function ($scope, addProjectHttpMethods, $mdDialog,$location,$anchorScroll) {
 	$scope.project = {};
@@ -44,20 +38,13 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 	}
 	const myDropzone = new Dropzone("div#my-awesome-dropzone", dzOptions);
 	myDropzone.on('thumbnail',(file,dataURL) => {
-		console.log(file);
 		$scope.thumbnail = file;
 	
 	});
 
-	// $scope.$watchCollection('rewards', () => {
-	// 	console.log('moving to bottom');
-	// 	window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
-	// });
-
 
 	const verifyProjectDetails = project => {
 		const projInfoEntries = Object.entries(project);
-		console.log(project);
 		if (projInfoEntries.length < 8) {
 			alert("need to fill the entire form");
 			return false;
@@ -112,14 +99,11 @@ AddProjectApp.controller('AddProjectController', ['$scope', 'addProjectHttpMetho
 	$scope.verifyAndSend = (project,rewards,thumbnail) => {
 		const isValidProject = verifyProjectDetails(project);
 		const isValidRewards = verifyRewardsDetails(rewards);
-		console.log("rewards: " + isValidRewards);
-		console.log("project: " + isValidProject);
 		if (isValidProject && isValidRewards) {
 			project.rewards = rewards;
-			addProjectHttpMethods.requestAddProject(project,thumbnail.dataURL).then(res => {
-				console.log(res.data);
-				$scope.showSuccessSaveDialog();
-			});
+			addProjectHttpMethods.requestAddProject(project,thumbnail.dataURL)
+			.then(() => $scope.showSuccessSaveDialog()
+			);
 		}
 	}
 	$scope.showSuccessSaveDialog = () => {

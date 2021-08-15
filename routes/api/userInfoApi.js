@@ -6,21 +6,15 @@ const userInfoApiRouter = express.Router();
 
 userInfoApiRouter.get('/', async (req, res) => {
 	const filter = req.query.creatorUserID;
-	console.log('user filter= ');
-	console.log(filter); //check filter - optional
 	try {
 		const userInfo = await userInfoApiHandler.getUserInfo(filter);
 		res.send(userInfo);
 	}
 	catch (e) {
-		console.log("error in user info api router");
-		res.send(e);
+		res.status(500);
 	}
 });
-userInfoApiRouter.post('/', (req, res) => {
-	console.log(req.body);
-	// userInfoApiHandler.updateUserDetails();
-});
+
 
 
 module.exports = userInfoApiRouter;

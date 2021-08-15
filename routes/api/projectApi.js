@@ -6,12 +6,10 @@ const projectApiRouter = express.Router();
 
 projectApiRouter.get('/firstProjects', async (req, res) => {
   try {
-    console.log("caught request");
     const firstProjects = projectApiHandler.requestFirstProjectsFromCache();
     if (firstProjects) res.send(firstProjects);
     else res.send(false);
   } catch (error) {
-    console.log("error in projectApi router");
     return false;
   }
 
@@ -26,14 +24,12 @@ projectApiRouter.get('/cache',async (req,res) => {
 
 projectApiRouter.get('/', async (req, res) => {
   const id = req.query._id;
-  console.log("id= " + id);
   if (id !== 'firstProjects') {
     try {
       const proj = await projectApiHandler.requestGetProject(id);
       if (proj) res.send(proj);
       else res.send(false);
     } catch (error) {
-      console.log("error in projectApi router");
       return false;
     }
   }

@@ -35,12 +35,10 @@ viewProjectApp.controller('viewProjectController', ['$scope', '$timeout', '$mdDi
 
 
 
-	console.log(window.location.search);
 	$scope.clearCurrentViewedProjectProperty();
 
 	$scope.donate = (reward, ev) => {
 		projectDetails.currentReward = reward;
-		console.log('opening donation modal');
 		$mdDialog.show({
 			controller: 'DialogController',
 			templateUrl: '/views/donateDialog.html',
@@ -57,11 +55,9 @@ viewProjectApp.controller('viewProjectController', ['$scope', '$timeout', '$mdDi
 			clickOutsideToClose: false,
 			fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
 		}).then(function (confirmTransaction) {
-			console.log("finished donating");
+
 
 		}, function () {
-			console.log('You cancelled the dialog.');
-			console.log($scope);
 			$scope.status = 'You cancelled the dialog.';
 		});
 	}
@@ -94,11 +90,10 @@ viewProjectApp.controller('DialogController', ['$scope', '$mdDialog', 'projectDe
 	$scope.afterSec = false;
 
 	const verifyPaymentDetails = paymentDetails => {
-		console.log($scope.paymentDetails);
+
 
 		if (!paymentDetails) return false;
 		const paymentInfoEntries = Object.entries(paymentDetails);
-		console.log(paymentInfoEntries);
 		const nameTester = new RegExp('^([\w]{3,})+\s+([\w\s]{3,})+$', 'i');
 		const numberTester = new RegExp('^[0-9]{16}$');
 		const dateTester = new RegExp('^[\d]{2}\/[\d]{4}');
@@ -117,41 +112,38 @@ viewProjectApp.controller('DialogController', ['$scope', '$mdDialog', 'projectDe
 		}
 
 		if(nameTester.test(paymentDetails.cardholderName)) {
-			console.log('failed name');
+
 			return false;
 		}
 		if(!numberTester.test(paymentDetails.cardNumber)){
-			console.log('failed number');
+
 			return false;
 		}
 		if(dateTester.test(paymentDetails.cardExpiryDate)){
-			console.log('failed exp');
+
 			return false;
 		};
 		if(!CVVtester.test(paymentDetails.cardCVV)){
-			console.log('failed CVV');
+
 			return false;
 		};
 
 		return true;
 	}
 	$scope.cancelTransaction = () => {
-		console.log(projectId);
-		console.log(currentReward);
+
 		$mdDialog.cancel();
 	};
 ``
 	$scope.changeAnim = () => {
 		$scope.afterSec = true;
-		console.log('switching message');
+
 		$scope.transactionMessage = "Transaction Complete!";
-		console.log($scope.afterSec);
+
 	}
 	$scope.submitTransaction = () => {
 		const isValid = verifyPaymentDetails($scope.paymentDetails);
-		console.log(isValid);
-		console.log("project details");
-		console.log(projectDetails);
+
 		if (isValid) {
 			$scope.transactionMessage = "Sending Transaction";
 			$scope.isModalConfirmed = true;

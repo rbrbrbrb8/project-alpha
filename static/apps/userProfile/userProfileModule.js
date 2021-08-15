@@ -4,7 +4,6 @@ userProfileModule.factory('userProfileHttpMethods', ['$http', userProfileHttpMet
 function userProfileHttpMethodsFunc($http) {
 	const httpService = {};
 	httpService.requestUserProjects = function (query) {
-		console.log("sending userProfile GET request");
 		return $http({
 			method: "GET",
 			url: `/api/allProjects/extended${query}`,
@@ -15,7 +14,6 @@ function userProfileHttpMethodsFunc($http) {
 	}
 
 	httpService.requestProjectsIds = function (query) {
-		console.log("sending userProfile GET request");
 		return $http({
 			method: "GET",
 			url: `/api/allProjects/${query}`,
@@ -26,7 +24,6 @@ function userProfileHttpMethodsFunc($http) {
 	}
 
 	httpService.requestUserInfo = function (query) {
-		console.log("sending userProfile GET request");
 		return $http({
 			method: "GET",
 			url: `/api/userInfo/${query}`,
@@ -47,7 +44,6 @@ function userProfileHttpMethodsFunc($http) {
 	}
 
 	httpService.requestProjects = function (query) { //arr of ids converted to string with arr.toString()
-		console.log("sending userProfile GET request");
 		return $http({
 			method: "GET",
 			url: `/api/allProjects/extended${query}`,

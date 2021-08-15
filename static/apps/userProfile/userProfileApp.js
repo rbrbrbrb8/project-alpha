@@ -25,17 +25,14 @@ userProfileApp.controller('userProfileController', ['$scope', 'userProfileHttpMe
 	$scope.totalMoneyRaised = 0;
 	$scope.user = {};
 	const query = window.location.search;
-	console.log(query);
 
 	$scope.getImages = projects => {
 		projects.forEach(project => {
 			if (project.thumbnailID) userProfileHttpMethods.getImage(project.thumbnailID)
 				.then(res => {
-					console.log(res.data);
 					project.thumbnail = res.data.dataURL;
 				})
 		});
-		// $scope.projects = projects;
 	}
 
 	$scope.moveToProject = project => {
@@ -45,7 +42,6 @@ userProfileApp.controller('userProfileController', ['$scope', 'userProfileHttpMe
 
 	$scope.initInfo = () => {
 		userProfileHttpMethods.requestProjects(query).then(res => {
-			console.log('got request project response');
 			const projects = res.data;
 			
 			$scope.totalMoneyRaised = projects.reduce((total, project) => total + project.amountAlreadyRaised, 0);
@@ -62,10 +58,8 @@ userProfileApp.controller('userProfileController', ['$scope', 'userProfileHttpMe
 	});
 
 	$scope.showMore = (projectsIds,lastProjectsShownIndex) => {
-		console.log(lastProjectsShownIndex);
 		$scope.loadingDocs = true;
 		const idsArr = projectsIds.slice(lastProjectsShownIndex + 1, lastProjectsShownIndex +5);
-		console.log(idsArr);
 		const searchQuery = '?_id=' + JSON.stringify(idsArr);
 		userProfileHttpMethods.requestProjects(searchQuery).then(res => {
 			const newProjects = res.data;
@@ -73,7 +67,6 @@ userProfileApp.controller('userProfileController', ['$scope', 'userProfileHttpMe
 			$scope.projects = $scope.projects.concat(newProjects);
 			$scope.loadingDocs = false;
 			$scope.lastProjectShownIndex+=newProjects.length;
-			console.log($scope.lastProjectShownIndex);
 		});
 	}
 

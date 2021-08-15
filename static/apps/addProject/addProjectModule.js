@@ -4,7 +4,6 @@ addProjectModule.factory('addProjectHttpMethods', ['$http', addProjectHttpMethod
 function addProjectHttpMethodsFunc($http) {
 	const httpService = {};
 	httpService.requestAddProject = (project,thumbnail) => {
-		console.log("saving project");
 		return $http({
 			method: "POST",
 			url: "/api/project",

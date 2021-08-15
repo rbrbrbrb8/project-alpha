@@ -5,7 +5,7 @@ function viewProjectHttpMethodsFunc($http) {
 	const httpService = {};
 
 	httpService.requestCurrentViewedProjectInfo = function (query) {
-		console.log("sending viewProject GET request");
+
 		return $http({
 			method: "GET",
 			url: `/api/project${query}`,
@@ -16,7 +16,7 @@ function viewProjectHttpMethodsFunc($http) {
 	}
 
   httpService.addDonationToProject = function (projectId,donationAmount){
-    console.log("sending donation POST request");
+
 		return $http({
 			method:'POST',
 			url:`/api/project/donate`,

@@ -26,27 +26,27 @@ module.exports = {
         ]
       },
       {
+        test: /\.ts$/,
+        use: [
+          'ts-loader'
+        ]
+      },
+      {
         test: /.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
         use: [{
-            loader: 'file-loader',
-            options: {
-            }
-        }]
-      },{
-        test: /\.js$/,
-        use: {
-            loader:'babel-loader',
+          loader: 'file-loader',
+          options: {
           }
-        
-      },{
+        }]
+      }, {
         test: /\.html$/,
-        use:[
+        use: [
           'html-loader'
         ]
       }
     ]
   },
-  
+
   output: {
     filename: '[name].js',
     path: __dirname + '/static/bundles'

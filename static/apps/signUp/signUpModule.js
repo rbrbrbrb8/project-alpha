@@ -4,7 +4,6 @@ signUpModule.factory('httpMethods',['$http',httpMethodsFunc]);
 function httpMethodsFunc($http){
     const httpService = {};
     httpService.requestSignUp = function(username,password){
-        console.log("sending POST request");
         return $http({
             method:"POST",
             url:"/signup",

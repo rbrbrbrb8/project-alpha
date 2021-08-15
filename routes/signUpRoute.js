@@ -11,7 +11,6 @@ signUpRouter.get('/', (req, res) => {
 });
 
 signUpRouter.post('/', async (req, res) => {
-  // console.log(req.body);
   const isSuccessful = await signUpHandler.requestRegistration(req.body.username, req.body.password);
   if (!isSuccessful) {
     logger.error(`creation of user failed`);
